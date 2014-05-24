@@ -1,0 +1,67 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form>
+        <xc:modalMessages/>
+        <p:fieldset legend="#{msg['dadosGerais']}">
+            <h:panelGrid columns="2" styleClass="grid-form">
+
+                <h:outputLabel value="* #{msg['modeloEmail.tipoAssuntoEmail']}:" />
+                <h:selectOneMenu value="#{modeloEmailMB.entity.tipoAssuntoEmail}"   >
+                    <f:selectItem itemLabel="#{xmsg['select']}" />
+                    <f:selectItems value="#{findAllBean.get(classMB.tipoAssuntoEmail)}" 
+                                   var="tipoAssuntoEmail"
+                                   itemLabel="#{tipoAssuntoEmail.descricao}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="* #{msg['modeloEmail.assunto']}:" />
+                <p:inputText value="#{modeloEmailMB.entity.assunto}" maxlength="255"  size="70"  />
+
+
+                <h:outputLabel value="* #{msg['modeloEmail.configuracaoEmail']}:" />
+                <h:selectOneMenu value="#{modeloEmailMB.entity.configuracaoEmail}" converter="entityConverter"  >
+                    <f:selectItem itemLabel="#{xmsg['select']}" />
+                    <f:selectItems value="#{findAllBean.get(classMB.configuracaoEmail)}" 
+                                   var="configuracaoEmail"
+                                   itemLabel="#{configuracaoEmail}"/>
+                </h:selectOneMenu>
+
+            </h:panelGrid>
+        </p:fieldset>
+        <p:fieldset legend="#{msg['modeloEmail.layout']}">
+
+            <h:panelGroup id="panelLayout">
+
+                <h:panelGroup rendered="#{empty viewScope.exibirTexto or viewScope.exibirTexto == false}" >
+                    <p:editor value="#{modeloEmailMB.entity.layout}" style="width: 100%;" width="900"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{viewScope.exibirTexto == true}" >
+                    <h:inputTextarea value="#{modeloEmailMB.entity.layout}" 
+                                     style="width: 100%; height: 300px;"  />
+                </h:panelGroup>
+
+                <h:selectBooleanCheckbox value="#{viewScope.exibirTexto}" id="exibirTexto">
+                    <p:ajax process="panelLayout" update="panelLayout"/>
+                </h:selectBooleanCheckbox>
+                <h:outputLabel for="exibirTexto" value="Exibir editor de texto"/>
+
+            </h:panelGroup>
+
+
+        </p:fieldset>
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div style="text-align: center;">
+            <x:securityArea rolesAllowed="modeloEmail.create">
+                <p:commandButton process="@form" update="@form" action="#{modeloEmailMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="modeloEmail.audit">
+                <xc:audit for="#{modeloEmailMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

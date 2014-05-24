@@ -1,0 +1,47 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form id="formDetailSolicitacaoRecuperacaoSenha">
+        <h:panelGrid columns="4" styleClass="grid-detail">
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.email']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.email}"/>
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.ativo']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.ativo}" converter ="yesNoConverter" />
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataCadastro']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataCadastro}">
+                <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+            </h:outputText>
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataValidade']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataValidade}">
+                 <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+            </h:outputText>
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataAlteracaoSenha}">
+                 <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+            </h:outputText>
+           
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.usuario']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.usuario.nome}"/>
+            
+            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}:" />
+            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.tipoRecuperacaoSenha.descricao}"/>
+
+        </h:panelGrid>
+        <p:separator/>
+        <div style="text-align: center;">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetSolicitacaoRecuperacaoSenhaDetail.hide()" />
+            <x:securityArea rolesAllowed="solicitacaoRecuperacaoSenha.audit">
+                <xc:audit for="#{solicitacaoRecuperacaoSenhaMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

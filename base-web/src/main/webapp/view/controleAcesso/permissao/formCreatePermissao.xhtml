@@ -1,0 +1,72 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form id="formCreatePermissao">
+        <xc:modalMessages/>
+        <p:fieldset legend="#{msg['dadosGerais']}">
+            <h:panelGrid columns="2" styleClass="grid-form">
+
+                <h:outputLabel value="* #{msg['permissao.descricao']}:" />
+                <p:inputText value="#{permissaoMB.entity.descricao}" maxlength="255"  size="70"  />
+
+                <h:outputLabel value="* #{msg['permissao.key']}:" />
+                <p:inputText value="#{permissaoMB.entity.key}" maxlength="255"  size="70"  />
+
+                <h:outputLabel value="#{msg['permissao.url']}:" />
+                <p:inputTextarea value="#{permissaoMB.entity.url}" size="70" style="width: 600px;" rows="3"  />
+
+                <h:outputLabel value="#{msg['permissao.permissaoPai']}:" />
+                <h:selectOneMenu value="#{permissaoMB.entity.permissaoPai}" converter="entityConverter" >
+                    <x:initializer/>
+                    <f:selectItem itemLabel="#{xmsg['select']}" />
+                    <f:selectItems value="#{findAllBean.get(classMB.permissao)}" var="permissao" itemLabel="#{permissao.descricao} - #{permissao.key}" />
+                </h:selectOneMenu>
+
+                <h:outputLabel value="#{msg['permissao.global']}:" />
+                <h:panelGroup>
+                    <h:selectBooleanCheckbox value="#{permissaoMB.entity.global}" />
+                    (<h:outputText value="#{msg['permissao.globalInfo']}"/>)
+                </h:panelGroup>
+
+
+            </h:panelGrid>
+        </p:fieldset>
+        <p:fieldset legend="#{msg['permissao.dadosMenu']}">
+            <h:panelGrid columns="2" styleClass="grid-form">
+
+                <h:outputLabel value="#{msg['permissao.possuiMenu']}:" />
+                <h:selectBooleanCheckbox value="#{permissaoMB.entity.possuiMenu}" />
+
+                <h:outputLabel value="#{msg['permissao.nomeMenu']}:" />
+                <h:panelGroup>
+                    <p:inputText value="#{permissaoMB.entity.nomeMenu}" size="70"  /><br/>
+                    <h:outputText value="#{msg['permissao.nomeMenuInfo']}" styleClass="font-11"/>
+                </h:panelGroup>
+
+                <h:outputLabel value="#{msg['permissao.urlMenu']}:" />
+                <h:panelGroup>
+                    <p:inputText value="#{permissaoMB.entity.urlMenu}" size="70"  /><br/>
+                    <h:outputText value="#{msg['permissao.urlMenuInfo']}" styleClass="font-11"/>
+                </h:panelGroup>
+
+            </h:panelGrid>
+        </p:fieldset>
+
+
+        <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+        <div style="text-align: center;">
+            <x:securityArea rolesAllowed="permissao.create">
+                <p:commandButton process="@form" update="@form" action="#{permissaoMB.save}" value="#{xmsg['save']}" />
+            </x:securityArea>
+            <x:securityArea rolesAllowed="permissao.audit">
+                <xc:audit for="#{permissaoMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+
+</ui:composition>

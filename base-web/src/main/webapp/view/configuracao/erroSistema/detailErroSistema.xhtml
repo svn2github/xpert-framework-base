@@ -1,0 +1,45 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form id="formDetailErroSistema">
+
+
+        <p:accordionPanel multiple="true" activeIndex="0,1">
+            <p:tab title="#{msg['dadosGerais']}">
+                <h:panelGrid columns="2" styleClass="grid-detail" columnClasses="w-150">
+
+                    <h:outputLabel value="#{msg['erroSistema.data']}:" />
+                    <h:outputText value="#{erroSistemaMB.entity.data}">
+                        <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                    </h:outputText>
+                    
+                    <h:outputLabel value="#{msg['erroSistema.usuario']}:" />
+                    <h:outputText value="#{erroSistemaMB.entity.usuario.nome}"/>
+
+                    <h:outputLabel value="#{msg['erroSistema.funcionalidade']}:" />
+                    <h:outputText value="#{erroSistemaMB.entity.funcionalidade}"/>
+
+                    <h:outputLabel value="#{msg['erroSistema.url']}:" />
+                    <h:outputText value="#{erroSistemaMB.entity.url}"/>
+
+                </h:panelGrid>
+                <h:panelGrid columns="4" styleClass="grid-detail" columnClasses="w-150">
+                    <h:outputLabel value="#{msg['erroSistema.informacaoNavegador']}:" />
+                    <h:outputText value="#{erroSistemaMB.entity.informacaoNavegador}"/>
+                </h:panelGrid>
+                <div style="text-align: center;">
+                    <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetErroSistemaDetail.hide()" />
+                </div>
+            </p:tab>
+            <p:tab title="#{msg['erroSistema.pilhaErro']}">
+                <h:outputText value="#{erroSistemaMB.entity.pilhaErroFormatada}" escape="false"/>
+            </p:tab>
+        </p:accordionPanel>
+
+    </h:form>
+</ui:composition>

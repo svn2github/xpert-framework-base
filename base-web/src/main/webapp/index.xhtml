@@ -1,0 +1,34 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:custom="http://java.sun.com/jsf/composite/tag"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:security="http://java.sun.com/jsf/composite/xpert/components/security"
+                 xmlns:of="http://omnifaces.org/functions"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+
+    <ui:param name="title" value="#{msg['login']}" />
+    <ui:define name="menu"/>  
+    <ui:define name="body">  
+        <h:form>
+            <xc:modalMessages autoUpdate="true"/> 
+
+            <h:panelGrid>
+
+                <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
+                <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
+
+                <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
+                <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
+
+            </h:panelGrid>
+            <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" />     
+
+            <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
+            <p:focus/>
+        </h:form>                   
+    </ui:define>
+</ui:composition>

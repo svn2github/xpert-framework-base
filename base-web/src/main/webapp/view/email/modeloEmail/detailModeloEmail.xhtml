@@ -1,0 +1,35 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form id="formDetailModeloEmail">
+        <p:fieldset legend="#{msg['dadosGerais']}">
+            <h:panelGrid columns="2" styleClass="grid-detail">
+
+                <h:outputLabel value="#{msg['modeloEmail.assunto']}:" />
+                <h:outputText value="#{modeloEmailMB.entity.assunto}"/>
+
+                <h:outputLabel value="#{msg['modeloEmail.tipoAssuntoEmail']}:" />
+                <h:outputText value="#{modeloEmailMB.entity.tipoAssuntoEmail.descricao}"/>
+
+                <h:outputLabel value="#{msg['modeloEmail.configuracaoEmail']}:" />
+                <h:outputText value="#{modeloEmailMB.entity.configuracaoEmail}"/>
+
+            </h:panelGrid>
+        </p:fieldset>
+        <p:fieldset legend="#{msg['modeloEmail.layout']}">
+
+            <h:outputText value="#{modeloEmailMB.entity.layout}" escape="false"/>
+
+        </p:fieldset>
+        <div style="text-align: center;">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetModeloEmailDetail.hide()" />
+            <x:securityArea rolesAllowed="modeloEmail.audit">
+                <xc:audit for="#{modeloEmailMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

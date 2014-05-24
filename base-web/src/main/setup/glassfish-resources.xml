@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Resource Definitions//EN" "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
+<resources>
+    <!-- 
+    TODO COnfiguracao para o homolog 
+    Abaixo deve ser comentado caso seja configuracao diretamenta no servidor
+    -->
+    <jdbc-resource enabled="true" jndi-name="jdbc/baseDS" object-type="user" pool-name="base">
+        <description/>
+    </jdbc-resource>
+    <jdbc-connection-pool name="base"  
+                        datasource-classname="org.postgresql.ds.PGSimpleDataSource" 
+                        res-type="javax.sql.DataSource">
+        <property name="User" value="postgres"></property>
+        <property name="DatabaseName" value="base"></property>
+        <property name="Password" value="postgres"></property>
+        <property name="Ssl" value="false"></property>
+        <property name="ServerName" value="localhost"></property>
+    </jdbc-connection-pool>
+</resources>

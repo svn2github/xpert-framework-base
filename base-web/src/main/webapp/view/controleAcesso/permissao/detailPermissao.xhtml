@@ -1,0 +1,84 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:custom="http://java.sun.com/jsf/composite/components"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form id="formDetailPermissao">
+        <p:accordionPanel multiple="true" activeIndex="0,1,2,3">
+            <p:tab title="#{msg['dadosGerais']}">
+                <h:panelGrid columns="2" styleClass="grid-detail">
+
+                    <h:outputLabel value="#{msg['permissao.descricao']}:" />
+                    <h:outputText value="#{permissaoMB.entity.descricao}"/>
+
+                    <h:outputLabel value="#{msg['permissao.key']}:" />
+                    <h:outputText value="#{permissaoMB.entity.key}"/>
+
+                    <h:outputLabel value="#{msg['permissao.url']}:" />
+                    <h:outputText value="#{permissaoMB.entity.url}"/>
+
+                    <h:outputLabel value="#{msg['permissao.permissaoPai']}:" />
+                    <h:outputText value="#{permissaoMB.entity.permissaoPai.descricao}">
+                        <x:initializer/>
+                    </h:outputText>
+
+                    <h:outputLabel value="#{msg['permissao.global']}:" />
+                    <h:outputText value="#{permissaoMB.entity.global}" converter="yesNoConverter"/>
+                    
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="#{msg['permissao.dadosMenu']}">
+                <h:panelGrid columns="2" styleClass="grid-detail">
+
+                    <h:outputLabel value="#{msg['permissao.possuiMenu']}:" />
+                    <h:outputText value="#{permissaoMB.entity.possuiMenu}" converter="yesNoConverter"/>
+                    
+                    <h:outputLabel value="#{msg['permissao.nomeMenu']}:" />
+                    <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+
+                    <h:outputLabel value="#{msg['permissao.urlMenu']}:" />
+                    <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+
+                </h:panelGrid>
+            </p:tab>
+            <p:tab title="#{msg['permissao.permissoesFilhas']}">
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index"
+                             var="permissao" value="#{permissaoMB.entity.permissoesFilhas}">
+                    <x:initializer/>
+                    <p:column style="text-align: center;">
+                        <h:outputText value="#{index+1}" />
+                    </p:column>
+
+                    <p:column headerText="#{msg['permissao.descricao']}" >
+                        <h:outputText value="#{permissao.descricao}"/>
+                    </p:column>
+                    <p:column headerText="#{msg['permissao.key']}" >
+                        <h:outputText value="#{permissao.key}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="#{msg['permissao.perfis']}">
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index"
+                             var="perfil" value="#{permissaoMB.entity.perfis}">
+                    <x:initializer/>
+                    <p:column style="text-align: center;">
+                        <h:outputText value="#{index+1}" />
+                    </p:column>
+                    <p:column headerText="#{msg['perfil.descricao']}" >
+                        <h:outputText value="#{perfil.descricao}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+        </p:accordionPanel>
+        <p:separator/>
+        <div style="text-align: center;">
+            <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetPermissaoDetail.hide()" />
+            <x:securityArea rolesAllowed="permissao.audit">
+                <xc:audit for="#{permissaoMB.entity}"/>
+            </x:securityArea>
+        </div>
+    </h:form>
+</ui:composition>

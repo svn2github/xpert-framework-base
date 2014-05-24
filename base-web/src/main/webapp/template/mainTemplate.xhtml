@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      dir="ltr" lang="en-US" xml:lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:x="http://xpert.com/faces"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+
+    <f:view locale="#{localeBean.locale}">
+        <h:head>
+            <ui:include src="imports.xhtml"/>
+        </h:head>
+        <h:body>
+            <ui:include src="/template/ajaxStatus.xhtml" />   
+            <h:panelGroup styleClass="ui-widget"  rendered="#{not empty sessaoUsuarioMB.user}">  
+                <h:panelGrid columns="2" style="width: 100%">
+
+                    <ui:insert name="menu">
+                        <h:panelGroup>
+                            <ui:include src="menu.xhtml"/>
+                        </h:panelGroup>
+                    </ui:insert> 
+
+                    <h:panelGroup layout="block" style="text-align: right;">
+                        <h:outputText value="#{now}" styleClass="font-11">
+                            <f:convertDateTime dateStyle="full" type="both" />
+                        </h:outputText><br/>
+                        <h:outputText style="font-weight: bold;" value="#{sessaoUsuarioMB.user.nome}"/>
+                    </h:panelGroup> 
+
+                </h:panelGrid>
+            </h:panelGroup> 
+
+            <p:panel>  
+                <h1>#{title}</h1>   
+                <ui:insert name="body" />
+            </p:panel>
+
+            <x:filterOnEnter/>
+        </h:body>
+    </f:view>
+
+</html>

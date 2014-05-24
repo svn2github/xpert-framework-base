@@ -1,0 +1,174 @@
+package com.base.bo.email;
+
+import com.base.bo.configuracao.ErroSistemaBO;
+import com.base.modelo.email.ConfiguracaoEmail;
+import com.base.modelo.email.ModeloEmail;
+import com.base.modelo.email.TipoAssuntoEmail;
+import com.xpert.core.exception.BusinessException;
+import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapper;
+import freemarker.template.Template;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.Asynchronous;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
+/**
+ *
+ * @author ayslan
+ */
+@Stateless
+public class EmailBO {
+
+    private static final Configuration cfg = new Configuration();
+    private static final Logger logger = Logger.getLogger(EmailBO.class.getName());
+    @EJB
+    private ModeloEmailBO modeloEmailBO;
+    @EJB
+    private ErroSistemaBO erroSistemaBO;
+
+    /**
+     * Enviar email assincrono a partir dos parametros passados
+     *
+     * @param tipoAssuntoEmail Tipo de Assunto do email. Usado para recuperar o
+     * modelo do email
+     * @param parametros Parametros para serem passados para o template
+     * @param destinatario Email de destino da mensagem
+     */
+    @Asynchronous
+    public void enviarAssincrono(TipoAssuntoEmail tipoAssuntoEmail, Map<String, Object> parametros, String destinatario) {
+        try {
+            enviar(tipoAssuntoEmail, parametros, destinatario);
+        } catch (BusinessException ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
+        }
+    }
+
+    /**
+     * Enviar email a partir dos parametros passados
+     *
+     * @param tipoAssuntoEmail Tipo de Assunto do email. Usado para recuperar o
+     * modelo do email
+     * @param parametros Parametros para serem passados para o template
+     * @param destinatario Email de destino da mensagem
+     * @throws BusinessException
+     */
+    public void enviar(TipoAssuntoEmail tipoAssuntoEmail, Map<String, Object> parametros, String destinatario) throws BusinessException {
+        ModeloEmail modeloEmail = modeloEmailBO.getModeloEmail(tipoAssuntoEmail);
+        enviar(modeloEmail, parametros, destinatario);
+    }
+
+    /**
+     * Enviar email assincrono a partir dos parametros passados
+     *
+     * @param modeloEmail Modelo a ser usado de email
+     * @param parametros Parametros para serem passados para o template
+     * @param destinatario Email de destino da mensagem
+     * @throws BusinessException
+     */
+    @Asynchronous
+    public void enviarAssincrono(ModeloEmail modeloEmail, Map<String, Object> parametros, String destinatario) {
+        try {
+            enviar(modeloEmail, parametros, destinatario);
+        } catch (BusinessException ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
+        }
+    }
+
+    /**
+     * Enviar email a partir dos parametros passados
+     *
+     * @param modeloEmail Modelo a ser usado de email
+     * @param parametros Parametros para serem passados para o template
+     * @param destinatario Email de destino da mensagem
+     * @throws BusinessException
+     */
+    public void enviar(ModeloEmail modeloEmail, Map<String, Object> parametros, String destinatario) throws BusinessException {
+        String mensagem = EmailBO.getMensagem(modeloEmail.getLayout(), parametros);
+        String assunto = EmailBO.getMensagem(modeloEmail.getAssunto(), parametros);
+        enviar(assunto, mensagem, modeloEmail.getConfiguracaoEmail(), destinatario);
+    }
+
+    /**
+     * Enviar email assincrono a partir dos parametros passados
+     *
+     * @param assunto Assunto do Email
+     * @param message Mensagem do Email
+     * @param configuracaoEmail
+     * @param destinatario Email de destino
+     * @throws BusinessException
+     */
+    public void enviarAssincrono(String assunto, String mensagem, ConfiguracaoEmail configuracaoEmail, String destinatario) {
+        try {
+            enviar(assunto, mensagem, configuracaoEmail, destinatario);
+        } catch (BusinessException ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
+        }
+    }
+
+    /**
+     * Enviar email a partir dos parametros passados
+     *
+     * @param assunto Assunto do Email
+     * @param message Mensagem do Email
+     * @param configuracaoEmail
+     * @param destinatario Email de destino
+     * @throws BusinessException
+     */
+    public void enviar(String assunto, String mensagem, ConfiguracaoEmail configuracaoEmail, String destinatario) throws BusinessException {
+
+        if (assunto == null || assunto.isEmpty()) {
+            throw new IllegalArgumentException("Email must not be null");
+        }
+        HtmlEmail email = new HtmlEmail();
+        email.setHostName(configuracaoEmail.getHostName());
+        try {
+
+            for (String string : destinatario.split(",")) {
+                email.addTo(string.trim());
+            }
+            email.setCharset("UTF-8");
+            email.setFrom(configuracaoEmail.getEmail(), configuracaoEmail.getEmail());
+            email.setSubject(assunto);
+            email.setHtmlMsg(mensagem);
+            email.setAuthentication(configuracaoEmail.getEmail(), configuracaoEmail.getSenha());
+            email.setSmtpPort(configuracaoEmail.getSmptPort());
+            email.setSSL(configuracaoEmail.isSsl());
+            email.setTLS(configuracaoEmail.isTls());
+            email.send();
+            email.setAuthenticator(null);
+
+        } catch (EmailException ex) {
+            erroSistemaBO.save(ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new BusinessException("Erro ao enviar o email. " + (ex.getMessage() != null ? ex.getMessage() : ""));
+        }
+
+    }
+
+    static {
+        cfg.setObjectWrapper(new DefaultObjectWrapper());
+        cfg.setDefaultEncoding("UTF-8");
+    }
+
+    public static String getMensagem(String layout, Map<String, Object> parametros) throws BusinessException {
+        Template template;
+        try {
+            template = new Template("name", new StringReader(layout), cfg);
+            StringWriter writer = new StringWriter();
+            template.process(parametros, writer);
+            writer.flush();
+            writer.close();
+            return writer.toString();
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+            throw new BusinessException("Erro ao pegar a mensagem de email. " + ex.getClass());
+        }
+    }
+}

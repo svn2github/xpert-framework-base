@@ -1,0 +1,68 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:x="http://xpert.com/faces"
+                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+    <h:form>
+        <xc:modalMessages/>
+        <p:tabView>
+            <p:tab title="#{xmsg.generalData}">
+                <h:panelGroup id="panelConfiguracaoEmail">
+
+                    <h:panelGrid columns="2" styleClass="grid-form">
+
+                        <h:outputLabel value="* #{msg['configuracaoEmail.nome']}:" />
+                        <p:inputText value="#{configuracaoEmailMB.entity.nome}" maxlength="255"  size="70"  />
+
+                        <h:outputLabel value="* #{msg['configuracaoEmail.email']}:" />
+                        <p:inputText value="#{configuracaoEmailMB.entity.email}" maxlength="255"  size="70"  />
+
+                        <h:outputLabel value="* #{msg['configuracaoEmail.senha']}:" />
+                        <p:inputText value="#{configuracaoEmailMB.entity.senha}" maxlength="255"  size="70"  />
+
+                        <h:outputLabel value="* #{msg['configuracaoEmail.smptPort']}:" />
+                        <p:inputMask mask="9?999999999" placeHolder="" value="#{configuracaoEmailMB.entity.smptPort}"  />
+
+                        <h:outputLabel value=" #{msg['configuracaoEmail.tls']}:" />
+                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.tls}" />
+
+                        <h:outputLabel value=" #{msg['configuracaoEmail.ssl']}:" />
+                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.ssl}" />
+
+                        <h:outputLabel value="* #{msg['configuracaoEmail.hostName']}:" />
+                        <p:inputText value="#{configuracaoEmailMB.entity.hostName}" maxlength="255"  size="70"  />
+
+                    </h:panelGrid>
+                    <p:separator/>
+                    <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
+                    <div style="text-align: center;">
+                        <x:securityArea rolesAllowed="configuracaoEmail.create">
+                            <p:commandButton process="panelConfiguracaoEmail" update="@form" action="#{configuracaoEmailMB.save}" value="#{xmsg['save']}" />
+                        </x:securityArea>
+                        <x:securityArea rolesAllowed="configuracaoEmail.audit">
+                            <xc:audit for="#{configuracaoEmailMB.entity}"/>
+                        </x:securityArea>
+                    </div>
+                </h:panelGroup>
+            </p:tab>
+            <p:tab title="#{msg['configuracaoEmail.testarEnvio']}">
+
+                <h:panelGrid columns="2" styleClass="grid-form">
+
+                    <h:outputLabel value="* #{msg['configuracaoEmail.para']}:" />
+                    <p:inputText value="#{configuracaoEmailMB.email}" maxlength="255"  size="70"  />
+
+                    <h:outputLabel value="* #{msg['configuracaoEmail.mensagem']}:" />
+                    <p:inputTextarea autoResize="false" value="#{configuracaoEmailMB.mensagem}" style="width: 500px"  />
+                </h:panelGrid>
+                <br/>
+                <div style="text-align: center;">
+                    <p:commandButton process="@form" update="@form" action="#{configuracaoEmailMB.enviarEmail()}" value="#{msg['enviar']}" />
+                </div>
+
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</ui:composition>

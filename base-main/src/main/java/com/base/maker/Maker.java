@@ -1,0 +1,48 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.base.maker;
+
+import com.xpert.maker.MakerSwingFrame;
+
+/**
+ *
+ * @author ayslan
+ */
+public class Maker extends MakerSwingFrame {
+
+    @Override
+    public String getDefaultPackage() {
+        return "com.base.modelo";
+    }
+
+    @Override
+    public String getDefaultTemplatePath() {
+        return "/template/mainTemplate.xhtml";
+    }
+
+    @Override
+    public String getDefaultResourceBundle() {
+        return "msg";
+    }
+
+    @Override
+    public String getDefaultBaseDAOImpl() {
+        return "com.base.application.BaseDAOImpl";
+    }
+
+    public static void main(String[] args) {
+        run(new Maker());
+    }
+
+    @Override
+    public String getManagedBeanSuffix() {
+        return "MB";
+    }
+
+    @Override
+    public String getBusinessObjectSuffix() {
+        return "BO";
+    }
+}
