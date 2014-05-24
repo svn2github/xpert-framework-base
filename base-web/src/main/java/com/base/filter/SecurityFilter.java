@@ -18,7 +18,7 @@ public class SecurityFilter extends AbstractSecurityFilter {
     public static final String PATTERN = "/view/*";
     private static final Logger logger = Logger.getLogger(SecurityFilter.class.getName());
     private static final String HOME = "/index.jsf";
-    private static final String[] IGNORE_URL = {"/view/home.jsf", "/view/controleAcesso/password/alterPassword.jsf"};
+    private static final String[] IGNORE_URL = {"/view/home.jsf"};
 
     @Override
     public String getUserSessionName() {

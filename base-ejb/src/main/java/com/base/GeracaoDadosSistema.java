@@ -1,8 +1,5 @@
 package com.base;
 
-import com.base.modelo.email.TipoAssuntoEmail;
-import com.base.modelo.email.ModeloEmail;
-import com.base.modelo.email.ConfiguracaoEmail;
 import com.base.dao.DAO;
 import com.base.modelo.controleacesso.*;
 import com.xpert.core.exception.StackException;
