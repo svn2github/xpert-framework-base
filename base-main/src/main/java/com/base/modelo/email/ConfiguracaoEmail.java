@@ -1,6 +1,7 @@
 package com.base.modelo.email;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +35,10 @@ public class ConfiguracaoEmail implements Serializable{
     @NotNull
     private Integer smptPort;
     
+    @Column(name = "is_tsl")
     private boolean tls;
+    
+    @Column(name = "is_ssl")
     private boolean ssl;
     
     @NotBlank

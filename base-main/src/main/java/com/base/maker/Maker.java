@@ -4,6 +4,7 @@
  */
 package com.base.maker;
 
+import com.xpert.faces.primefaces.PrimeFacesVersion;
 import com.xpert.maker.MakerSwingFrame;
 
 /**
@@ -45,4 +46,11 @@ public class Maker extends MakerSwingFrame {
     public String getBusinessObjectSuffix() {
         return "BO";
     }
+
+    @Override
+    public PrimeFacesVersion getPrimeFacesVersion() {
+        return PrimeFacesVersion.VERSION_3;
+    }
+    
+    
 }
