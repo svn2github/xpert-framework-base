@@ -8,7 +8,7 @@
                  xmlns:x="http://xpert.com/faces"
                  xmlns:security="http://java.sun.com/jsf/composite/xpert/components/security"
                  xmlns:of="http://omnifaces.org/functions"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
 
     <ui:param name="title" value="#{msg['solicitacaoRecuperacaoSenha.solicitacaoNovaSenha']}" />
     <ui:define name="menu"/>
@@ -18,8 +18,8 @@
 
 
             <h:form>
-                <xc:info value="#{msg['solicitacaoRecuperacaoSenha.informeNovaSenha']}"/>
-                <xc:modalMessages/>
+                <x:info value="#{msg['solicitacaoRecuperacaoSenha.informeNovaSenha']}"/>
+                <x:modalMessages/>
 
                 <h:panelGrid columns="2" styleClass="grid-form">
 
@@ -48,7 +48,7 @@
 
 
             <h:form>
-                <xc:warn value="#{msg['solicitacaoRecuperacaoSenha.invalidaOuExpirada']}"/>
+                <x:warn value="#{msg['solicitacaoRecuperacaoSenha.invalidaOuExpirada']}"/>
                 <br/>
                 <div style="text-align: center;">
                     <p:button value="#{msg['paginaInicial']}" outcome="/index.jsf"/>

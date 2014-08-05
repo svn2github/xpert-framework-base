@@ -5,9 +5,9 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form>
-        <xc:modalMessages/>
+        <x:modalMessages/>
 
         <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
@@ -84,7 +84,7 @@
                 </p:commandButton>
             </x:securityArea>
             <x:securityArea rolesAllowed="usuario.audit">
-                <xc:audit for="#{usuarioMB.entity}"/>
+                <x:audit for="#{usuarioMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>

@@ -5,9 +5,9 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form>
-        <xc:modalMessages/>
+        <x:modalMessages/>
         <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
                 <h:panelGrid columns="2" styleClass="grid-form">
@@ -49,7 +49,7 @@
                 <p:commandButton process="@form" update="@form" action="#{perfilMB.save}" value="#{xmsg['save']}" />
             </x:securityArea>
             <x:securityArea rolesAllowed="perfil.audit">
-                <xc:audit for="#{perfilMB.entity}"/>
+                <x:audit for="#{perfilMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>

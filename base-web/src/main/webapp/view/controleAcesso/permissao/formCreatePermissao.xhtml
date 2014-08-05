@@ -5,9 +5,9 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form id="formCreatePermissao">
-        <xc:modalMessages/>
+        <x:modalMessages/>
         <p:fieldset legend="#{msg['dadosGerais']}">
             <h:panelGrid columns="2" styleClass="grid-form">
 
@@ -18,7 +18,7 @@
                 <p:inputText value="#{permissaoMB.entity.key}" maxlength="255"  size="70"  />
 
                 <h:outputLabel value="#{msg['permissao.url']}:" />
-                <p:inputTextarea value="#{permissaoMB.entity.url}" size="70" style="width: 600px;" rows="3"  />
+                <p:inputTextarea value="#{permissaoMB.entity.url}" style="width: 600px;" rows="3"  />
 
                 <h:outputLabel value="#{msg['permissao.permissaoPai']}:" />
                 <h:selectOneMenu value="#{permissaoMB.entity.permissaoPai}" converter="entityConverter" >
@@ -64,7 +64,7 @@
                 <p:commandButton process="@form" update="@form" action="#{permissaoMB.save}" value="#{xmsg['save']}" />
             </x:securityArea>
             <x:securityArea rolesAllowed="permissao.audit">
-                <xc:audit for="#{permissaoMB.entity}"/>
+                <x:audit for="#{permissaoMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>

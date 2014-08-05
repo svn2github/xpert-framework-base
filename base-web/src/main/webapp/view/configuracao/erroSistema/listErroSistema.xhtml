@@ -6,11 +6,11 @@
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <ui:param name="title" value="#{msg['erroSistema.list']}" />
     <ui:define name="body">
         <h:form id="formListErroSistema">
-            <xc:modalMessages/>
+            <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="erroSistema" rowIndexVar="index" styleClass="font-11"
                          currentPageReportTemplate="#{erroSistemaMB.dataModel.currentPageReportTemplate}"
@@ -48,7 +48,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <xc:legends detail="true" />
+                        <x:legends detail="true" />
                     </f:facet>
                     <p:commandButton oncomplete="widgetErroSistemaDetail.show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailErroSistema" >
                         <f:setPropertyActionListener value="#{erroSistema}" target="#{erroSistemaMB.entity}" />

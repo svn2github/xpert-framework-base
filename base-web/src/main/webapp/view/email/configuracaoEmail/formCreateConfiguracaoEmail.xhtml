@@ -4,9 +4,9 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form>
-        <xc:modalMessages/>
+        <x:modalMessages/>
         <p:tabView>
             <p:tab title="#{xmsg.generalData}">
                 <h:panelGroup id="panelConfiguracaoEmail">
@@ -42,7 +42,7 @@
                             <p:commandButton process="panelConfiguracaoEmail" update="@form" action="#{configuracaoEmailMB.save}" value="#{xmsg['save']}" />
                         </x:securityArea>
                         <x:securityArea rolesAllowed="configuracaoEmail.audit">
-                            <xc:audit for="#{configuracaoEmailMB.entity}"/>
+                            <x:audit for="#{configuracaoEmailMB.entity}"/>
                         </x:securityArea>
                     </div>
                 </h:panelGroup>

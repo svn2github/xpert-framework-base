@@ -4,9 +4,9 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form>
-        <xc:modalMessages/>
+        <x:modalMessages/>
         <p:fieldset legend="#{msg['dadosGerais']}">
             <h:panelGrid columns="2" styleClass="grid-form">
 
@@ -60,7 +60,7 @@
                 <p:commandButton process="@form" update="@form" action="#{modeloEmailMB.save}" value="#{xmsg['save']}" />
             </x:securityArea>
             <x:securityArea rolesAllowed="modeloEmail.audit">
-                <xc:audit for="#{modeloEmailMB.entity}"/>
+                <x:audit for="#{modeloEmailMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>

@@ -6,12 +6,12 @@
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <ui:param name="title" value="#{msg['usuario.list']}" />
     <ui:define name="body">
         <ui:include src="menuUsuario.xhtml" />
         <h:form id="formListUsuario">
-            <xc:modalMessages/>
+            <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="usuario" rowIndexVar="index"
                          currentPageReportTemplate="#{usuarioMB.dataModel.currentPageReportTemplate}"
@@ -54,7 +54,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                          <xc:legends detail="true" edit="true" delete="true"/>
+                          <x:legends detail="true" edit="true" delete="true"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetUsuarioDetail.show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailUsuario" >
                         <f:setPropertyActionListener value="#{usuario}" target="#{usuarioMB.entity}" />
@@ -73,7 +73,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <x:securityArea rolesAllowed="usuario.audit">
-                        <xc:auditDelete for="#{classMB.usuario}"/>
+                        <x:auditDelete for="#{classMB.usuario}"/>
                     </x:securityArea>
                 </f:facet>
             </p:dataTable>

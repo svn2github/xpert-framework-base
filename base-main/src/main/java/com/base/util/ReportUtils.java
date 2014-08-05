@@ -32,6 +32,8 @@ public class ReportUtils {
     public static final String TEMPLATE_RETRATO_PADRAO = "/WEB-INF/report/template/TemplateRetrato.jasper";
     public static final String TEMPLATE_PAISAGEM_PADRAO = "/WEB-INF/report/template/TemplatePaisagem.jasper";
     public static final String REPORT_PATH = "REPORT_PATH";
+    public static final String NOME_EMPRESA = "Nome de Empresa de Teste";
+    public static final String CNPJ_EMPRESA = "00.000.000/0000-00";
 
     /**
      * Cria um relatorio com layout retrato a partir do template padrao

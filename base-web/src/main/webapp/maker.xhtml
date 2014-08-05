@@ -6,14 +6,14 @@
                  xmlns:custom="http://java.sun.com/jsf/composite/tag"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
 
     <ui:param name="title" value="Maker" />
     <ui:define name="body">
         <p:tabView>
             <p:tab title="Maker">
 
-                <xc:maker managedBean="com.base.mb"   
+                <x:maker managedBean="com.base.mb"   
                           businessObject="com.base.bo"   
                           dao="com.base.dao"   
                           daoImpl="com.base.dao.impl"   

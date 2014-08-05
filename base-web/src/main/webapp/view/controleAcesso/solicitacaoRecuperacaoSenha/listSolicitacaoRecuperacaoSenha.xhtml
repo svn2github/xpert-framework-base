@@ -5,12 +5,12 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <ui:param name="title" value="#{msg['solicitacaoRecuperacaoSenha.list']}" />
     <ui:define name="body">
         <ui:include src="menuSolicitacaoRecuperacaoSenha.xhtml" />
         <h:form id="formListSolicitacaoRecuperacaoSenha">
-            <xc:modalMessages/>
+            <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="solicitacaoRecuperacaoSenha" rowIndexVar="index" widgetVar="dataTableSolicitacaoRecuperacaoSenhaWidget"
                          currentPageReportTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.currentPageReportTemplate}"
@@ -64,7 +64,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <xc:legends detail="true"/>
+                        <x:legends detail="true"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetSolicitacaoRecuperacaoSenhaDetail.show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailSolicitacaoRecuperacaoSenha" title="#{xmsg['detail']}" >

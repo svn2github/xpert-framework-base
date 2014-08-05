@@ -1,5 +1,6 @@
 package com.base.application;
 
+import com.base.constante.Constantes;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -9,7 +10,7 @@ import javax.persistence.PersistenceContext;
  */
 public class BaseDAOImpl<T> extends com.xpert.persistence.dao.BaseDAOImpl<T> {
 
-    @PersistenceContext(unitName="basePU")
+    @PersistenceContext(unitName=Constantes.PERSISTENCE_UNIT_NAME)
     private EntityManager entityManager;
 
     public BaseDAOImpl() {

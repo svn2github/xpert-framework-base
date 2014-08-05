@@ -1,5 +1,6 @@
 package com.base.modelo.controleacesso;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @SequenceGenerator(name = "AcessoSistema", allocationSize = 1, sequenceName = "acessosistema_id_seq")
-public class AcessoSistema {
+public class AcessoSistema implements Serializable {
     
     @Id
     @GeneratedValue(generator = "AcessoSistema")

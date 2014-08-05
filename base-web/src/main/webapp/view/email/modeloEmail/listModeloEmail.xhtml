@@ -5,12 +5,12 @@
                  xmlns:p="http://primefaces.org/ui"
                  template="/template/mainTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <ui:param name="title" value="#{msg['modeloEmail.list']}" />
     <ui:define name="body">
         <ui:include src="menuModeloEmail.xhtml" />
         <h:form id="formListModeloEmail">
-            <xc:modalMessages/>
+            <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="modeloEmail" rowIndexVar="index" widgetVar="dataTableModeloEmailWidget"
                          currentPageReportTemplate="#{modeloEmailMB.dataModel.currentPageReportTemplate}"
@@ -37,7 +37,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <xc:legends detail="true" edit="true" delete="true"/>
+                        <x:legends detail="true" edit="true" delete="true"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetModeloEmailDetail.show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailModeloEmail" title="#{xmsg['detail']}" >
@@ -58,7 +58,7 @@
                 </p:column>
                 <f:facet name="footer">
                     <x:securityArea rolesAllowed="modeloEmail.audit">
-                        <xc:auditDelete for="#{modeloEmailMB.entityClass}"/>
+                        <x:auditDelete for="#{modeloEmailMB.entityClass}"/>
                     </x:securityArea>
                 </f:facet>
             </p:dataTable>

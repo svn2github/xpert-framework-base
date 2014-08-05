@@ -4,7 +4,7 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form id="formDetailModeloEmail">
         <p:fieldset legend="#{msg['dadosGerais']}">
             <h:panelGrid columns="2" styleClass="grid-detail">
@@ -28,7 +28,7 @@
         <div style="text-align: center;">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetModeloEmailDetail.hide()" />
             <x:securityArea rolesAllowed="modeloEmail.audit">
-                <xc:audit for="#{modeloEmailMB.entity}"/>
+                <x:audit for="#{modeloEmailMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>

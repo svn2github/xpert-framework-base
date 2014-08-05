@@ -12,6 +12,7 @@ public class Constantes {
      * Oracle: clob
      * MySQL: longtext
      */
+    public static final String PERSISTENCE_UNIT_NAME = "basePU";
     public static final String TIPO_TEXTO_BANCO = "text";
     public static final int MINUTOS_VALIDADE_RECUPERACAO_SENHA = 30;
 

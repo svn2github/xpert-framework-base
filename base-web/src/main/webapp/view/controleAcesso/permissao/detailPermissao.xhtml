@@ -5,7 +5,7 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:x="http://xpert.com/faces"
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
-                 xmlns:xc="http://java.sun.com/jsf/composite/xpert/components">
+                 >
     <h:form id="formDetailPermissao">
         <p:accordionPanel multiple="true" activeIndex="0,1,2,3">
             <p:tab title="#{msg['dadosGerais']}">
@@ -77,7 +77,7 @@
         <div style="text-align: center;">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetPermissaoDetail.hide()" />
             <x:securityArea rolesAllowed="permissao.audit">
-                <xc:audit for="#{permissaoMB.entity}"/>
+                <x:audit for="#{permissaoMB.entity}"/>
             </x:securityArea>
         </div>
     </h:form>
