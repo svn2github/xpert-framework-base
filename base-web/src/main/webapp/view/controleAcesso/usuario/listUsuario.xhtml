@@ -17,7 +17,7 @@
                          currentPageReportTemplate="#{usuarioMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{usuarioMB.dataModel.paginatorTemplate}"
                          value="#{usuarioMB.dataModel}" lazy="true" >
-                <p:column style="text-align: center;">
+                <p:column styleClass="uix-datatable-index">
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column headerText="#{msg['usuario.nome']}" sortBy="#{usuario.nome}"

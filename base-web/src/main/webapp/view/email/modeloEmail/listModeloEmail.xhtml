@@ -16,7 +16,7 @@
                          currentPageReportTemplate="#{modeloEmailMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{modeloEmailMB.dataModel.paginatorTemplate}"
                          value="#{modeloEmailMB.dataModel}" lazy="true" >
-                <p:column style="text-align: center;">
+                <p:column styleClass="uix-datatable-index">
                     <f:facet name="header">
                         <p:commandButton onclick="dataTableModeloEmailWidget.filter()" type="button" icon="ui-icon-refresh" />
                     </f:facet>

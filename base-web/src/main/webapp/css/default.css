@@ -2,6 +2,7 @@ body{font-size: 12px;}
 .ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
 header{padding: 10px 20px;}
 .ui-widget{font-size: 12px;}
+select{padding: 4px;}
 .font-11, .font-11  td, .font-11  th{font-size:  11px;}
 .font-weight-normal, .font-weight-normal  td{font-weight: normal;}
 .grid-detail, grid-form{margin-top: 0;}
@@ -39,6 +40,7 @@ header{padding: 10px 20px;}
 .w-330{width: 330px;}
 .w-340{width: 340px;}
 .w-350{width: 350px;}
+.ui-tabs{margin-bottom: 2px;}
 .ui-datatable th{text-align: center !important;  white-space: normal;}
 .datatable-auditing th, .datatable-auditing td, .datatable-auditing td .ui-dt-c, .datatable-auditing td .ui-dt-c span{white-space: normal !important;}
 .ui-datatable th{text-align: center !important;}
@@ -61,6 +63,7 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .radio td, .checkbox td{    padding: 4px;}
 .ui-toolbar{margin: 5px 0 10px 0;}
 .ui-datatable th input.ui-column-filter{width: 95% !important; }
+.ui-datatable th select.ui-column-filter{width: 95% !important; }
 .ui-toolbar .ui-button{margin: 0 3px 0 0;}
 .ui-toolbar .ui-button span{font-size: 14px;}
 .navbar .ui-panelmenu .ui-panelmenu-header{font-size: 14px;}

@@ -16,7 +16,7 @@
                          currentPageReportTemplate="#{acessoSistemaMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{acessoSistemaMB.dataModel.paginatorTemplate}"
                          value="#{acessoSistemaMB.dataModel}" lazy="true" >
-                <p:column style="text-align: center;">
+                <p:column styleClass="uix-datatable-index">
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column sortBy="#{acessoSistema.dataHora}"

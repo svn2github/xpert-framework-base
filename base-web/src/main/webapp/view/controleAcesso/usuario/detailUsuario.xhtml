@@ -10,38 +10,66 @@
 
         <p:accordionPanel multiple="true" activeIndex="0,1,2">
             <p:tab title="#{msg['dadosGerais']}">
-                <h:panelGrid columns="4" styleClass="grid-detail">
 
-                    <h:outputLabel value="#{msg['usuario.nome']}:" />
-                    <h:outputText value="#{usuarioMB.entity.nome}"/>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.nome']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.nome}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.cpf']}:" /><br/>
+                            <span class="uix-content-detail">
+                                 <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.email']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.email}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.userLogin']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.userLogin}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.situacaoUsuario']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.situacaoUsuario.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.emailCadastroEnviado']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.emailCadastroEnviado}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.senhaCadastrada']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.senhaCadastrada}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.superUsuario']}:" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{usuarioMB.entity.superUsuario}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
+                    </div>
 
-                    <h:outputLabel value="#{msg['usuario.cpf']}:" />
-                    <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
-
-                    <h:outputLabel value="#{msg['usuario.email']}:" />
-                    <h:outputText value="#{usuarioMB.entity.email}"/>
-
-                    <h:outputLabel value="#{msg['usuario.userLogin']}:" />
-                    <h:outputText value="#{usuarioMB.entity.userLogin}"/>
-
-                    <h:outputLabel value=" #{msg['usuario.situacaoUsuario']}:" />
-                    <h:outputText value="#{usuarioMB.entity.situacaoUsuario.descricao}" />
-                    
-                    <h:outputLabel value="#{msg['usuario.emailCadastroEnviado']}:" />
-                    <h:outputText value="#{usuarioController.entity.emailCadastroEnviado}" converter ="yesNoConverter" />
-                    
-                    <h:outputLabel value="#{msg['usuario.senhaCadastrada']}:" />
-                    <h:outputText value="#{usuarioController.entity.senhaCadastrada}" converter ="yesNoConverter" />
-
-                    <h:outputLabel value="#{msg['usuario.superUsuario']}:" />
-                    <h:outputText value="#{usuarioMB.entity.superUsuario}" converter ="yesNoConverter" />
-
-                </h:panelGrid>
+                </div>
             </p:tab>
             <p:tab title="#{msg['usuario.perfisAcesso']}">
-                <p:dataTable rowIndexVar="index" var="perfil" value="#{usuarioMB.entity.perfis}">
+                <p:dataTable rowIndexVar="index" var="perfil" value="#{usuarioMB.entity.perfis}"
+                             emptyMessage="#{xmsg['noRecordFound']}">
                     <x:initializer/>
-                    <p:column style="text-align: center;">
+                    <p:column styleClass="uix-datatable-index">
                         <h:outputText value="#{index+1}"/>
                     </p:column>
                     <p:column headerText="#{msg['perfil.descricao']}">
@@ -52,8 +80,11 @@
             <p:tab title="#{msg['usuario.historicosSituacao']}">
 
                 <p:dataTable value="#{usuarioMB.entity.historicosSituacao}" var="historicoSituacao"
-                             emptyMessage="#{xmsg['noRecordFound']}">
+                             emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index">
                     <x:initializer/>
+                     <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
                     <p:column headerText="#{msg['historicoSituacaoUsuario.dataSituacao']}" style="text-align: center;">
                         <h:outputText value="#{historicoSituacao.dataSituacao}">
                             <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>

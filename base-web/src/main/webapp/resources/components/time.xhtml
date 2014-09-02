@@ -24,7 +24,7 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
 
-        <p:inputMask mask="#{formatController.format.mascaraHoraMinuto}"  
+        <p:inputMask mask="#{formatMB.format.mascaraHoraMinuto}"  
                      value="#{cc.attrs.value}"
                      required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}"
                      readonly="#{cc.attrs.readonly}" size="#{cc.attrs.size}" 
@@ -32,7 +32,7 @@
                      styleClass="#{cc.attrs.styleClass}"
                      converterMessage="#{msg['business.horaInvalida']}"
                      disabled="#{cc.attrs.disabled}">
-            <f:convertDateTime pattern="#{formatController.format.horaMinuto}"/>
+            <f:convertDateTime pattern="#{formatMB.format.horaMinuto}"/>
         </p:inputMask>
 
     </cc:implementation>

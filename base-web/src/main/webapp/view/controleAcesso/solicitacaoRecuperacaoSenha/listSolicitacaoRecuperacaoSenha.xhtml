@@ -16,7 +16,7 @@
                          currentPageReportTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.paginatorTemplate}"
                          value="#{solicitacaoRecuperacaoSenhaMB.dataModel}" lazy="true" >
-                <p:column style="text-align: center;">
+                <p:column styleClass="uix-datatable-index">
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.email']}" sortBy="#{solicitacaoRecuperacaoSenha.email}"

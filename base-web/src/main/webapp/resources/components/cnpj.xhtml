@@ -20,7 +20,7 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <p:inputMask mask="#{formatController.format.cnpj}" validator="cnpjValidator" 
+        <p:inputMask mask="#{formatMB.format.cnpj}" validator="cnpjValidator" 
                      style="#{cc.attrs.style}" styleClass="#{cc.attrs.styleClass}"
                      value="#{cc.attrs.value}" converter="cnpjConverter" size="#{cc.attrs.size}" 
                      required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}"

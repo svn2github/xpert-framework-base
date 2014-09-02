@@ -4,6 +4,7 @@ import com.base.modelo.controleacesso.Perfil;
 import com.base.modelo.controleacesso.Permissao;
 import com.base.modelo.controleacesso.SituacaoUsuario;
 import com.base.modelo.controleacesso.Usuario;
+import com.base.modelo.email.TipoAssuntoEmail;
 import com.xpert.faces.bean.ClassModel;
 import com.xpert.persistence.query.Restriction;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class FindAllBean extends com.xpert.faces.bean.FindAllBean {
         put(Perfil.class, "descricao");
         put(Usuario.class, "nome");
         put(SituacaoUsuario.class, "descricao");
+        put(TipoAssuntoEmail.class, "descricao");
     }
 
     public static void put(Class entity, String order) {
