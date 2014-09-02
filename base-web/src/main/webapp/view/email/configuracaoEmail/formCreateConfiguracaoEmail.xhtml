@@ -11,30 +11,53 @@
             <p:tab title="#{xmsg.generalData}">
                 <h:panelGroup id="panelConfiguracaoEmail">
 
-                    <h:panelGrid columns="2" styleClass="grid-form">
+                    <div class="container-fluid">
+                        <div class="row">
 
-                        <h:outputLabel value="* #{msg['configuracaoEmail.nome']}:" />
-                        <p:inputText value="#{configuracaoEmailMB.entity.nome}" maxlength="255"  size="70"  />
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.nome']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.nome}" maxlength="255" styleClass="form-control"  />
+                            </div>
 
-                        <h:outputLabel value="* #{msg['configuracaoEmail.email']}:" />
-                        <p:inputText value="#{configuracaoEmailMB.entity.email}" maxlength="255"  size="70"  />
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.email']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.email}" maxlength="255"  styleClass="form-control" />
+                            </div>
 
-                        <h:outputLabel value="* #{msg['configuracaoEmail.senha']}:" />
-                        <p:inputText value="#{configuracaoEmailMB.entity.senha}" maxlength="255"  size="70"  />
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.hostName']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.hostName}" maxlength="255"  styleClass="form-control" />
+                            </div>
 
-                        <h:outputLabel value="* #{msg['configuracaoEmail.smptPort']}:" />
-                        <p:inputMask mask="9?999999999" placeHolder="" value="#{configuracaoEmailMB.entity.smptPort}"  />
+                            <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.senha']}:" />
+                                <p:inputText value="#{configuracaoEmailMB.entity.senha}" maxlength="255"  styleClass="form-control" />
+                            </div>
 
-                        <h:outputLabel value=" #{msg['configuracaoEmail.tls']}:" />
-                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.tls}" />
+                            <div class="form-group col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                                <h:outputLabel value="* #{msg['configuracaoEmail.smptPort']}:" />
+                                <p:inputMask mask="9?999999999" placeHolder="" value="#{configuracaoEmailMB.entity.smptPort}" styleClass="form-control"  />
+                            </div>
 
-                        <h:outputLabel value=" #{msg['configuracaoEmail.ssl']}:" />
-                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.ssl}" />
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.tls}" />
+                                        #{msg['configuracaoEmail.tls']}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{configuracaoEmailMB.entity.ssl}" />
+                                        #{msg['configuracaoEmail.ssl']}
+                                    </label>
+                                </div>
+                            </div>
 
-                        <h:outputLabel value="* #{msg['configuracaoEmail.hostName']}:" />
-                        <p:inputText value="#{configuracaoEmailMB.entity.hostName}" maxlength="255"  size="70"  />
-
-                    </h:panelGrid>
+                        </div>
+                    </div>
                     <p:separator/>
                     <h:outputText value="#{xmsg['requiredFieldsForm']}"/>
                     <div style="text-align: center;">
@@ -49,14 +72,21 @@
             </p:tab>
             <p:tab title="#{msg['configuracaoEmail.testarEnvio']}">
 
-                <h:panelGrid columns="2" styleClass="grid-form">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
 
-                    <h:outputLabel value="* #{msg['configuracaoEmail.para']}:" />
-                    <p:inputText value="#{configuracaoEmailMB.email}" maxlength="255"  size="70"  />
+                            <h:outputLabel value="* #{msg['configuracaoEmail.para']}:" />
+                            <p:inputText value="#{configuracaoEmailMB.email}" maxlength="255" styleClass="form-control"  />
+                        </div>
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
 
-                    <h:outputLabel value="* #{msg['configuracaoEmail.mensagem']}:" />
-                    <p:inputTextarea autoResize="false" value="#{configuracaoEmailMB.mensagem}" style="width: 500px"  />
-                </h:panelGrid>
+                            <h:outputLabel value="* #{msg['configuracaoEmail.mensagem']}:" />
+                            <p:inputTextarea autoResize="false" value="#{configuracaoEmailMB.mensagem}" styleClass="form-control"  />
+                        </div>
+                    </div>
+
+                </div>
                 <br/>
                 <div style="text-align: center;">
                     <p:commandButton process="@form" update="@form" action="#{configuracaoEmailMB.enviarEmail()}" value="#{msg['enviar']}" />

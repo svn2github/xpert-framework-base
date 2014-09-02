@@ -8,47 +8,66 @@
     <h:form>
         <x:modalMessages/>
         <p:fieldset legend="#{msg['dadosGerais']}">
-            <h:panelGrid columns="2" styleClass="grid-form">
+            <div class="container-fluid">
+                <div class="row">
 
-                <h:outputLabel value="* #{msg['modeloEmail.tipoAssuntoEmail']}:" />
-                <h:selectOneMenu value="#{modeloEmailMB.entity.tipoAssuntoEmail}"   >
-                    <f:selectItem itemLabel="#{xmsg['select']}" />
-                    <f:selectItems value="#{findAllBean.get(classMB.tipoAssuntoEmail)}" 
-                                   var="tipoAssuntoEmail"
-                                   itemLabel="#{tipoAssuntoEmail.descricao}"/>
-                </h:selectOneMenu>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="* #{msg['modeloEmail.assunto']}:" />
+                        <p:inputText value="#{modeloEmailMB.entity.assunto}" maxlength="255"  styleClass="form-control"  />
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <h:outputLabel value="* #{msg['modeloEmail.tipoAssuntoEmail']}:" />
+                        <h:selectOneMenu value="#{modeloEmailMB.entity.tipoAssuntoEmail}" styleClass="form-control"    >
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.tipoAssuntoEmail)}" 
+                                           var="tipoAssuntoEmail"
+                                           itemLabel="#{tipoAssuntoEmail.descricao}"/>
+                        </h:selectOneMenu>
+                    </div>
 
-                <h:outputLabel value="* #{msg['modeloEmail.assunto']}:" />
-                <p:inputText value="#{modeloEmailMB.entity.assunto}" maxlength="255"  size="70"  />
+                    <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
 
+                        <h:outputLabel value="* #{msg['modeloEmail.configuracaoEmail']}:" />
+                        <h:selectOneMenu value="#{modeloEmailMB.entity.configuracaoEmail}" converter="entityConverter" styleClass="form-control"  >
+                            <f:selectItem itemLabel="#{xmsg['select']}" />
+                            <f:selectItems value="#{findAllBean.get(classMB.configuracaoEmail)}" 
+                                           var="configuracaoEmail"
+                                           itemLabel="#{configuracaoEmail}"/>
+                        </h:selectOneMenu>
+                    </div>
 
-                <h:outputLabel value="* #{msg['modeloEmail.configuracaoEmail']}:" />
-                <h:selectOneMenu value="#{modeloEmailMB.entity.configuracaoEmail}" converter="entityConverter"  >
-                    <f:selectItem itemLabel="#{xmsg['select']}" />
-                    <f:selectItems value="#{findAllBean.get(classMB.configuracaoEmail)}" 
-                                   var="configuracaoEmail"
-                                   itemLabel="#{configuracaoEmail}"/>
-                </h:selectOneMenu>
-
-            </h:panelGrid>
+                </div>
+            </div>
         </p:fieldset>
         <p:fieldset legend="#{msg['modeloEmail.layout']}">
 
             <h:panelGroup id="panelLayout">
 
-                <h:panelGroup rendered="#{empty viewScope.exibirTexto or viewScope.exibirTexto == false}" >
-                    <p:editor value="#{modeloEmailMB.entity.layout}" style="width: 100%;" width="900"/>
-                </h:panelGroup>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
 
-                <h:panelGroup rendered="#{viewScope.exibirTexto == true}" >
-                    <h:inputTextarea value="#{modeloEmailMB.entity.layout}" 
-                                     style="width: 100%; height: 300px;"  />
-                </h:panelGroup>
+                            <h:panelGroup rendered="#{empty viewScope.exibirTexto or viewScope.exibirTexto == false}" >
+                                <p:editor value="#{modeloEmailMB.entity.layout}" style="width: 100%;" width="700"/>
+                            </h:panelGroup>
 
-                <h:selectBooleanCheckbox value="#{viewScope.exibirTexto}" id="exibirTexto">
-                    <p:ajax process="panelLayout" update="panelLayout"/>
-                </h:selectBooleanCheckbox>
-                <h:outputLabel for="exibirTexto" value="Exibir editor de texto"/>
+                            <h:panelGroup rendered="#{viewScope.exibirTexto == true}" >
+                                <p:inputTextarea autoResize="false" value="#{modeloEmailMB.entity.layout}" 
+                                                 styleClass="form-control" />
+                            </h:panelGroup>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <h:selectBooleanCheckbox value="#{viewScope.exibirTexto}" id="exibirTexto">
+                                        <p:ajax process="panelLayout" update="panelLayout"/>
+                                    </h:selectBooleanCheckbox>
+                                    Exibir editor de texto
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </h:panelGroup>
 

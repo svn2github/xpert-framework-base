@@ -70,3 +70,4 @@ input[type="radio"], input[type="checkbox"] {margin: 0; min-height: 0; padding-l
 .ui-menu > ul > li > ul > li{width: 190px !important;}
 .ui-menu > ul > li ul .ui-menuitem-link {padding: 8px 0 !important; font-size: 13px;}
 .acesso-rapido .ui-autocomplete-input {height: 34px;}
+select.form-control{height: 34px;}
