@@ -11,11 +11,15 @@
             <div class="container-fluid">
                 <div class="row">
 
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <h:outputLabel value="* #{msg['modeloEmail.assunto']}:" />
                         <p:inputText value="#{modeloEmailMB.entity.assunto}" maxlength="255"  styleClass="form-control"  />
                     </div>
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <h:outputLabel value="* #{msg['modeloEmail.tipoAssuntoEmail']}:" />
                         <h:selectOneMenu value="#{modeloEmailMB.entity.tipoAssuntoEmail}" styleClass="form-control"    >
                             <f:selectItem itemLabel="#{xmsg['select']}" />
@@ -24,8 +28,10 @@
                                            itemLabel="#{tipoAssuntoEmail.descricao}"/>
                         </h:selectOneMenu>
                     </div>
+                </div>
+                <div class="row">
 
-                    <div class="form-group col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                         <h:outputLabel value="* #{msg['modeloEmail.configuracaoEmail']}:" />
                         <h:selectOneMenu value="#{modeloEmailMB.entity.configuracaoEmail}" converter="entityConverter" styleClass="form-control"  >
@@ -52,7 +58,7 @@
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{viewScope.exibirTexto == true}" >
-                                <p:inputTextarea autoResize="false" value="#{modeloEmailMB.entity.layout}" 
+                                <p:inputTextarea autoResize="false" value="#{modeloEmailMB.entity.layout}"  rows="10"
                                                  styleClass="form-control" />
                             </h:panelGroup>
                         </div>

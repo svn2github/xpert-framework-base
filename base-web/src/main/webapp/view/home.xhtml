@@ -12,15 +12,25 @@
 
     <ui:param name="title" value="#{msg['bemVindo']}" />
     <ui:define name="body">  
-        <p:dataGrid columns="3" styleClass="grid-permissao" var="permissao" rendered="#{not empty sessaoUsuarioMB.atalhos}" value="#{sessaoUsuarioMB.atalhos}">
-                <p:panel>
-                    <h:link outcome="#{permissao.urlMenuVerificado}" styleClass="link-permissao" >
-                        <h:outputText value="#{permissao.caminhoPermissao}" class="caminho-permissao ui-widget-header"/>
-                        <span class="nome-permissao">
-                            <h:outputText value="#{permissao.nomeMenuVerificado}"/>
-                        </span>
-                    </h:link>
-                </p:panel>
-        </p:dataGrid>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-12 col-xs-12">
+                    <h:panelGroup rendered="#{not empty sessaoUsuarioMB.atalhos}" >
+                        <ui:repeat var="permissao" value="#{sessaoUsuarioMB.atalhos}">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h:link outcome="#{permissao.urlMenuVerificado}" styleClass="link-permissao" >
+                                        <h:outputText value="#{permissao.caminhoPermissao}" class="caminho-permissao"/>
+                                        <span class="nome-permissao">
+                                            <h:outputText value="#{permissao.nomeMenuVerificado}"/>
+                                        </span>
+                                    </h:link>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

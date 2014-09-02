@@ -3,30 +3,50 @@
                  xmlns:f="http://java.sun.com/jsf/core"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:p="http://primefaces.org/ui"
-                 template="/template/mainTemplate.xhtml"
+                 template="/template/loginTemplate.xhtml"
                  xmlns:x="http://xpert.com/faces"
-                 xmlns:security="http://java.sun.com/jsf/composite/xpert/components/security"
                  >
 
-    <ui:param name="title" value="#{msg['login']}" />
     <ui:define name="menu"/>  
+    <ui:define name="header"/>  
     <ui:define name="body">  
+
+
         <h:form>
             <x:modalMessages autoUpdate="true"/> 
+            <h1>
+                Xpert-framework - Base
+            </h1>
 
-            <h:panelGrid>
+            <div class="login-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
-                <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
+                            <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
+                            <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
 
-                <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
-                <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
+                            <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
+                        </div>
+                    </div>
 
-            </h:panelGrid>
-            <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" />     
+                    <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" styleClass="col-lg-12  col-md-12 col-sm-12 col-xs-12" />   
+                    <br/>
+                    <br/>
+                    <div class="text-right">
+                        <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
+                    </div>
+                    <p:focus/>
+                </div>
 
-            <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
-            <p:focus/>
+            </div>
+
+
         </h:form>                   
     </ui:define>
 </ui:composition>
