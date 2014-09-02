@@ -18,24 +18,24 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "ModeloEmail", allocationSize = 1, sequenceName = "modeloemail_id_seq")
-public class ModeloEmail implements Serializable{
-    
+public class ModeloEmail implements Serializable {
+
     @Id
+    @SequenceGenerator(name = "ModeloEmail", allocationSize = 1, sequenceName = "modeloemail_id_seq")
     @GeneratedValue(generator = "ModeloEmail")
     private Long id;
-    
+
     @Column(columnDefinition = Constantes.TIPO_TEXTO_BANCO)
     private String layout;
-    
+
     @NotBlank
     private String assunto;
-    
+
     @NotNull
     @Column(length = 50)
     @Enumerated(EnumType.STRING)
     private TipoAssuntoEmail tipoAssuntoEmail;
-    
+
     @NotNull
     @ManyToOne
     private ConfiguracaoEmail configuracaoEmail;
@@ -55,7 +55,7 @@ public class ModeloEmail implements Serializable{
     public void setTipoAssuntoEmail(TipoAssuntoEmail tipoAssuntoEmail) {
         this.tipoAssuntoEmail = tipoAssuntoEmail;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -106,7 +106,5 @@ public class ModeloEmail implements Serializable{
         }
         return true;
     }
-   
-    
-    
+
 }

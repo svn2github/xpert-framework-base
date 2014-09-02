@@ -11,36 +11,65 @@
 
         <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
-                <h:panelGrid columns="2" styleClass="grid-form">
+                <div class="container-fluid">
+                    <div class="row">
 
-                    <h:outputLabel value="* #{msg['usuario.nome']}:" />
-                    <p:inputText value="#{usuarioMB.entity.nome}" maxlength="255"  size="70"  />
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.nome']}:" />
+                            <p:inputText value="#{usuarioMB.entity.nome}" maxlength="255" styleClass="form-control"/>
+                        </div>
 
-                    <h:outputLabel value="* #{msg['usuario.cpf']}:" />
-                    <p:inputMask mask="#{formatMB.format.cpf}" placeHolder=""
-                                 converter="cpfConverter"
-                                 value="#{usuarioMB.entity.cpf}" maxlength="255"  size="20"  />
+                    </div>
+                    <div class="row">
 
-                    <h:outputLabel value="#{msg['usuario.rg']}:" />
-                    <p:inputText value="#{usuarioMB.entity.rg}" maxlength="255"  size="20"  />
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.cpf']}:" />
+                            <custom:cpf value="#{usuarioMB.entity.cpf}" styleClass="form-control" />
+                        </div>
 
-                    <h:outputLabel value="* #{msg['usuario.userLogin']}:" />
-                    <p:inputText value="#{usuarioMB.entity.userLogin}" maxlength="255"  size="20"  />
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['usuario.rg']}:" />
+                            <p:inputText value="#{usuarioMB.entity.rg}" maxlength="255"  size="20" styleClass="form-control" />
+                        </div>
 
-                    <h:outputLabel value=" #{msg['usuario.email']}:" />
-                    <p:inputText value="#{usuarioMB.entity.email}" maxlength="255"  size="70"  />
+                        <div class="form-group col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="* #{msg['usuario.userLogin']}:" />
+                            <p:inputText value="#{usuarioMB.entity.userLogin}" maxlength="255"  size="20"  styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
 
-                    <h:outputLabel value=" #{msg['usuario.situacaoUsuario']}:" />
-                    <h:selectOneRadio value="#{usuarioMB.entity.situacaoUsuario}" styleClass="radio"  >
-                        <f:selectItems value="#{findAllBean.get(classMB.situacaoUsuario)}" 
-                                       var="situacaoUsuario"
-                                       itemLabel="#{situacaoUsuario.descricao}"/>
-                    </h:selectOneRadio>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value=" #{msg['usuario.email']}:" />
+                            <p:inputText value="#{usuarioMB.entity.email}" maxlength="255"  size="70"  styleClass="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row">
 
-                    <h:outputLabel value=" #{msg['usuario.superUsuario']}:" rendered="#{sessaoUsuarioMB.user.superUsuario}"/>
-                    <h:selectBooleanCheckbox value="#{usuarioMB.entity.superUsuario}" rendered="#{sessaoUsuarioMB.user.superUsuario}"/>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value=" #{msg['usuario.situacaoUsuario']}:" />
+                            <h:selectOneRadio value="#{usuarioMB.entity.situacaoUsuario}"  >
+                                <f:selectItems value="#{findAllBean.get(classMB.situacaoUsuario)}" 
+                                               var="situacaoUsuario"
+                                               itemLabel="#{situacaoUsuario.descricao}"/>
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                    <div class="row">
 
-                </h:panelGrid>
+                        <h:panelGroup rendered="#{sessaoUsuarioMB.user.superUsuario}" >
+                            <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <h:selectBooleanCheckbox value="#{usuarioMB.entity.superUsuario}" />
+                                        #{msg['usuario.superUsuario']}
+                                    </label>
+                                </div>
+                            </div>
+                        </h:panelGroup>                        
+
+                    </div>
+                </div>
             </p:tab>
             <p:tab title="#{msg['usuario.perfisAcesso']}">
                 <h:selectManyCheckbox value="#{usuarioMB.entity.perfis}" converter="entityConverter" styleClass="checkbox-list">

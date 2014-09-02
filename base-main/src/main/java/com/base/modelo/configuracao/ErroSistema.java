@@ -13,30 +13,30 @@ import javax.persistence.*;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "ErroSistema", allocationSize = 1, sequenceName = "errosistema_id_seq")
 public class ErroSistema implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "ErroSistema", allocationSize = 1, sequenceName = "errosistema_id_seq")
     @GeneratedValue(generator = "ErroSistema")
     private Long id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-    
+
     @Column(length = 500)
     private String informacaoNavegador;
-    
-    @Column(columnDefinition="text")
+
+    @Column(columnDefinition = "text")
     private String pilhaErro;
-    
+
     @Column(length = 190)
     private String funcionalidade;
-    
+
     @Column(length = 500)
     private String url;
     @ManyToOne
     private Usuario usuario;
-    
+
     private static final String PACOTE_PADRAO_SISTEMA = "com.base";
 
     public String getPilhaErroFormatada() {

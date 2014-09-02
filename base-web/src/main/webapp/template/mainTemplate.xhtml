@@ -14,24 +14,29 @@
             <ui:include src="imports.xhtml"/>
         </h:head>
         <h:body>
-            <ui:include src="/template/ajaxStatus.xhtml" />   
-            <h:panelGroup styleClass="ui-widget"  rendered="#{not empty sessaoUsuarioMB.user}">  
-                <h:panelGrid columns="2" style="width: 100%">
+            <ui:include src="/template/ajaxStatus.xhtml" />  
+            <header>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-left text-left logo">
+                        <img src="#{request.contextPath}/images/logo-empresa.png" alt="Logo" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right text-right info">
+                        <h:panelGroup  rendered="#{not empty sessaoUsuarioMB.user}">
+                            <h:outputText value="#{sessaoUsuarioMB.user.nome}"/><br/>
+                            <h:outputText value="#{now}" styleClass="font-11">
+                                <f:convertDateTime dateStyle="full" type="both" />
+                            </h:outputText>
+                        </h:panelGroup>                            
+                    </div>
+                </div>
+            </header>
 
-                    <ui:insert name="menu">
-                        <h:panelGroup>
-                            <ui:include src="menu.xhtml"/>
-                        </h:panelGroup>
-                    </ui:insert> 
-
-                    <h:panelGroup layout="block" style="text-align: right;">
-                        <h:outputText value="#{now}" styleClass="font-11">
-                            <f:convertDateTime dateStyle="full" type="both" />
-                        </h:outputText><br/>
-                        <h:outputText style="font-weight: bold;" value="#{sessaoUsuarioMB.user.nome}"/>
-                    </h:panelGroup> 
-
-                </h:panelGrid>
+            <h:panelGroup rendered="#{not empty sessaoUsuarioMB.user}">  
+                <ui:insert name="menu">
+                    <h:panelGroup>
+                        <ui:include src="menu.xhtml"/>
+                    </h:panelGroup>
+                </ui:insert> 
             </h:panelGroup> 
 
             <p:panel>  

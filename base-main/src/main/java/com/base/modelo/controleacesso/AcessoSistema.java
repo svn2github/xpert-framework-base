@@ -15,20 +15,20 @@ import javax.persistence.TemporalType;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "AcessoSistema", allocationSize = 1, sequenceName = "acessosistema_id_seq")
 public class AcessoSistema implements Serializable {
-    
+
     @Id
+    @SequenceGenerator(name = "AcessoSistema", allocationSize = 1, sequenceName = "acessosistema_id_seq")
     @GeneratedValue(generator = "AcessoSistema")
     private Long id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
-    
+
     private String ip;
-    
+
     private String userAgent;
-    
+
     @ManyToOne
     private Usuario usuario;
 
@@ -39,7 +39,6 @@ public class AcessoSistema implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
 
     public Date getDataHora() {
         return dataHora;
@@ -72,7 +71,5 @@ public class AcessoSistema implements Serializable {
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
     }
-    
-    
-    
+
 }

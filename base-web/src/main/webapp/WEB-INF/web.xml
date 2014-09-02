@@ -22,6 +22,11 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.jsf</url-pattern>
     </servlet-mapping>
+    
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
 
     <persistence-context-ref>
         <persistence-context-ref-name>persistence/entityManager</persistence-context-ref-name>
@@ -61,7 +66,7 @@
         <auth-constraint/>
     </security-constraint>
     
-     <!-- Referencias a EJBs -->
+    <!-- Referencias a EJBs -->
     <ejb-local-ref>
         <ejb-ref-name>ejb/ErroSistemaBO</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>

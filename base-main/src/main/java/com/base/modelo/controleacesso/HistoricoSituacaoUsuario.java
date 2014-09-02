@@ -9,27 +9,27 @@ import javax.persistence.*;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "HistoricoSituacaoUsuario", allocationSize = 1, sequenceName = "hist_sit_usuario_id_seq")
 public class HistoricoSituacaoUsuario implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "HistoricoSituacaoUsuario", allocationSize = 1, sequenceName = "hist_sit_usuario_id_seq")
     @GeneratedValue(generator = "HistoricoSituacaoUsuario")
     private Long id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataSituacao;
-   
+
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private SituacaoUsuario situacaoUsuario;
-    
-    @ManyToOne(fetch= FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
-    
+
     /*
      * Usuário que alterou a situacao
      */
-    @ManyToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioAlteracao;
 
     public Usuario getUsuarioAlteracao() {
@@ -40,7 +40,6 @@ public class HistoricoSituacaoUsuario implements Serializable {
         this.usuarioAlteracao = usuarioAlteracao;
     }
 
-    
     public Date getDataSituacao() {
         return dataSituacao;
     }
@@ -72,7 +71,6 @@ public class HistoricoSituacaoUsuario implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -95,7 +93,5 @@ public class HistoricoSituacaoUsuario implements Serializable {
         hash = 79 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
-    
-    
+
 }

@@ -14,12 +14,13 @@ import javax.persistence.*;
 public class Auditing extends AbstractAuditing implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "Auditing", allocationSize = 1, sequenceName = "auditing_id_seq")
+    @GeneratedValue(generator = "Auditing")
     private Long id;
-   
+
     @ManyToOne
     private Usuario usuario;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "auditing")
     private List<Metadata> metadatas;
 

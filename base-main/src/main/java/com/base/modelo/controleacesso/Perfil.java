@@ -7,31 +7,31 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@SequenceGenerator(name = "Perfil", allocationSize = 1, sequenceName = "perfil_id_seq")
 public class Perfil implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "Perfil", allocationSize = 1, sequenceName = "perfil_id_seq")
     @GeneratedValue(generator = "Perfil")
     private Long id;
-    
+
     @NotBlank
     private String descricao;
     private Boolean ativo = true;
-  
+
     @ManyToMany(targetEntity = Permissao.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "perfil_permissao", joinColumns = @JoinColumn(name = "perfil_id"), inverseJoinColumns =@JoinColumn(name = "permissao_id"))
+    @JoinTable(name = "perfil_permissao", joinColumns = @JoinColumn(name = "perfil_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     @OrderBy(value = "descricao")
     private List<Permissao> permissoes = new ArrayList<Permissao>();
-    
+
     @ManyToMany(targetEntity = Permissao.class, fetch = FetchType.LAZY)
-    @JoinTable(name = "perfil_permissao_menu", joinColumns = @JoinColumn(name = "perfil_id"), inverseJoinColumns =@JoinColumn(name = "permissao_id"))
+    @JoinTable(name = "perfil_permissao_menu", joinColumns = @JoinColumn(name = "perfil_id"), inverseJoinColumns = @JoinColumn(name = "permissao_id"))
     @OrderBy(value = "descricao")
     private List<Permissao> permissoesAtalho = new ArrayList<Permissao>();
-    
+
     @OrderBy("nome")
-    @ManyToMany(fetch= FetchType.LAZY, mappedBy="perfis")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "perfis")
     private List<Usuario> usuarios;
-     
+
     public Perfil() {
     }
 
@@ -43,7 +43,6 @@ public class Perfil implements Serializable {
         this.usuarios = usuarios;
     }
 
-    
     public Boolean getAtivo() {
         return ativo;
     }
@@ -86,7 +85,7 @@ public class Perfil implements Serializable {
     public void setPermissoesAtalho(List<Permissao> permissoesAtalho) {
         this.permissoesAtalho = permissoesAtalho;
     }
-    
+
     @Override
     public String toString() {
         return descricao;

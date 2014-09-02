@@ -17,8 +17,6 @@ public class ApplicationMB {
 
     @EJB
     private GeracaoDadosSistema geracaoDadosSistema;
-    @EJB
-    private GeracaoPermissao geracaoPermissao;
 
     @PostConstruct
     public void init() {

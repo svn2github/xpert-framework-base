@@ -4,6 +4,7 @@
  */
 package com.base.maker;
 
+import com.xpert.faces.bootstrap.BootstrapVersion;
 import com.xpert.faces.primefaces.PrimeFacesVersion;
 import com.xpert.maker.MakerSwingFrame;
 
@@ -51,6 +52,12 @@ public class Maker extends MakerSwingFrame {
     public PrimeFacesVersion getPrimeFacesVersion() {
         return PrimeFacesVersion.VERSION_3;
     }
+
+    @Override
+    public BootstrapVersion getBootstrapVersion() {
+        return BootstrapVersion.VERSION_3;
+    }
+    
     
     
 }

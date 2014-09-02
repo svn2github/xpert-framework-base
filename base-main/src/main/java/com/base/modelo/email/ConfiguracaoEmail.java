@@ -15,32 +15,32 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "ConfiguracaoEmail", allocationSize = 1, sequenceName = "configuracaoemail_id_seq")
-public class ConfiguracaoEmail implements Serializable{
-    
+public class ConfiguracaoEmail implements Serializable {
+
     @Id
+    @SequenceGenerator(name = "ConfiguracaoEmail", allocationSize = 1, sequenceName = "configuracaoemail_id_seq")
     @GeneratedValue(generator = "ConfiguracaoEmail")
     private Long id;
-    
+
     @Email
     @NotBlank
     private String email;
-    
+
     @NotBlank
     private String nome;
-    
+
     @NotBlank
     private String senha;
-    
+
     @NotNull
     private Integer smptPort;
-    
+
     @Column(name = "is_tsl")
     private boolean tls;
-    
+
     @Column(name = "is_ssl")
     private boolean ssl;
-    
+
     @NotBlank
     private String hostName;
 
@@ -51,7 +51,7 @@ public class ConfiguracaoEmail implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -134,6 +134,5 @@ public class ConfiguracaoEmail implements Serializable{
     public String toString() {
         return email + ". SMTP Port=" + smptPort + ", TLS=" + tls + ", SSL=" + ssl + ", Host Name=" + hostName;
     }
-    
-    
+
 }

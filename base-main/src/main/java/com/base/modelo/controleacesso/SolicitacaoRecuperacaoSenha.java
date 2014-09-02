@@ -21,34 +21,34 @@ import org.hibernate.validator.constraints.Email;
  * @author ayslan
  */
 @Entity
-@SequenceGenerator(name = "SolicitacaoRecuperacaoSenha", allocationSize = 1, sequenceName = "solicitacaorecuperacaosenha_id_seq")
 public class SolicitacaoRecuperacaoSenha implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "SolicitacaoRecuperacaoSenha", allocationSize = 1, sequenceName = "solicitacaorecuperacaosenha_id_seq")
     @GeneratedValue(generator = "SolicitacaoRecuperacaoSenha")
     private Long id;
     @Email
-    
+
     private String email;
     private String token;
     private boolean ativo;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCadastro;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataValidade;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracaoSenha;
-    
+
     @ManyToOne
     private Usuario usuario;
-    
+
     @Column(length = 50)
     @Enumerated(EnumType.STRING)
     private TipoRecuperacaoSenha tipoRecuperacaoSenha;
-    
+
     private static final SimpleDateFormat FORMAT_DATA_HORA_MINUTO = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public String getUrlRecuperacaoSenha() {
@@ -78,7 +78,7 @@ public class SolicitacaoRecuperacaoSenha implements Serializable {
     public void setTipoRecuperacaoSenha(TipoRecuperacaoSenha tipoRecuperacaoSenha) {
         this.tipoRecuperacaoSenha = tipoRecuperacaoSenha;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }

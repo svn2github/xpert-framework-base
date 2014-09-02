@@ -7,23 +7,22 @@
                 xmlns:x="http://xpert.com/faces"
                 >
 
-    <h:form id="formMenuBar">     
 
-        <h:panelGrid columns="2" style="width: 100%;">
-
-            <p:menubar model="#{sessaoUsuarioMB.menuModel}" styleClass="nav navbar-nav" >
-               <f:facet name="options">  
+    <h:form id="formMenu">                
+        <div class="hidden-xs">
+            <p:menubar model="#{sessaoUsuarioMB.menuModel}">
+                <f:facet name="options">
                     <h:panelGroup>
                         <p:autoComplete minQueryLength="3" id="autoCompleteMenu" 
                                         completeMethod="#{sessaoUsuarioMB.pesquisarPermissao}"
                                         global="false"
-                                        converter="entityConverter"
-                                        itemValue="#{permissao}" scrollHeight="300" panelStyle="width: auto;"
+                                        converter="entityConverter" styleClass="acesso-rapido"
+                                        itemValue="#{permissao}" scrollHeight="300"
                                         var="permissao" itemLabel="#{permissao.urlMenuVerificado}">
                             <p:ajax event="itemSelect" onstart="navegarMenuBar();return false;" />
                             <p:column>
-                                <h:link outcome="#{permissao.urlMenuVerificado}">
-                                    <h:outputText style="font-size: 11px; white-space: nowrap;" value="#{permissao.caminhoPermissao}" escape="false"/>
+                                <h:link outcome="#{permissao.urlMenuVerificado}" styleClass="link-acesso-rapido">
+                                    <h:outputText  value="#{permissao.caminhoPermissao}" escape="false"/>
                                 </h:link>
                             </p:column>
                         </p:autoComplete>
@@ -31,8 +30,28 @@
                     </h:panelGroup>
                 </f:facet>
             </p:menubar>
-
-
-        </h:panelGrid>
+        </div>
+        <div class="hidden-lg hidden-sm hidden-md">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs" href="#{request.contextPath}/view/home.jsf">Home</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <p:panelMenu  style="width: 100%" model="#{sessaoUsuarioMB.menuModel}"/>                    
+                </div>
+            </nav>
+        </div>
     </h:form>
+
+    <script>
+        function navegarMenuBar() {
+            var url = $('.acesso-rapido input').val();
+            window.location.href = "#{request.contextPath}" + url;
+        }
+    </script>
 </ui:composition>

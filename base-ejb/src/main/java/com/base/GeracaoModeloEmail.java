@@ -43,8 +43,8 @@ public class GeracaoModeloEmail {
             configuracaoEmail = getDAO(ConfiguracaoEmail.class).merge(configuracaoEmail, false);
         }
 
-        salvarModeloEmail("Xpert Base - Cadastro de Usuario", TipoAssuntoEmail.NOVO_USUARIO_SISTEMA, configuracaoEmail);
-        salvarModeloEmail("Xpert Base - Recuperacao de Senha", TipoAssuntoEmail.RECUPERACAO_SENHA, configuracaoEmail);
+        salvarModeloEmail("[Xpert-framework - Base] Cadastro de Usuario", TipoAssuntoEmail.NOVO_USUARIO_SISTEMA, configuracaoEmail);
+        salvarModeloEmail("[Xpert-framework - Base] Recuperacao de Senha", TipoAssuntoEmail.RECUPERACAO_SENHA, configuracaoEmail);
     }
 
     public void salvarModeloEmail(String assunto, TipoAssuntoEmail tipoAssuntoEmail, ConfiguracaoEmail configuracaoEmail) {
