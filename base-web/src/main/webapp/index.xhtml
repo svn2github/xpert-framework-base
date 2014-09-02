@@ -7,6 +7,7 @@
                  xmlns:x="http://xpert.com/faces"
                  >
 
+     <ui:param name="title" value="Xpert-framework - Base" />
     <ui:define name="menu"/>  
     <ui:define name="header"/>  
     <ui:define name="body">  
@@ -14,37 +15,32 @@
 
         <h:form>
             <x:modalMessages autoUpdate="true"/> 
-            <h1>
-                Xpert-framework - Base
-            </h1>
 
-            <div class="login-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                            <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
-                            <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
+                        <h:outputLabel value="#{msg['usuario.userLogin']}:"/>
+                        <p:inputText id="user" value="#{loginMB.userLogin}" required="true" requiredMessage="#{msg['required.usuario']}" styleClass="form-control"  />
 
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
-                            <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h:outputLabel value="#{msg['usuario.userPassword']}:"/>
+                        <p:password id="password" feedback="false" autocomplete="false" value="#{loginMB.userPassword}" required="true" maxlength="20" requiredMessage="#{msg['required.password']}" styleClass="form-control"/>
                     </div>
-
-                    <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" styleClass="col-lg-12  col-md-12 col-sm-12 col-xs-12" />   
-                    <br/>
-                    <br/>
-                    <div class="text-right">
-                        <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
-                    </div>
-                    <p:focus/>
                 </div>
 
+                <p:commandButton value="#{msg['entrar']}" action="#{loginMB.login}" process="@form" update="@form" styleClass="col-lg-12  col-md-12 col-sm-12 col-xs-12 " />   
+                <br/>
+                <br/>
+                <div class="text-right">
+                    <h:link outcome="/esqueciSenha.jsf" value="#{msg['solicitacaoRecuperacaoSenha.esqueciMinhaSenha']}"/>
+                </div>
+                <p:focus/>
             </div>
+
 
 
         </h:form>                   

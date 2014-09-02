@@ -77,10 +77,11 @@ select.form-control{height: 34px;}
 section.conteudo {padding: 0 20px; font-size: 12px;}
 section.conteudo .page-header {margin: 10px 0 0 0; font-size: 20px }
 section.conteudo h1.page-header  span{vertical-align: middle;}
+.ui-datatable .ui-datatable-tablewrapper tbody > tr > td {padding: 3px;}
 /*login*/
 .login-wraper {width: 300px;margin: 10% auto;-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);position: relative;padding: 10px;height: auto;background: white;text-align: left;}
 .login-wraper h1{font-family: 'Raleway', sans-serif;font-weight: lighter;text-align: center;font-size: 23px;padding: 0;margin: 0}
-.login-wraper .login-body{border-top: 1px solid #ccc;margin: 10px auto;padding: 15px 0 10px}
+.login-wraper .login-body{margin: 10px auto;padding: 15px 0 10px}
 .login-wraper .login-body .input-append,.login-wraper .login-body .input-prepend {width: 350px;}
 .login-wraper .login-body input[type=text],.login-wraper .login-body input[type=password]{width: 100%}
 @media (max-width: 600px) {
