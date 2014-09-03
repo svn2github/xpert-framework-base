@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 
 /**
  * Classe para geracao das permissoes iniciais do sistema
- * 
+ *
  * @author Ayslan
  */
 @Stateless
@@ -39,7 +39,6 @@ public class GeracaoPermissao {
         create(new Permissao("permissao.audit", "Auditoria de Permissão"), "permissao");
         create(new Permissao("permissao.delete", "Exclusão de Permissão"), "permissao");
 
-
         //Usuario
         create(new Permissao("usuario", "Usuário", true), "controleAcesso");
         create(new Permissao("usuario.create", "Cadastro de Usuário", "/view/controleAcesso/usuario/createUsuario.jsf", true), "usuario");
@@ -47,14 +46,12 @@ public class GeracaoPermissao {
         create(new Permissao("usuario.audit", "Auditoria de Usuário"), "usuario");
         create(new Permissao("usuario.delete", "Exclusão de Usuário"), "usuario");
 
-
         //Perfil
         create(new Permissao("perfil", "Perfil", true), "controleAcesso");
         create(new Permissao("perfil.create", "Cadastro de Perfil", "/view/controleAcesso/perfil/createPerfil.jsf", true), "perfil");
         create(new Permissao("perfil.list", "Consulta de Perfil", "/view/controleAcesso/perfil/listPerfil.jsf", true), "perfil");
         create(new Permissao("perfil.audit", "Auditoria de Perfil"), "perfil");
         create(new Permissao("perfil.delete", "Exclusão de Perfil"), "perfil");
-
 
         //Acessos do Sistema
         create(new Permissao("acessoSistema.list", "Relatório de Acessos", "/view/controleAcesso/acessoSistema/listAcessoSistema.jsf", true), "controleAcesso");
@@ -84,6 +81,12 @@ public class GeracaoPermissao {
         create(new Permissao("configuracaoEmail.audit", "Auditoria de Configuração de Email"), "configuracaoEmail");
         create(new Permissao("configuracaoEmail.delete", "Exclusão de Configuração de Email"), "configuracaoEmail");
 
+        create(new Permissao("person", "Person", true), null);
+        create(new Permissao("person.create", "Cadastro de Person", "/view/exemplo/person/createPerson.jsf", true), "person");
+        create(new Permissao("person.list", "Consulta de Person", "/view/exemplo/person/listPerson.jsf", true), "person");
+        create(new Permissao("person.audit", "Auditoria de Person"), "person");
+        create(new Permissao("person.delete", "Exclusão de Person"), "person");
+
         /*
          * Configuracao
          */
@@ -98,7 +101,6 @@ public class GeracaoPermissao {
         //Alterar Senha
         createGlobal(new Permissao("usuario.alterarSenha", "Alterar Senha", "/view/controleAcesso/password/alterPassword.jsf", true), "controleAcesso");
         createGlobal(new Permissao("usuario.ultimosAcessos", "Últimos Acessos", "/view/controleAcesso/acessoSistema/ultimosAcessoSistema.jsf", true), "controleAcesso");
-
 
     }
 
@@ -128,7 +130,7 @@ public class GeracaoPermissao {
             permissaoDB.setPossuiMenu(permissao.isPossuiMenu());
             permissaoDB.setGlobal(permissao.isGlobal());
             permissao = permissaoDB;
-        } 
+        }
 
         permissaoDAO.merge(permissao, false);
     }
