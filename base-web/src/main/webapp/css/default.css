@@ -94,7 +94,3 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 @media (max-width: 800px) {
     .login-wraper {margin: 10% auto;}
 }
-
-.uix-calendar{white-space: nowrap}
-.uix-calendar .ui-inputfield.hasDatepicker {padding-right: 35px;}
-.uix-calendar .ui-datepicker-trigger.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-icon-only { left: -31px;}
