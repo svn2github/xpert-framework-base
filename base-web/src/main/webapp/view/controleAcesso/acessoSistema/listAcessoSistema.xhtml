@@ -42,7 +42,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true" />
+                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetAcessoSistemaDetail.show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailAcessoSistema" >
                         <f:setPropertyActionListener value="#{acessoSistema}" target="#{acessoSistemaMB.entity}" />
@@ -56,7 +56,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetAcessoSistemaDetail" header="#{msg['acessoSistema.detail']}" appendToBody="true" modal="true" height="500" width="800">
+        <p:dialog widgetVar="widgetAcessoSistemaDetail" header="#{msg['acessoSistema.detail']}" appendToBody="true" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailAcessoSistema.xhtml" />
         </p:dialog>
     </ui:define>

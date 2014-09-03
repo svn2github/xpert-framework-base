@@ -83,8 +83,11 @@
             <p:tab title="#{msg['usuario.historicosSituacao']}">
 
                 <p:dataTable value="#{usuarioMB.entity.historicosSituacao}" var="historicoSituacao"
-                             emptyMessage="#{xmsg['noRecordFound']}">
+                             emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive">
                     <x:initializer/>
+                    <p:column styleClass="uix-datatable-index">
+                        <h:outputText value="#{index+1}"/>
+                    </p:column>
                     <p:column headerText="#{msg['historicoSituacaoUsuario.dataSituacao']}" style="text-align: center;">
                         <h:outputText value="#{historicoSituacao.dataSituacao}">
                             <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>

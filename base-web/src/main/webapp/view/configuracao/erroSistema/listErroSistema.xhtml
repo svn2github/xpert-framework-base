@@ -48,7 +48,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true" />
+                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetErroSistemaDetail.show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailErroSistema" >
                         <f:setPropertyActionListener value="#{erroSistema}" target="#{erroSistemaMB.entity}" />

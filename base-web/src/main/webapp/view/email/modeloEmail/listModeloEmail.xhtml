@@ -13,6 +13,7 @@
             <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="modeloEmail" rowIndexVar="index" widgetVar="dataTableModeloEmailWidget"
+                         styleClass="table-responsive"
                          currentPageReportTemplate="#{modeloEmailMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{modeloEmailMB.dataModel.paginatorTemplate}"
                          value="#{modeloEmailMB.dataModel}" lazy="true" >
@@ -37,7 +38,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true" edit="true" delete="true"/>
+                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetModeloEmailDetail.show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailModeloEmail" title="#{xmsg['detail']}" >
@@ -64,7 +65,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetModeloEmailDetail" header="#{msg['modeloEmail.detail']}" appendToBody="true" modal="true" height="500" width="800">
+        <p:dialog widgetVar="widgetModeloEmailDetail" header="#{msg['modeloEmail.detail']}" appendToBody="true" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailModeloEmail.xhtml" />
         </p:dialog>
     </ui:define>

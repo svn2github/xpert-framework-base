@@ -6,32 +6,60 @@
                  xmlns:x="http://xpert.com/faces"
                  >
     <h:form id="formDetailConfiguracaoEmail">
-        <h:panelGrid columns="4" styleClass="grid-detail">
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.nome']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.nome}"/>
-            
-            <h:outputLabel value="#{msg['configuracaoEmail.email']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.email}"/>
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.senha']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.senha}"/>
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.smptPort']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.smptPort}"/>
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.tls']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.tls}" converter ="yesNoConverter" />
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.ssl']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.ssl}" converter ="yesNoConverter" />
-           
-            <h:outputLabel value="#{msg['configuracaoEmail.hostName']}:" />
-            <h:outputText value="#{configuracaoEmailMB.entity.hostName}"/>
+        <div class="container-fluid">
+            <div class="row">
 
-        </h:panelGrid>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.nome']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.nome}"/>
+                    </span>
+                </div>
+                
+                 <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.hostName']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.hostName}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.email']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.email}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.senha']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.senha}"/>
+                    </span>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.smptPort']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.smptPort}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.tls']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.tls}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['configuracaoEmail.ssl']}:"  styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{configuracaoEmailMB.entity.ssl}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+               
+            </div>
+        </div>
         <p:separator/>
-        <div style="text-align: center;">
+        <div class="text-center">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetConfiguracaoEmailDetail.hide()" />
             <x:securityArea rolesAllowed="configuracaoEmail.audit">
                 <x:audit for="#{configuracaoEmailMB.entity}"/>

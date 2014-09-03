@@ -7,24 +7,45 @@
                  xmlns:custom="http://java.sun.com/jsf/composite/components"
                  >
     <h:form id="formDetailAcessoSistema">
-        
-        <h:panelGrid columns="2" styleClass="grid-detail" >
-           
-            <h:outputLabel value="#{msg['acessoSistema.dataHora']}:" />
-            <h:outputText value="#{acessoSistemaMB.entity.dataHora}">
-                <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
-            </h:outputText>
-           
-            <h:outputLabel value="#{msg['acessoSistema.ip']}:" />
-            <h:outputText value="#{acessoSistemaMB.entity.ip}"/>
-           
-            <h:outputLabel value="#{msg['acessoSistema.userAgent']}:" />
-            <h:outputText value="#{acessoSistemaMB.entity.userAgent}"/>
-           
-            <h:outputLabel value="#{msg['acessoSistema.usuario']}:" />
-            <h:outputText value="#{acessoSistemaMB.entity.usuario}"/>
 
-        </h:panelGrid>
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['acessoSistema.dataHora']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{acessoSistemaMB.entity.dataHora}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}"/>
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+                    <h:outputLabel value="#{msg['acessoSistema.ip']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{acessoSistemaMB.entity.ip}"/>
+                    </span>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+
+                    <h:outputLabel value="#{msg['acessoSistema.usuario']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{acessoSistemaMB.entity.usuario}"/>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <h:outputLabel value="#{msg['acessoSistema.userAgent']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{acessoSistemaMB.entity.userAgent}"/>
+                    </span>
+                </div>
+
+            </div>
+        </div>
         <p:separator/>
         <div style="text-align: center;">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetAcessoSistemaDetail.hide()" />

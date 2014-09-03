@@ -14,49 +14,49 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.nome']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.nome']}:" styleClass="control-label" /><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.nome}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.cpf']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.cpf']}:" styleClass="control-label" /><br/>
                             <span class="uix-content-detail">
                                  <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.email']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.email']}:" styleClass="control-label" /><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.email}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.userLogin']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.userLogin']}:" styleClass="control-label" /><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.userLogin}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.situacaoUsuario']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.situacaoUsuario']}:" styleClass="control-label"/><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.situacaoUsuario.descricao}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.emailCadastroEnviado']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.emailCadastroEnviado']}:" styleClass="control-label"/><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.emailCadastroEnviado}" converter ="yesNoConverter" />
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.senhaCadastrada']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.senhaCadastrada']}:" styleClass="control-label"/><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.senhaCadastrada}" converter ="yesNoConverter" />
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <h:outputLabel value="#{msg['usuario.superUsuario']}:" /><br/>
+                            <h:outputLabel value="#{msg['usuario.superUsuario']}:" styleClass="control-label"/><br/>
                             <span class="uix-content-detail">
                                 <h:outputText value="#{usuarioMB.entity.superUsuario}" converter ="yesNoConverter" />
                             </span>

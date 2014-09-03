@@ -13,11 +13,15 @@
         <h:form id="formListUsuario">
             <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                         var="usuario" rowIndexVar="index"
+                         var="usuario" rowIndexVar="index" styleClass="table-responsive"
                          currentPageReportTemplate="#{usuarioMB.dataModel.currentPageReportTemplate}"
+                         widgetVar="dataTableUsuario"
                          paginatorTemplate="#{usuarioMB.dataModel.paginatorTemplate}"
                          value="#{usuarioMB.dataModel}" lazy="true" >
                 <p:column styleClass="uix-datatable-index">
+                    <f:facet name="header">
+                        <p:commandButton onclick="dataTableUsuario.filter()" type="button" icon="ui-icon-refresh" />
+                    </f:facet>
                     <h:outputText value="#{index+1}"/>
                 </p:column>
                 <p:column headerText="#{msg['usuario.nome']}" sortBy="#{usuario.nome}"
@@ -54,7 +58,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                          <x:legends detail="true" edit="true" delete="true"/>
+                        <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetUsuarioDetail.show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailUsuario" >
                         <f:setPropertyActionListener value="#{usuario}" target="#{usuarioMB.entity}" />

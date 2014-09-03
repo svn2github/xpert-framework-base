@@ -13,12 +13,12 @@
         <h:form id="formListPerfil">
             <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                         var="perfil" value="#{perfilMB.dataModel}" lazy="true"
+                         var="perfil" value="#{perfilMB.dataModel}" lazy="true" styleClass="table-responsive"
                          currentPageReportTemplate="#{perfilMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{perfilMB.dataModel.paginatorTemplate}"
                          rowIndexVar="index" widgetVar="widgetDataTablePerfil">
 
-                <p:column styleClass="uix-datatable-index" headerText="#{msg['perfil.id']}">
+                <p:column styleClass="uix-datatable-index" >
                     <h:outputText value="#{index+1}" />
                 </p:column>
 
@@ -34,7 +34,7 @@
 
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true" edit="true" delete="true"/>
+                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetPerfilDetail.show();"  
                                      action="#{perfilMB.detail}"
@@ -61,7 +61,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetPerfilDetail" header="#{msg['perfil.detail']}" appendToBody="true" modal="true" height="500" width="800">
+        <p:dialog widgetVar="widgetPerfilDetail" header="#{msg['perfil.detail']}" appendToBody="true" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailPerfil.xhtml" />
         </p:dialog>
     </ui:define>

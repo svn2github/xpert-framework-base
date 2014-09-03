@@ -6,38 +6,62 @@
                  xmlns:x="http://xpert.com/faces"
                  >
     <h:form id="formDetailSolicitacaoRecuperacaoSenha">
-        <h:panelGrid columns="4" styleClass="grid-detail">
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.email']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.email}"/>
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.ativo']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.ativo}" converter ="yesNoConverter" />
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataCadastro']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataCadastro}">
-                <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
-            </h:outputText>
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataValidade']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataValidade}">
-                 <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
-            </h:outputText>
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataAlteracaoSenha}">
-                 <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
-            </h:outputText>
-           
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.usuario']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.usuario.nome}"/>
-            
-            <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}:" />
-            <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.tipoRecuperacaoSenha.descricao}"/>
+        <div class="container-fluid">
+            <div class="row">
 
-        </h:panelGrid>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.email']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText styleClass="uix-content-detail" value="#{solicitacaoRecuperacaoSenhaMB.entity.email}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.ativo']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.ativo}" converter ="yesNoConverter" />
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataCadastro']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataCadastro}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataValidade']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataValidade}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.dataAlteracaoSenha']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.dataAlteracaoSenha}">
+                            <f:convertDateTime pattern="#{formatMB.format.dataHoraMinutoSegundo}" />
+                        </h:outputText>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.usuario']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.usuario.nome}"/>
+                    </span>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <h:outputLabel value="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}:" styleClass="control-label"/><br/>
+                    <span class="uix-content-detail">
+                        <h:outputText value="#{solicitacaoRecuperacaoSenhaMB.entity.tipoRecuperacaoSenha.descricao}"/>
+                    </span>
+                </div>
+
+            </div>
+        </div>
         <p:separator/>
-        <div style="text-align: center;">
+        <div class="text-center">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="widgetSolicitacaoRecuperacaoSenhaDetail.hide()" />
             <x:securityArea rolesAllowed="solicitacaoRecuperacaoSenha.audit">
                 <x:audit for="#{solicitacaoRecuperacaoSenhaMB.entity}"/>

@@ -13,6 +13,7 @@
             <x:modalMessages/>
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="configuracaoEmail" rowIndexVar="index" widgetVar="dataTableConfiguracaoEmailWidget"
+                         styleClass="table-responsive"
                          currentPageReportTemplate="#{configuracaoEmailMB.dataModel.currentPageReportTemplate}"
                          paginatorTemplate="#{configuracaoEmailMB.dataModel.paginatorTemplate}"
                          value="#{configuracaoEmailMB.dataModel}" lazy="true" >
@@ -52,7 +53,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true" edit="true" delete="true"/>
+                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetConfiguracaoEmailDetail.show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailConfiguracaoEmail" title="#{xmsg['detail']}" >
@@ -79,7 +80,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetConfiguracaoEmailDetail" header="#{msg['configuracaoEmail.detail']}" appendToBody="true" modal="true" height="500" width="800">
+        <p:dialog widgetVar="widgetConfiguracaoEmailDetail" header="#{msg['configuracaoEmail.detail']}" appendToBody="true" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailConfiguracaoEmail.xhtml" />
         </p:dialog>
     </ui:define>

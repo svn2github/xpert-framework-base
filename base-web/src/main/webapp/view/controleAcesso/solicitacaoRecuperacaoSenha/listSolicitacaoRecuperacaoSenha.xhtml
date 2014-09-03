@@ -14,6 +14,7 @@
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
                          var="solicitacaoRecuperacaoSenha" rowIndexVar="index" widgetVar="dataTableSolicitacaoRecuperacaoSenhaWidget"
                          currentPageReportTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.currentPageReportTemplate}"
+                         styleClass="table-responsive"
                          paginatorTemplate="#{solicitacaoRecuperacaoSenhaMB.dataModel.paginatorTemplate}"
                          value="#{solicitacaoRecuperacaoSenhaMB.dataModel}" lazy="true" >
                 <p:column styleClass="uix-datatable-index">
@@ -54,7 +55,7 @@
                         </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.usuario']}" sortBy="#{solicitacaoRecuperacaoSenha.usuario.nome}"
-                             >
+                          filterBy="#{solicitacaoRecuperacaoSenha.usuario.nome}"   >
                         <h:outputText value="#{solicitacaoRecuperacaoSenha.usuario.nome}"/>
                 </p:column>
                 <p:column headerText="#{msg['solicitacaoRecuperacaoSenha.tipoRecuperacaoSenha']}"
@@ -64,7 +65,7 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions">
                     <f:facet name="header">
-                        <x:legends detail="true"/>
+                        <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
                     <p:commandButton oncomplete="widgetSolicitacaoRecuperacaoSenhaDetail.show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailSolicitacaoRecuperacaoSenha" title="#{xmsg['detail']}" >
@@ -74,7 +75,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetSolicitacaoRecuperacaoSenhaDetail" header="#{msg['solicitacaoRecuperacaoSenha.detail']}" appendToBody="true" modal="true" height="500" width="800">
+        <p:dialog widgetVar="widgetSolicitacaoRecuperacaoSenhaDetail" header="#{msg['solicitacaoRecuperacaoSenha.detail']}" appendToBody="true" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailSolicitacaoRecuperacaoSenha.xhtml" />
         </p:dialog>
     </ui:define>

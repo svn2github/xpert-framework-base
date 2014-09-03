@@ -9,46 +9,81 @@
     <h:form id="formDetailPermissao">
         <p:accordionPanel multiple="true" activeIndex="0,1,2,3">
             <p:tab title="#{msg['dadosGerais']}">
-                <h:panelGrid columns="2" styleClass="grid-detail">
+                <div class="container-fluid">
+                    <div class="row">
 
-                    <h:outputLabel value="#{msg['permissao.descricao']}:" />
-                    <h:outputText value="#{permissaoMB.entity.descricao}"/>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.descricao']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.key']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.key}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.permissaoPai']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.permissaoPai.descricao}">
+                                    <x:initializer/>
+                                </h:outputText>
+                            </span>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.global']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.global}" converter="yesNoConverter"/>
+                            </span>
+                        </div>
 
-                    <h:outputLabel value="#{msg['permissao.key']}:" />
-                    <h:outputText value="#{permissaoMB.entity.key}"/>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.url']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.url}"/>
+                            </span>
+                        </div>
 
-                    <h:outputLabel value="#{msg['permissao.url']}:" />
-                    <h:outputText value="#{permissaoMB.entity.url}"/>
 
-                    <h:outputLabel value="#{msg['permissao.permissaoPai']}:" />
-                    <h:outputText value="#{permissaoMB.entity.permissaoPai.descricao}">
-                        <x:initializer/>
-                    </h:outputText>
-
-                    <h:outputLabel value="#{msg['permissao.global']}:" />
-                    <h:outputText value="#{permissaoMB.entity.global}" converter="yesNoConverter"/>
-                    
-                </h:panelGrid>
+                    </div>
+                </div>
             </p:tab>
             <p:tab title="#{msg['permissao.dadosMenu']}">
-                <h:panelGrid columns="2" styleClass="grid-detail">
+                <div class="container-fluid">
+                    <div class="row">
 
-                    <h:outputLabel value="#{msg['permissao.possuiMenu']}:" />
-                    <h:outputText value="#{permissaoMB.entity.possuiMenu}" converter="yesNoConverter"/>
-                    
-                    <h:outputLabel value="#{msg['permissao.nomeMenu']}:" />
-                    <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.possuiMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.possuiMenu}" converter="yesNoConverter"/>
+                            </span>
+                        </div>
 
-                    <h:outputLabel value="#{msg['permissao.urlMenu']}:" />
-                    <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.nomeMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                            </span>
+                        </div>
 
-                </h:panelGrid>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="#{msg['permissao.urlMenu']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{permissaoMB.entity.nomeMenu}"/>
+                            </span>
+                        </div>
+
+
+                    </div>
+                </div>
             </p:tab>
             <p:tab title="#{msg['permissao.permissoesFilhas']}">
-                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index"
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive"
                              var="permissao" value="#{permissaoMB.entity.permissoesFilhas}">
                     <x:initializer/>
-                    <p:column style="text-align: center;">
+                    <p:column styleClass="uix-datatable-index">
                         <h:outputText value="#{index+1}" />
                     </p:column>
 
@@ -61,10 +96,10 @@
                 </p:dataTable>
             </p:tab>
             <p:tab title="#{msg['permissao.perfis']}">
-                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index"
+                <p:dataTable emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index" styleClass="table-responsive"
                              var="perfil" value="#{permissaoMB.entity.perfis}">
                     <x:initializer/>
-                    <p:column style="text-align: center;">
+                    <p:column styleClass="uix-datatable-index">
                         <h:outputText value="#{index+1}" />
                     </p:column>
                     <p:column headerText="#{msg['perfil.descricao']}" >

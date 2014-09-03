@@ -9,15 +9,25 @@
     <h:form id="formDetailPerfil">
         <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
-                <h:panelGrid columns="2" styleClass="grid-detail" columnClasses="w-120">
 
-                    <h:outputLabel value="#{msg['perfil.descricao']}:" />
-                    <h:outputText value="#{perfilMB.entity.descricao}"/>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <h:outputLabel value="#{msg['perfil.descricao']}:" styleClass="control-label" /><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{perfilMB.entity.descricao}"/>
+                            </span>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                    <h:outputLabel value="#{msg['perfil.ativo']}:" />
-                    <h:outputText value="#{perfilMB.entity.ativo}" converter ="yesNoConverter" />
+                            <h:outputLabel value="#{msg['perfil.ativo']}:" styleClass="control-label"/><br/>
+                            <span class="uix-content-detail">
+                                <h:outputText value="#{perfilMB.entity.ativo}" converter ="yesNoConverter" />
+                            </span>
+                        </div>
 
-                </h:panelGrid>
+                    </div>
+                </div>
             </p:tab>
             <p:tab title="#{msg['acessosDoPerfil']}">
                 <div style="height: 380px; overflow: scroll;">
@@ -45,10 +55,10 @@
             </p:tab>
             <p:tab title="#{msg['perfil.usuarios']}">
                 <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                             var="usuario" rowIndexVar="index" styleClass="font-11"
+                             var="usuario" rowIndexVar="index" styleClass="font-11 table-responsive"
                              value="#{perfilMB.entity.usuarios}" >
                     <x:initializer/>
-                    <p:column style="text-align: center;">
+                    <p:column styleClass="uix-datatable-index">
                         <h:outputText value="#{index+1}"/>
                     </p:column>
                     <p:column headerText="#{msg['usuario.nome']}" sortBy="#{usuario.nome}"
@@ -76,7 +86,9 @@
         <script>
             /*<![CDATA[*/
             $(function() {
-                $(".disable-tree .ui-chkbox-box").addClass("ui-state-disabled").click(function(){return false;});
+                $(".disable-tree .ui-chkbox-box").addClass("ui-state-disabled").click(function() {
+                    return false;
+                });
             });
             /*]]>*/
         </script>
