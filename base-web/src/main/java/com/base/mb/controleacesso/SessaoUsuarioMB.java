@@ -17,13 +17,10 @@ import javax.el.MethodExpression;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-//import org.primefaces.component.menuitem.MenuItem;
-//import org.primefaces.component.submenu.Submenu;
-//import org.primefaces.model.DefaultMenuModel;
-import org.primefaces.model.menu.DefaultMenuModel;
-import org.primefaces.model.menu.MenuItem;
-import org.primefaces.model.menu.MenuModel;
-import org.primefaces.model.menu.Submenu;
+import org.primefaces.component.menuitem.MenuItem;
+import org.primefaces.component.submenu.Submenu;
+import org.primefaces.model.DefaultMenuModel;
+import org.primefaces.model.MenuModel;
 
 /**
  * @ManagedBean que guarda o usuario logado e suas permissoess
@@ -56,7 +53,6 @@ public class SessaoUsuarioMB extends AbstractUserSession implements Serializable
     }
 
     public void criarMenu() {
-        /*
         menuModel = new DefaultMenuModel();
         //home
         MenuItem item = new MenuItem();
@@ -109,11 +105,9 @@ public class SessaoUsuarioMB extends AbstractUserSession implements Serializable
         item.setIcon("ui-icon-close");
         item.setActionExpression(getMethodExpressionSair());
         menuModel.addMenuItem(item);
-                */
     }
 
     public void putSubmenu(Permissao permissao, Map<Permissao, Submenu> subMenuMap, MenuModel menuModel) {
-        /*
         if (permissao != null) {
             if (permissao.isPossuiMenu()) {
                 String url = permissao.getUrlMenuVerificado();
@@ -141,7 +135,6 @@ public class SessaoUsuarioMB extends AbstractUserSession implements Serializable
                 }
             }
         }
-                */
     }
 
     public void criarCaminhoPermissao() {

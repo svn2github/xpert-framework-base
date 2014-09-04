@@ -95,5 +95,5 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
     .login-wraper {margin: 10% auto;}
 }
 .ui-datatable table {
-    width: auto;
+   /* width: auto;*/
 }
