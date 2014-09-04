@@ -4,7 +4,10 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
 
-    <p:ajaxStatus onstart="loadingGif.show();"
+    <p:ajaxStatus onstart="PF('loadingGif').show();" rendered="true"
+                  oncomplete="PF('loadingGif').hide();"/>
+    
+    <p:ajaxStatus onstart="loadingGif.show();" rendered="false"
                   oncomplete="loadingGif.hide();"/>
 
     <p:dialog modal="true" widgetVar="loadingGif" closable="false" styleClass="fixed"

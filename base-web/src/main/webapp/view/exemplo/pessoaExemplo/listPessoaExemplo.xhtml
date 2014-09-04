@@ -17,7 +17,7 @@
                          value="#{pessoaExemploMB.dataModel}" lazy="true" >
                 <p:column styleClass="uix-datatable-index">
                     <f:facet name="header">
-                        <p:commandButton onclick="dataTablePessoaExemploWidget.filter()" type="button" icon="ui-icon-refresh" />
+                        <p:commandButton onclick="PF('dataTablePessoaExemploWidget').filter()" type="button" icon="ui-icon-refresh" />
                     </f:facet>
                     <h:outputText value="#{index+1}"/>
                 </p:column>
@@ -46,7 +46,7 @@
                         </h:outputText>
                 </p:column>
                 <p:column headerText="#{msg['pessoaExemplo.horario']}" sortBy="#{pessoaExemplo.horario}"
-                             >
+                             style="text-align: center;">
                         <h:outputText value="#{pessoaExemplo.horario}">
                             <f:convertDateTime pattern="HH:mm"/>
                         </h:outputText>
@@ -61,9 +61,9 @@
                 </p:column>
                 <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
                     <f:facet name="header">
-                        <x:legends detail="true" edit="true" delete="true"/>
+                        <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="widgetPessoaExemploDetail.show();"  icon="ui-icon-zoomin" 
+                    <p:commandButton oncomplete="PF('widgetPessoaExemploDetail').show();"  icon="ui-icon-zoomin" 
                                      process="@form" update=":formDetailPessoaExemplo" title="#{xmsg['detail']}" >
                         <f:setPropertyActionListener value="#{pessoaExemplo}" target="#{pessoaExemploMB.entity}" />
                     </p:commandButton>
@@ -74,7 +74,7 @@
                     </x:securityArea>
                     <x:securityArea rolesAllowed="pessoaExemplo.delete">
                         <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
-                                         action="#{pessoaExemploMB.delete}" >
+                                          >
                             <f:setPropertyActionListener value="#{pessoaExemplo.id}" target="#{pessoaExemploMB.id}" />
                             <x:confirmation message="#{xmsg['confirmDelete']} - #{pessoaExemplo}" />
                         </p:commandButton>
@@ -88,7 +88,7 @@
             </p:dataTable>
         </h:form>
 
-        <p:dialog widgetVar="widgetPessoaExemploDetail" header="#{msg['pessoaExemplo.detail']}" appendToBody="true" 
+        <p:dialog widgetVar="widgetPessoaExemploDetail" header="#{msg['pessoaExemplo.detail']}" appendTo="@(body)" 
                   modal="true" styleClass="uix-dialog-fluid" >
             <ui:include src="detailPessoaExemplo.xhtml" />
         </p:dialog>

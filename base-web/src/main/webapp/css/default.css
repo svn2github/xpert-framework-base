@@ -94,3 +94,6 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 @media (max-width: 800px) {
     .login-wraper {margin: 10% auto;}
 }
+.ui-datatable table {
+    width: auto;
+}
