@@ -10,7 +10,7 @@
 
     <ui:param name="title" value="Maker" />
     <ui:define name="body">
-        <p:tabView>
+        <p:tabView rendered="#{sessaoUsuarioMB.user.superUsuario}">
             <p:tab title="Maker">
 
                 <x:maker managedBean="com.base.mb"   
