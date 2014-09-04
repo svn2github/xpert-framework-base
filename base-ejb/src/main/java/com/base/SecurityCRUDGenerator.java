@@ -1,6 +1,6 @@
 package com.base;
 
-import com.base.modelo.exemplo.Person;
+import com.base.modelo.exemplo.PessoaExemplo;
 import com.xpert.utils.HumaniseCamelCase;
 import com.xpert.utils.StringUtils;
 import java.util.logging.Logger;
@@ -24,7 +24,7 @@ public class SecurityCRUDGenerator {
         /**
          * adicionar aqui as classes que serão geradas
          */
-        generate(Person.class);
+        generate(PessoaExemplo.class);
     }
 
     public static void generate(Class clazz) {

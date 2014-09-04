@@ -6,8 +6,8 @@ import com.xpert.core.crud.AbstractBaseBean;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import com.base.bo.exemplo.PersonBO;
-import com.base.modelo.exemplo.Person;
+import com.base.bo.exemplo.PessoaExemploBO;
+import com.base.modelo.exemplo.PessoaExemplo;
 
 /**
  *
@@ -15,14 +15,14 @@ import com.base.modelo.exemplo.Person;
  */
 @ManagedBean
 @ViewScoped
-public class PersonMB extends AbstractBaseBean<Person> implements Serializable {
+public class PessoaExemploMB extends AbstractBaseBean<PessoaExemplo> implements Serializable {
 
     @EJB
-    private PersonBO personBO;
+    private PessoaExemploBO pessoaExemploBO;
 
     @Override
-    public PersonBO getBO() {
-        return personBO;
+    public PessoaExemploBO getBO() {
+        return pessoaExemploBO;
     }
 
     @Override

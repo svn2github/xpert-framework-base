@@ -81,11 +81,12 @@ public class GeracaoPermissao {
         create(new Permissao("configuracaoEmail.audit", "Auditoria de Configuração de Email"), "configuracaoEmail");
         create(new Permissao("configuracaoEmail.delete", "Exclusão de Configuração de Email"), "configuracaoEmail");
 
-        create(new Permissao("person", "Person", true), null);
-        create(new Permissao("person.create", "Cadastro de Person", "/view/exemplo/person/createPerson.jsf", true), "person");
-        create(new Permissao("person.list", "Consulta de Person", "/view/exemplo/person/listPerson.jsf", true), "person");
-        create(new Permissao("person.audit", "Auditoria de Person"), "person");
-        create(new Permissao("person.delete", "Exclusão de Person"), "person");
+       //Pessoa Exemplo
+        create(new Permissao("pessoaExemplo", "Pessoa Exemplo", true), null);
+        create(new Permissao("pessoaExemplo.create", "Cadastro de Pessoa Exemplo", "/view/exemplo/pessoaExemplo/createPessoaExemplo.jsf", true), "pessoaExemplo");
+        create(new Permissao("pessoaExemplo.list", "Consulta de Pessoa Exemplo", "/view/exemplo/pessoaExemplo/listPessoaExemplo.jsf", true), "pessoaExemplo");
+        create(new Permissao("pessoaExemplo.audit", "Auditoria de Pessoa Exemplo"), "pessoaExemplo");
+        create(new Permissao("pessoaExemplo.delete", "Exclusão de Pessoa Exemplo"), "pessoaExemplo");
 
         /*
          * Configuracao

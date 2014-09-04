@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Ayslan
  */
 @Entity
-public class Person implements Serializable {
+public class PessoaExemplo implements Serializable {
 
     @Id
     @SequenceGenerator(name = "Person", allocationSize = 1, sequenceName = "person_id_seq")
@@ -35,15 +35,27 @@ public class Person implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    private Date horario;
+    
     @NotBlank
     @Size(max=10)
     private String rg;
      
     private Boolean active;
 
-    public Person() {
+    public PessoaExemplo() {
     }
 
+    public Date getHorario() {
+        return horario;
+    }
+
+    public void setHorario(Date horario) {
+        this.horario = horario;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -126,7 +138,7 @@ public class Person implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Person other = (Person) obj;
+        final PessoaExemplo other = (PessoaExemplo) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }

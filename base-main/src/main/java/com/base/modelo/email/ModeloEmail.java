@@ -1,7 +1,14 @@
 package com.base.modelo.email;
 
 import com.base.constante.Constantes;
+import com.base.modelo.controleacesso.Perfil;
+import com.base.modelo.controleacesso.Usuario;
+import com.base.modelo.exemplo.PessoaExemplo;
+import com.xpert.maker.BeanCreator;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -39,6 +46,7 @@ public class ModeloEmail implements Serializable {
     @NotNull
     @ManyToOne
     private ConfiguracaoEmail configuracaoEmail;
+
 
     public ConfiguracaoEmail getConfiguracaoEmail() {
         return configuracaoEmail;

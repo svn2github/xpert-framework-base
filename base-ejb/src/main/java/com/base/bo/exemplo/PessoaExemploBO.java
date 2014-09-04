@@ -1,27 +1,27 @@
 package com.base.bo.exemplo;
 
 import com.xpert.core.crud.AbstractBusinessObject;
-import com.base.dao.exemplo.PersonDAO;
+import com.base.dao.exemplo.PessoaExemploDAO;
 import com.xpert.core.validation.UniqueField;
 import com.xpert.core.exception.BusinessException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import com.base.modelo.exemplo.Person;
+import com.base.modelo.exemplo.PessoaExemplo;
 
 /**
  *
  * @author ayslan
  */
 @Stateless
-public class PersonBO extends AbstractBusinessObject<Person> {
+public class PessoaExemploBO extends AbstractBusinessObject<PessoaExemplo> {
 
     @EJB
-    private PersonDAO personDAO;
+    private PessoaExemploDAO pessoaExemploDAO;
     
     @Override
-    public PersonDAO getDAO() {
-        return personDAO;
+    public PessoaExemploDAO getDAO() {
+        return pessoaExemploDAO;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class PersonBO extends AbstractBusinessObject<Person> {
     }
 
     @Override
-    public void validate(Person person) throws BusinessException {
+    public void validate(PessoaExemplo pessoaExemplo) throws BusinessException {
     }
 
     @Override
