@@ -10,15 +10,23 @@
         <x:modalMessages/>
         <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
-                <h:panelGrid columns="2" styleClass="grid-form">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="* #{msg['perfil.descricao']}:" />
+                            <p:inputText value="#{perfilMB.entity.descricao}" maxlength="255"  styleClass="form-control"   />
+                        </div>
 
-                    <h:outputLabel value="* #{msg['perfil.descricao']}:" />
-                    <p:inputText value="#{perfilMB.entity.descricao}" maxlength="255"  size="70"  />
-
-                    <h:outputLabel value="#{msg['perfil.ativo']}:" />
-                    <h:selectBooleanCheckbox value="#{perfilMB.entity.ativo}" />
-
-                </h:panelGrid>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    <h:selectBooleanCheckbox value="#{perfilMB.entity.ativo}" />
+                                    #{msg['perfil.ativo']}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </p:tab>
             <p:tab title="#{msg['acessosDoPerfil']}">
@@ -30,7 +38,7 @@
                     </p:treeNode>  
                 </p:tree>  
             </p:tab>
-             <p:tab title="#{msg['perfil.permissoesMenu']}" rendered="#{not empty perfilMB.entity.id}">
+            <p:tab title="#{msg['perfil.permissoesMenu']}" rendered="#{not empty perfilMB.entity.id}">
                 <div style="max-height: 500px; overflow-y: scroll;">
                     <p:tree value="#{perfilMB.permissoesMenu}" var="permissao"
                             selectionMode="checkbox"  
