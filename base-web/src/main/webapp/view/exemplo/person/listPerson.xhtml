@@ -1,0 +1,84 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:p="http://primefaces.org/ui"
+                 template="/template/mainTemplate.xhtml"
+                 xmlns:x="http://xpert.com/faces">
+    <ui:param name="title" value="#{msg['person.list']}" />
+    <ui:define name="body">
+        <ui:include src="menuPerson.xhtml" />
+        <h:form id="formListPerson">
+            <x:modalMessages/>
+            <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
+                         var="person" rowIndexVar="index" id="dataTablePerson" widgetVar="dataTablePersonWidget" styleClass="table-responsive"
+                         currentPageReportTemplate="#{personMB.dataModel.currentPageReportTemplate}"
+                         paginatorTemplate="#{personMB.dataModel.paginatorTemplate}"
+                         value="#{personMB.dataModel}" lazy="true" >
+                <p:column styleClass="uix-datatable-index">
+                    <f:facet name="header">
+                        <p:commandButton onclick="dataTablePersonWidget.filter()" type="button" icon="ui-icon-refresh" />
+                    </f:facet>
+                    <h:outputText value="#{index+1}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.nome']}" sortBy="#{person.nome}"
+                          filterBy="#{person.nome}"   >
+                        <h:outputText value="#{person.nome}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.email']}" sortBy="#{person.email}"
+                          filterBy="#{person.email}"   >
+                        <h:outputText value="#{person.email}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.salary']}" sortBy="#{person.salary}"
+                             style="text-align: right;">
+                        <h:outputText value="#{person.salary}">
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['person.dataNascimento']}" sortBy="#{person.dataNascimento}"
+                          filterBy="#{person.dataNascimento}"   style="text-align: center;">
+                        <f:facet name="header">
+                            #{msg['person.dataNascimento']}
+                            <x:dateFilter/>
+                        </f:facet>
+                        <h:outputText value="#{person.dataNascimento}">
+                            <f:convertDateTime />
+                        </h:outputText>
+                </p:column>
+                <p:column headerText="#{msg['person.rg']}" sortBy="#{person.rg}"
+                          filterBy="#{person.rg}"   >
+                        <h:outputText value="#{person.rg}"/>
+                </p:column>
+                <p:column headerText="#{msg['person.active']}" sortBy="#{person.active}"
+                          filterBy="#{person.active}" filterOptions="#{booleanSelectItensEmptyOption}"  style="text-align: center;">
+                        <h:outputText value="#{person.active}" converter ="yesNoConverter" />
+                </p:column>
+                <p:column styleClass="uix-datatable-actions" exportable="false" headerText="#{xmsg['actions']}">
+                    <f:facet name="header">
+                        <x:legends detail="true" edit="true" delete="true"/>
+                    </f:facet>
+                    <p:commandButton oncomplete="widgetPersonDetail.show();"  icon="ui-icon-zoomin" 
+                                     process="@form" update=":formDetailPerson" title="#{xmsg['detail']}" >
+                        <f:setPropertyActionListener value="#{person}" target="#{personMB.entity}" />
+                    </p:commandButton>
+                    <p:button icon="ui-icon-pencil" outcome="createPerson" title="#{xmsg['edit']}">
+                         <f:param name="id" value="#{person.id}" />
+                    </p:button>
+                    <p:commandButton icon="ui-icon-trash" title="#{xmsg['delete']}" process="@form" update="@form" 
+                                        action="#{personMB.delete}" >
+                        <f:setPropertyActionListener value="#{person.id}" target="#{personMB.id}" />
+                        <x:confirmation message="#{xmsg['confirmDelete']} - #{person}" />
+                    </p:commandButton>
+                </p:column>
+                <f:facet name="footer">
+                    <x:auditDelete for="#{personMB.entityClass}"/>
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog widgetVar="widgetPersonDetail" header="#{msg['person.detail']}" appendToBody="true" 
+                  modal="true" styleClass="uix-dialog-fluid" >
+            <ui:include src="detailPerson.xhtml" />
+        </p:dialog>
+    </ui:define>
+</ui:composition>
