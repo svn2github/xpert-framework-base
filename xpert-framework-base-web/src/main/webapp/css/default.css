@@ -1,6 +1,7 @@
 body{font-size: 12px;}
 .ui-inputfield[readonly],.ui-inputfield[disabled]{ background-color: #E6E6E6;}
 header{padding: 10px 20px;}
+footer {border-top: 1px solid #ddd;margin: 10px auto 0; padding: 20px; width: 98%;}
 .ui-widget{font-size: 12px;}
 select{padding: 4px;}
 .font-11, .font-11  td, .font-11  th{font-size:  11px;}
