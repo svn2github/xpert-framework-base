@@ -1,4 +1,4 @@
-package com.insel.mb.email;
+package com.base.mb.email;
 
 import com.base.bo.email.ConfiguracaoEmailBO;
 import com.base.bo.email.EmailBO;

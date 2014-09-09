@@ -52,8 +52,7 @@ select{padding: 4px;}
 .grid-permissao a{text-decoration: none;}
 .grid-permissao .ui-panel-content{padding: 2px;}
 .grid-permissao .ui-datagrid-content{border: 0;}
-.panel-permissao{width: 150px;}
-.panel-permissao .ui-panel-content{padding: 2px; }
+.panel-permissao{margin-bottom: 5px;}
 .link-permissao{vertical-align:middle;display:block;}
 .caminho-permissao {font-size: 10px;  display: block; line-height: 11px; font-weight: normal; padding-top: 3px;text-align: center; color: #8B8989;}
 .nome-permissao {display: block;font-size: 15px; font-weight: bold; padding-top: 3px; text-align: center; color: #000}
@@ -94,6 +93,4 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 @media (max-width: 800px) {
     .login-wraper {margin: 10% auto;}
 }
-.ui-datatable table {
-   /* width: auto;*/
-}
+.ui-dialog.ui-widget-content .ui-dialog-title{font-size: 18px;}
