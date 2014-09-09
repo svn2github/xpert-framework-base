@@ -5,10 +5,10 @@
     TODO COnfiguracao para o homolog 
     Abaixo deve ser comentado caso seja configuracao diretamenta no servidor
     -->
-    <jdbc-resource enabled="true" jndi-name="jdbc/baseDS" object-type="user" pool-name="base">
+    <jdbc-resource enabled="true" jndi-name="jdbc/xpert-framework-baseDS" object-type="user" pool-name="xpert-framework-base">
         <description/>
     </jdbc-resource>
-    <jdbc-connection-pool name="base"  
+    <jdbc-connection-pool name="xpert-framework-base"  
                         datasource-classname="org.postgresql.ds.PGSimpleDataSource" 
                         res-type="javax.sql.DataSource">
         <property name="User" value="postgres"></property>

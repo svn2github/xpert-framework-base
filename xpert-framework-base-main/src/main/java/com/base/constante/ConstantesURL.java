@@ -10,5 +10,5 @@ package com.base.constante;
  */
 public class ConstantesURL {
 
-    public static final String URL_APLICACAO = "http://localhost:8080/base";
+    public static final String URL_APLICACAO = "http://localhost:8080/xpert-framework-base";
 }

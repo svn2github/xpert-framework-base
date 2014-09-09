@@ -6,7 +6,7 @@ package com.base.constante;
  */
 public class Constantes {
 
-    public static final String PERSISTENCE_UNIT_NAME = "basePU";
+    public static final String PERSISTENCE_UNIT_NAME = "xpert-framework-basePU";
     /**
      * Tipo para String sem tamanho definido.
      * Postgres: text

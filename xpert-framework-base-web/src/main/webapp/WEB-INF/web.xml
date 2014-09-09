@@ -30,7 +30,7 @@
 
     <persistence-context-ref>
         <persistence-context-ref-name>persistence/entityManager</persistence-context-ref-name>
-        <persistence-unit-name>basePU</persistence-unit-name>
+        <persistence-unit-name>xpert-framework-basePU</persistence-unit-name>
     </persistence-context-ref>
     
     <context-param>
