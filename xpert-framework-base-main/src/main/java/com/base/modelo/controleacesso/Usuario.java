@@ -16,7 +16,7 @@ public class Usuario implements Serializable, User {
 
     @Id
     @SequenceGenerator(name = "Usuario", allocationSize = 1, sequenceName = "usuario_id_seq")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "Usuario")
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
