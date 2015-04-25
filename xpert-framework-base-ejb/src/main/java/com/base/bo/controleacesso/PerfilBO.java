@@ -34,7 +34,7 @@ public class PerfilBO extends AbstractBusinessObject<Perfil> {
 
     @Override
     public List<UniqueField> getUniqueFields() {
-          return new UniqueFields().add("descricao");
+        return new UniqueFields().add("descricao");
     }
 
     @Override
@@ -46,7 +46,9 @@ public class PerfilBO extends AbstractBusinessObject<Perfil> {
         if (novo == true) {
             //adicionar o perfil ao usuario logado
             Usuario usuario = SessaoUtils.getUser();
+            //recarregar do banco
             if (usuario != null) {
+                usuario = usuarioDAO.find(usuario.getId());
                 usuario.getPerfis().add(perfil);
                 usuarioDAO.merge(usuario);
             }

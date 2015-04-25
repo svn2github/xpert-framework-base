@@ -33,7 +33,7 @@ public class ConfiguracaoEmail implements Serializable {
     private String senha;
 
     @NotNull
-    private Integer smptPort;
+    private Integer smtpPort;
 
     @Column(name = "is_tsl")
     private boolean tls;
@@ -76,12 +76,12 @@ public class ConfiguracaoEmail implements Serializable {
         this.senha = senha;
     }
 
-    public Integer getSmptPort() {
-        return smptPort;
+    public Integer getSmtpPort() {
+        return smtpPort;
     }
 
-    public void setSmptPort(Integer smptPort) {
-        this.smptPort = smptPort;
+    public void setSmtpPort(Integer smtpPort) {
+        this.smtpPort = smtpPort;
     }
 
     public boolean isTls() {
@@ -132,7 +132,7 @@ public class ConfiguracaoEmail implements Serializable {
 
     @Override
     public String toString() {
-        return email + ". SMTP Port=" + smptPort + ", TLS=" + tls + ", SSL=" + ssl + ", Host Name=" + hostName;
+        return email + ". SMTP Port=" + smtpPort + ", TLS=" + tls + ", SSL=" + ssl + ", Host Name=" + hostName;
     }
 
 }
