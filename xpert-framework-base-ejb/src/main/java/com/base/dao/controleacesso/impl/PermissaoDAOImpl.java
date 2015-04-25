@@ -17,6 +17,11 @@ import javax.persistence.Query;
 public class PermissaoDAOImpl extends BaseDAOImpl<Permissao> implements PermissaoDAO {
 
     @Override
+    public Class getEntityClass() {
+        return Permissao.class;
+    }
+    
+    @Override
     public List<Permissao> getTodasPermissoesComFilhos() {
         StringBuilder builder = new StringBuilder();
         //trazer todas permissoes
