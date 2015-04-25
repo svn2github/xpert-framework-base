@@ -69,7 +69,7 @@ public class GeracaoDadosSistema {
                 atalhos.add((Permissao) permissaoDAO.unique("key", "perfil.list"));
                 perfil.setPermissoesAtalho(atalhos);
             }
-            perfil = getDAO(Perfil.class).merge(perfil, false);
+            getDAO(Perfil.class).saveOrMerge(perfil, false);
 
 
             Usuario usuario = getDAO(Usuario.class).unique("userLogin", "ADMIN");
@@ -94,14 +94,14 @@ public class GeracaoDadosSistema {
                     throw new RuntimeException(ex);
                 }
                 usuario.setSuperUsuario(true);
-                usuario = getDAO(Usuario.class).merge(usuario, false);
+                getDAO(Usuario.class).saveOrMerge(usuario, false);
 
                 //historico como ativo
                 HistoricoSituacaoUsuario historicoSituacaoUsuario = new HistoricoSituacaoUsuario();
                 historicoSituacaoUsuario.setDataSituacao(new Date());
                 historicoSituacaoUsuario.setSituacaoUsuario(SituacaoUsuario.ATIVO);
                 historicoSituacaoUsuario.setUsuario(usuario);
-                historicoSituacaoUsuario = getDAO(HistoricoSituacaoUsuario.class).merge(historicoSituacaoUsuario, false);
+                getDAO(HistoricoSituacaoUsuario.class).saveOrMerge(historicoSituacaoUsuario, false);
 
             }
 

@@ -35,6 +35,7 @@ public class GeracaoModeloEmail {
             configuracaoEmail = new ConfiguracaoEmail();
             configuracaoEmail.setNome("Sistema Base");
             configuracaoEmail.setEmail("xpert.testes@gmail.com");
+            configuracaoEmail.setUsuario("xpert.testes@gmail.com");
             configuracaoEmail.setSenha("xpert12345");
             configuracaoEmail.setHostName("smtp.gmail.com");
             configuracaoEmail.setSsl(true);

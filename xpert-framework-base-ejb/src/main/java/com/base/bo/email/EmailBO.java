@@ -220,7 +220,7 @@ public class EmailBO {
             email.setFrom(configuracaoEmail.getEmail(), configuracaoEmail.getEmail());
             email.setSubject(assunto);
             email.setHtmlMsg(mensagem);
-            email.setAuthentication(configuracaoEmail.getEmail(), configuracaoEmail.getSenha());
+            email.setAuthentication(configuracaoEmail.getUsuario(), configuracaoEmail.getSenha());
             email.setSmtpPort(configuracaoEmail.getSmtpPort());
             email.setSSL(configuracaoEmail.isSsl());
             email.setTLS(configuracaoEmail.isTls());

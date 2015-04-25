@@ -25,6 +25,9 @@ public class ConfiguracaoEmail implements Serializable {
     @Email
     @NotBlank
     private String email;
+    
+    @NotBlank
+    private String usuario;
 
     @NotBlank
     private String nome;
@@ -43,6 +46,14 @@ public class ConfiguracaoEmail implements Serializable {
 
     @NotBlank
     private String hostName;
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
     public String getNome() {
         return nome;
