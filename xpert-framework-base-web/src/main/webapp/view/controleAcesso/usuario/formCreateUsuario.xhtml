@@ -42,6 +42,7 @@
                         <div class="form-group col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <h:outputLabel value="* #{msg['usuario.email']}:" />
                             <p:inputText value="#{usuarioMB.entity.email}" maxlength="255"  size="70"  styleClass="form-control"/>
+                            <h:outputText value="#{msg['usuario.emailInfo']}" styleClass="help-block"/>
                         </div>
                     </div>
                     <div class="row">
@@ -65,6 +66,7 @@
                                         #{msg['usuario.superUsuario']}
                                     </label>
                                 </div>
+                                <h:outputText value="#{msg['usuario.superUsuarioInfo']}" styleClass="help-block"/>
                             </div>
                         </h:panelGroup>                        
 
