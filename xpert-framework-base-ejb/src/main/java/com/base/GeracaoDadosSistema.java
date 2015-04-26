@@ -59,14 +59,14 @@ public class GeracaoDadosSistema {
             //adicionar todas as permissoes para o admin
             perfil.setPermissoes(getDAO(Permissao.class).listAll());
             if (perfil.getId() == null) {
-                BaseDAO permissaoDAO = getDAO(Permissao.class);
+                BaseDAO<Permissao> permissaoDAO = getDAO(Permissao.class);
                 List<Permissao> atalhos = new ArrayList<Permissao>();
-                atalhos.add((Permissao) permissaoDAO.unique("key", "usuario.list"));
-                atalhos.add((Permissao) permissaoDAO.unique("key", "usuario.create"));
-                atalhos.add((Permissao) permissaoDAO.unique("key", "acessoSistema.list"));
-                atalhos.add((Permissao) permissaoDAO.unique("key", "usuario.alterarSenha"));
-                atalhos.add((Permissao) permissaoDAO.unique("key", "erroSistema.list"));
-                atalhos.add((Permissao) permissaoDAO.unique("key", "perfil.list"));
+                atalhos.add(permissaoDAO.unique("key", "usuario.list"));
+                atalhos.add(permissaoDAO.unique("key", "usuario.create"));
+                atalhos.add(permissaoDAO.unique("key", "acessoSistema.list"));
+                atalhos.add(permissaoDAO.unique("key", "usuario.alterarSenha"));
+                atalhos.add(permissaoDAO.unique("key", "erroSistema.list"));
+                atalhos.add(permissaoDAO.unique("key", "perfil.list"));
                 perfil.setPermissoesAtalho(atalhos);
             }
             getDAO(Perfil.class).saveOrMerge(perfil, false);
