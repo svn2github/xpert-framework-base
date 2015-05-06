@@ -74,13 +74,14 @@
                 </div>
             </p:tab>
             <p:tab title="#{msg['usuario.perfisAcesso']}">
-                <h:selectManyCheckbox value="#{usuarioMB.entity.perfis}" converter="entityConverter" styleClass="checkbox-list">
+                <h:selectManyCheckbox value="#{usuarioMB.entity.perfis}" converter="entityConverter" styleClass="checkbox">
                     <x:initializer/>
                     <x:spread columns="3"/>
                     <f:selectItems value="#{findAllBean.get(classMB.perfil)}" 
                                    var="perfil" itemDisabled="#{not sessaoUsuarioMB.user.superUsuario and not sessaoUsuarioMB.user.perfis.contains(perfil)}"
                                    itemLabel="#{perfil}"/>
                 </h:selectManyCheckbox>
+                <h:outputText value="#{msg['usuario.perfisUsuarioInfo']}" styleClass="help-block"/>
             </p:tab>
             <p:tab title="#{msg['usuario.historicosSituacao']}">
 
