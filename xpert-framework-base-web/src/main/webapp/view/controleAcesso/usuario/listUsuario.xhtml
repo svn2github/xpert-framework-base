@@ -15,7 +15,7 @@
             <x:dataTableActions target=":formListUsuario:dataTableUsuario" widgetVar="dataTableUsuarioWidget" fileName="usuario_export" />
 
             <p:dataTable paginator="true" rows="10" rowsPerPageTemplate="10,20,30" paginatorPosition="bottom" emptyMessage="#{xmsg['noRecordFound']}"
-                         var="usuario" rowIndexVar="index" styleClass="table-responsive"
+                         var="usuario" rowIndexVar="index" styleClass="table-responsive" 
                          currentPageReportTemplate="#{usuarioMB.dataModel.currentPageReportTemplate}"
                          id="dataTableUsuario" widgetVar="dataTableUsuarioWidget"
                          paginatorTemplate="#{usuarioMB.dataModel.paginatorTemplate}"
@@ -32,7 +32,7 @@
                     <h:outputText value="#{usuario.nome}"/>
                 </p:column>
                 <p:column headerText="#{msg['usuario.cpf']}" sortBy="#{usuario.cpf}"
-                          filterBy="#{usuario.cpf}" style="text-align: center;"
+                          filterBy="#{usuario.cpf}" styleClass="text-center"
                           >
                     <f:facet name="header">
                         <h:outputText value="#{msg['usuario.cpf']}"/>
@@ -58,7 +58,7 @@
                 <p:column headerText="#{msg['usuario.situacaoUsuario']}" sortBy="#{usuario.situacaoUsuario}"
                           filterBy="#{usuario.situacaoUsuario}"
                           filterOptions="#{findAllBean.getSelect(classMB.situacaoUsuario)}"
-                          style="text-align: center;">
+                          styleClass="text-center">
                     <f:facet name="header">
                         <h:outputText value="#{msg['usuario.situacaoUsuario']}"/>
                     </f:facet>
@@ -67,7 +67,7 @@
                 <p:column headerText="#{msg['usuario.superUsuario']}" sortBy="#{usuario.superUsuario}"
                           filterBy="#{usuario.superUsuario}"
                           filterOptions="#{booleanSelectItensEmptyOption}"
-                          style="text-align: center;">
+                          styleClass="text-center">
                     <f:facet name="header">
                         <h:outputText value="#{msg['usuario.superUsuario']}"/>
                     </f:facet>
