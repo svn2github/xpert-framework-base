@@ -96,3 +96,4 @@ section.conteudo h1.page-header  span{vertical-align: middle;}
 }
 .ui-dialog.ui-widget-content .ui-dialog-title{font-size: 18px;}
 .ui-datatable table{ table-layout: auto; }
+.ui-datatable tr.ui-widget-content:hover, .ui-panelgrid tr.ui-widget-content:hover{background-color: #EBEBEB;}
