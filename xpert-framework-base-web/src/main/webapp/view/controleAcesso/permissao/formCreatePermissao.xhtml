@@ -41,8 +41,8 @@
                                         listener="#{permissaoMB.entity.setPermissaoPai(permissao)}" oncomplete="PF('overlayPermissaoPai').hide()" />
                                 <p:treeNode collapsedIcon="ui-icon-folder-collapsed" >
                                     <h:panelGroup styleClass="#{permissao == permissaoMB.entity.permissaoPai ? 'ui-state-highlight' : ''}">
-                                        <h:outputText value="#{permissao.descricao} - " style="font-weight: bold"/>  
-                                        <h:outputText value="#{permissao.key}"  /> 
+                                        <h:outputText value="#{permissao.descricao}" style="font-weight: bold"/>  
+                                        <h:outputText value=" (#{permissao.key})" styleClass="font-11"  /> 
                                     </h:panelGroup>
                                 </p:treeNode>
                             </p:tree>
