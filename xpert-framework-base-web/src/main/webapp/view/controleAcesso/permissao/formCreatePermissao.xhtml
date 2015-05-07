@@ -37,11 +37,13 @@
                         <p:overlayPanel for="panelPermissaoPai" styleClass="w-100p" widgetVar="overlayPermissaoPai" >
                             <p:tree value="#{perfilMB.permissoes}" var="permissao" styleClass="w-100p"
                                     selectionMode="single"  style="max-height: 400px; overflow-y: scroll" >
-                                <p:ajax event="select" update=":formCreatePermissao:conteudoPanelPermissaoPai"
+                                <p:ajax event="select" update=":formCreatePermissao:conteudoPanelPermissaoPai @this"
                                         listener="#{permissaoMB.entity.setPermissaoPai(permissao)}" oncomplete="PF('overlayPermissaoPai').hide()" />
-                                <p:treeNode collapsedIcon="ui-icon-folder-collapsed">
-                                    <h:outputText value="#{permissao.descricao} - " style="font-weight: bold"/>  
-                                    <h:outputText value="#{permissao.key}"  /> 
+                                <p:treeNode collapsedIcon="ui-icon-folder-collapsed" >
+                                    <h:panelGroup styleClass="#{permissao == permissaoMB.entity.permissaoPai ? 'ui-state-highlight' : ''}">
+                                        <h:outputText value="#{permissao.descricao} - " style="font-weight: bold"/>  
+                                        <h:outputText value="#{permissao.key}"  /> 
+                                    </h:panelGroup>
                                 </p:treeNode>
                             </p:tree>
                         </p:overlayPanel>

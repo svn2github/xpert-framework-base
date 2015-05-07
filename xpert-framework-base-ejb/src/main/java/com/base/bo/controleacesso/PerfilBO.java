@@ -34,7 +34,7 @@ public class PerfilBO extends AbstractBusinessObject<Perfil> {
     private PermissaoDAO permissaoDAO;
 
     @Override
-    public BaseDAO getDAO() {
+    public PerfilDAO getDAO() {
         return perfilDAO;
     }
 
