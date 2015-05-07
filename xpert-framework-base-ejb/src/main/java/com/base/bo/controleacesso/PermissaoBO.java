@@ -164,6 +164,11 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
 
     @Override
     public void validate(Permissao permissao) throws BusinessException {
+        if (permissao.getId() != null && permissao.getPermissaoPai() != null) {
+            if (permissao.getId().equals(permissao.getPermissaoPai().getId())) {
+                throw new BusinessException("business.permissaoNaoPodePaiDelaMesma");
+            }
+        }
     }
 
     @Override
