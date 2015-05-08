@@ -8,7 +8,6 @@ import com.base.modelo.controleacesso.Permissao;
 import com.base.modelo.controleacesso.Usuario;
 import com.base.util.SessaoUtils;
 import com.xpert.core.crud.AbstractBusinessObject;
-import com.xpert.persistence.dao.BaseDAO;
 import com.xpert.core.validation.UniqueField;
 import com.xpert.core.exception.BusinessException;
 import com.xpert.core.validation.UniqueFields;
