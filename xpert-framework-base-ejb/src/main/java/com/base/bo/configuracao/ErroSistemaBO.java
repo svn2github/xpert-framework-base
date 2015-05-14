@@ -12,9 +12,9 @@ import com.xpert.faces.utils.FacesUtils;
 import com.xpert.persistence.dao.BaseDAO;
 import com.xpert.persistence.query.Restriction;
 import com.xpert.persistence.query.RestrictionType;
+import com.xpert.persistence.query.Restrictions;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -48,8 +48,8 @@ public class ErroSistemaBO extends AbstractBusinessObject<ErroSistema> {
      * @param usuario
      * @param pilhaErro
      * @param url
-     * 
-     * @return 
+     *
+     * @return
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public ErroSistema save(Usuario usuario, String pilhaErro, String url) {
@@ -66,9 +66,9 @@ public class ErroSistemaBO extends AbstractBusinessObject<ErroSistema> {
 
         if (url != null && !url.isEmpty()) {
             erroSistema.setUrl(url);
-            //pegar possiveis funcionalidades
-            List<Restriction> restrictions = new ArrayList<Restriction>();
-            restrictions.add(new Restriction("url", RestrictionType.LIKE, url));
+            //pegar possiveis funcionalidades a partir da URL atual
+            Restrictions restrictions = new Restrictions();
+            restrictions.like("url", url);
             List<Permissao> permissoes = permissaoDAO.list(restrictions);
             if (permissoes != null) {
                 StringBuilder funcionalidade = new StringBuilder();

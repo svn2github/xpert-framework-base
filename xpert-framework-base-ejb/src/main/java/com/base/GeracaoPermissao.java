@@ -61,7 +61,6 @@ public class GeracaoPermissao {
         create(new Permissao("solicitacaoRecuperacaoSenha.list", "Consulta Recuperação de Senha", "/view/controleAcesso/solicitacaoRecuperacaoSenha/listSolicitacaoRecuperacaoSenha.jsf", true), "solicitacaoRecuperacaoSenha");
         create(new Permissao("solicitacaoRecuperacaoSenha.audit", "Auditoria de Recuperação de Senha"), "solicitacaoRecuperacaoSenha");
 
-
         /*
          * Email
          */
@@ -97,7 +96,7 @@ public class GeracaoPermissao {
         create(new Permissao("erroSistema.list", "Relatório de Erros", "/view/configuracao/erroSistema/listErroSistema.jsf", true), "configuracaoSistema");
 
         /**
-         * Permissoes Globais
+         * Permissoes Globais (essas permissoes todos terao acessos)
          */
         //Alterar Senha
         createGlobal(new Permissao("usuario.alterarSenha", "Alterar Senha", "/view/controleAcesso/password/alterPassword.jsf", true), "controleAcesso");

@@ -53,6 +53,7 @@ public class GeracaoModeloEmail {
         BaseDAO<ModeloEmail> dao = getDAO(ModeloEmail.class);
         ModeloEmail modeloEmail = dao.unique("tipoAssuntoEmail", tipoAssuntoEmail);
 
+        //caso encontre o modelo ja cadastrado, nao fazer nada
         if (modeloEmail != null) {
             return;
         }
@@ -66,7 +67,7 @@ public class GeracaoModeloEmail {
             modeloEmail.setLayout(layout);
             modeloEmail.setConfiguracaoEmail(configuracaoEmail);
             modeloEmail.setTipoAssuntoEmail(tipoAssuntoEmail);
-            dao.merge(modeloEmail, false);
+            dao.saveOrMerge(modeloEmail, false);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, null, ex);
             return;
