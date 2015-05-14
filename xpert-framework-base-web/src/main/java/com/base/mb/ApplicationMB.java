@@ -7,6 +7,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 /**
+ * Como esse managed bean tem o escopo de "Application" e a opcao "eager = true"
+ * ele o metodo "@PostConstruct" sera chamado ao iniciar a aplicacao
  *
  * @author ayslan
  */

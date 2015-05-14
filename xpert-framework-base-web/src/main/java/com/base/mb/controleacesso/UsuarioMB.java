@@ -27,7 +27,6 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
     @EJB
     private SolicitacaoRecuperacaoSenhaBO solicitacaoRecuperacaoSenhaBO;
 
-
     @Override
     public void init() {
     }
@@ -45,7 +44,8 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
     public void save() {
         boolean novo = getEntity().getId() == null;
         try {
-            getBO().save(getEntity());
+            //salvar usuario
+            usuarioBO.save(getEntity());
             //apos o cadastro feito tentar enviar senha do usuario
             if (novo) {
                 try {
