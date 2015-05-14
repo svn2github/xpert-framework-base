@@ -1,7 +1,6 @@
 package com.base.mb;
 
 import com.base.GeracaoDadosSistema;
-import com.base.GeracaoPermissao;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;

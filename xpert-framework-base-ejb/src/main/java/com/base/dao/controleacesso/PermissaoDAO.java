@@ -6,7 +6,6 @@ import com.base.modelo.controleacesso.Usuario;
 import com.xpert.persistence.dao.BaseDAO;
 import java.util.List;
 import javax.ejb.Local;
-import javax.persistence.Query;
 
 /**
  *

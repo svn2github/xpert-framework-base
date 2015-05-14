@@ -45,9 +45,11 @@ public class ErroSistemaBO extends AbstractBusinessObject<ErroSistema> {
      * Método que salva o erro a partir da requisição e da exceção lançada pelo
      * usuário
      *
-     * @param throwable
-     * @param request
      * @param usuario
+     * @param pilhaErro
+     * @param url
+     * 
+     * @return 
      */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public ErroSistema save(Usuario usuario, String pilhaErro, String url) {

@@ -72,6 +72,7 @@ public class EmailBO {
      * modelo do email
      * @param parametros Parametros para serem passados para o template
      * @param destinatario Email de destino da mensagem
+     * @param anexos
      * @throws BusinessException
      */
     public void enviar(TipoAssuntoEmail tipoAssuntoEmail, Map<String, Object> parametros, String destinatario, List<Attachment> anexos) throws BusinessException {
@@ -195,6 +196,7 @@ public class EmailBO {
      * @param configuracaoEmail
      * @param destinatario Email de destino
      * * @param anexos Anexos do email
+     * @param anexos
      * @throws BusinessException
      */
     public void enviar(String assunto, String mensagem, ConfiguracaoEmail configuracaoEmail, String destinatario, List<Attachment> anexos) throws BusinessException {

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 /**
  *
  * @author
+ * @param <T>
  */
 public class BaseDAOImpl<T> extends com.xpert.persistence.dao.BaseDAOImpl<T> {
 
