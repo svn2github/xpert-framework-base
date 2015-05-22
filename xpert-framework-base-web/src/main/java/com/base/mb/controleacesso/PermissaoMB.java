@@ -25,6 +25,7 @@ public class PermissaoMB extends AbstractBaseBean<Permissao> implements Serializ
 
     @EJB
     private PermissaoBO permissaoBO;
+    private boolean emCascata;
 
     @Override
     public AbstractBusinessObject getBO() {
@@ -41,6 +42,20 @@ public class PermissaoMB extends AbstractBaseBean<Permissao> implements Serializ
         return null;
     }
 
+    public void ativar() {
+        permissaoBO.ativar(getEntity(), emCascata);
+        getPerfilMB().carregarTree();
+        FacesMessageUtils.sucess();
+        emCascata = false;
+    }
+
+    public void inativar() {
+        permissaoBO.inativar(getEntity(), emCascata);
+        getPerfilMB().carregarTree();
+        FacesMessageUtils.sucess();
+        emCascata = false;
+    }
+
     public void deleteArvore() {
         try {
             Object id = getId();
@@ -49,11 +64,24 @@ public class PermissaoMB extends AbstractBaseBean<Permissao> implements Serializ
                 FacesMessageUtils.sucess();
                 id = null;
                 //recarregar tree
-                PerfilMB perfilMB = FacesUtils.getBeanByEl("#{perfilMB}");
-                perfilMB.carregarTree();
+                getPerfilMB().carregarTree();
             }
         } catch (DeleteException ex) {
             FacesMessageUtils.error(XpertResourceBundle.get("objectCannotBeDeleted"));
         }
     }
+
+    public PerfilMB getPerfilMB() {
+        return FacesUtils.getBeanByEl("#{perfilMB}");
+    }
+
+    public boolean isEmCascata() {
+        return emCascata;
+    }
+
+    public void setEmCascata(boolean emCascata) {
+        this.emCascata = emCascata;
+    }
+    
+    
 }

@@ -116,40 +116,92 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
      * superusuario, retornar as permissoes dos perfis dele.
      *
      * @param usuario
+     * @param apenasAtivas Indica se devem ser retornadas apenas as ativas
      * @return
      */
-    public List getPermissoes(Usuario usuario) {
+    public List getPermissoes(Usuario usuario, boolean apenasAtivas) {
         List<Permissao> permissoes = new ArrayList<Permissao>();
         if (usuario != null) {
             if (usuario.isSuperUsuario()) {
-                permissoes = permissaoDAO.getTodasPermissoes();
+                permissoes = permissaoDAO.getPermissoes(apenasAtivas);
             } else {
-                permissoes = permissaoDAO.getPermissoes(usuario);
+                permissoes = permissaoDAO.getPermissoes(usuario, apenasAtivas);
             }
         }
-        permissoes = getChildren(permissoes);
+        permissoes = getChildren(permissoes, apenasAtivas);
         return permissoes;
     }
 
-    private List<Permissao> getChildren(List<Permissao> permissoes) {
+    /**
+     *
+     * Retorna uma lista de permissoes a partir de um usuario. Caso seja um
+     * superusuario retornar todas as permissoes. Casa seja nao seja
+     * superusuario, retornar as permissoes dos perfis dele.
+     *
+     * Este metodo retorna tanto as ativas com as inativas.
+     *
+     * @param usuario
+     * @return
+     */
+    public List getPermissoes(Usuario usuario) {
+        return getPermissoes(usuario, false);
+    }
+
+    /**
+     * pega todas as permissoes filhas em cascada a partir da lista passada
+     *
+     * @param permissoes
+     * @param apenasAtivas Indica se sao apenas as permissoes ativas
+     * @return
+     */
+    private List<Permissao> getChildren(List<Permissao> permissoes, boolean apenasAtivas) {
         List<Permissao> permissoesAdd = new ArrayList<Permissao>();
         if (permissoes != null) {
             for (Permissao permissao : permissoes) {
                 if (!permissoesAdd.contains(permissao)) {
-                    permissoesAdd.add(permissao);
+                    //se nao indicado se sao apenas as ativas ou se a permissao for ativa, adicinar
+                    if (apenasAtivas == false || permissao.isAtivo()) {
+                        permissoesAdd.add(permissao);
+                    }
                 }
                 permissao.getPermissoesFilhas().size();
-                List<Permissao> children = getChildren(permissao.getPermissoesFilhas());
+                List<Permissao> children = getChildren(permissao.getPermissoesFilhas(), apenasAtivas);
                 if (children != null && !children.isEmpty()) {
                     for (Permissao child : children) {
                         if (!permissoesAdd.contains(child)) {
-                            permissoesAdd.add(child);
+                            //se nao indicado se sao apenas as ativas ou se a permissao for ativa, adicinar
+                            if (apenasAtivas == false || permissao.isAtivo()) {
+                                permissoesAdd.add(child);
+                            }
                         }
                     }
                 }
             }
         }
         return permissoesAdd;
+    }
+
+    public void alterarStatus(Permissao permissao, boolean ativo, boolean emCascata) {
+        permissao.setAtivo(ativo);
+        permissaoDAO.merge(permissao);
+        if (emCascata == true) {
+            List<Permissao> filhas = permissaoDAO.getInitialized(permissao.getPermissoesFilhas());
+            if (filhas != null) {
+                for (Permissao filha : filhas) {
+                    alterarStatus(filha, ativo, emCascata);
+                }
+            }
+        }
+    }
+
+    public void inativar(Permissao permissao, boolean emCascata) {
+        //passar ativo = false
+        alterarStatus(permissao, false, emCascata);
+    }
+
+    public void ativar(Permissao permissao, boolean emCascata) {
+        //passar ativo = true
+        alterarStatus(permissao, true, emCascata);
     }
 
     @Override

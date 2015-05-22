@@ -38,6 +38,8 @@ public class GeracaoPermissao {
         create(new Permissao("permissao.list", "Consulta de Permissão", "/view/controleAcesso/permissao/listPermissao.jsf", true), "permissao");
         create(new Permissao("permissao.audit", "Auditoria de Permissão"), "permissao");
         create(new Permissao("permissao.delete", "Exclusão de Permissão"), "permissao");
+        create(new Permissao("permissao.ativacao", "Ativação de Permissão"), "permissao");
+        create(new Permissao("permissao.inativacao", "Inativação de Permissão"), "permissao");
 
         //Usuario
         create(new Permissao("usuario", "Usuário", true), "controleAcesso");
