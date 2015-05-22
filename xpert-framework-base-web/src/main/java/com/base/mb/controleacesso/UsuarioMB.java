@@ -2,6 +2,7 @@ package com.base.mb.controleacesso;
 
 import com.base.bo.controleacesso.SolicitacaoRecuperacaoSenhaBO;
 import com.base.bo.controleacesso.UsuarioBO;
+import com.base.bo.controleacesso.UsuarioMenuBO;
 import com.base.modelo.controleacesso.TipoRecuperacaoSenha;
 import com.base.modelo.controleacesso.Usuario;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import com.xpert.i18n.I18N;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.model.menu.MenuModel;
 
 /**
  *
@@ -22,6 +24,9 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable {
 
+    @EJB
+    private UsuarioMenuBO usuarioMenuBO;
+    private MenuModel menuModel;
     @EJB
     private UsuarioBO usuarioBO;
     @EJB
@@ -37,6 +42,19 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
             FacesMessageUtils.info("solicitacaoRecuperacaoSenha.instrucoesEnviadas");
         } catch (BusinessException ex) {
             FacesMessageUtils.error(ex);
+        }
+    }
+    
+    public void detail(){
+        carregarMenuUsuario();
+    }
+
+    /**
+     * carrega o menu baseado nos perfis do usuario
+     */
+    public void carregarMenuUsuario() {
+        if (getEntity().getId() != null) {
+            menuModel = usuarioMenuBO.criarMenu(getEntity());
         }
     }
 
@@ -72,4 +90,14 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
     public String getDataModelOrder() {
         return "nome";
     }
+
+    public MenuModel getMenuModel() {
+        return menuModel;
+    }
+
+    public void setMenuModel(MenuModel menuModel) {
+        this.menuModel = menuModel;
+    }
+    
+    
 }

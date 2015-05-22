@@ -8,7 +8,7 @@
                  >
     <h:form id="formDetailUsuario" styleClass="uix-form-detail">
 
-        <p:accordionPanel multiple="true" activeIndex="0,1,2">
+        <p:tabView>
             <p:tab title="#{msg['dadosGerais']}">
 
                 <div class="container-fluid">
@@ -22,7 +22,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <h:outputLabel value="#{msg['usuario.cpf']}:" styleClass="control-label" /><br/>
                             <span class="uix-content-detail">
-                                 <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
+                                <h:outputText converter="cpfConverter" value="#{usuarioMB.entity.cpf}"/>
                             </span>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -82,7 +82,7 @@
                 <p:dataTable value="#{usuarioMB.entity.historicosSituacao}" var="historicoSituacao"
                              emptyMessage="#{xmsg['noRecordFound']}" rowIndexVar="index">
                     <x:initializer/>
-                     <p:column styleClass="uix-datatable-index">
+                    <p:column styleClass="uix-datatable-index">
                         <h:outputText value="#{index+1}"/>
                     </p:column>
                     <p:column headerText="#{msg['historicoSituacaoUsuario.dataSituacao']}" style="text-align: center;">
@@ -101,8 +101,23 @@
                 </p:dataTable>
 
             </p:tab>
-        </p:accordionPanel>
-        <div style="text-align: center;">
+
+            <p:tab title="#{msg['usuario.menuUsuario']}">
+
+                <div style="min-height: 400px; overflow-y: scroll;">
+
+                    <h:outputText value="#{msg['usuario.menuUsuarioInfo']}"  styleClass="help-block"/>
+                    <div class="hidden-xs">
+                        <p:menubar model="#{usuarioMB.menuModel}" />
+                    </div>
+                    <div class="hidden-lg hidden-sm hidden-md">
+                        <p:panelMenu  style="width: 100%" model="#{usuarioMB.menuModel}"/>
+                    </div>
+                </div>
+
+            </p:tab>
+        </p:tabView>
+        <div class="uix-center">
             <p:commandButton type="button" value="#{xmsg['close']}" onclick="PF('widgetUsuarioDetail').hide()" />
             <x:securityArea rolesAllowed="usuario.audit">
                 <x:audit for="#{usuarioMB.entity}"/>

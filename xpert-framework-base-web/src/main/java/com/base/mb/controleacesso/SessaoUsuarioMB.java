@@ -1,5 +1,6 @@
 package com.base.mb.controleacesso;
 
+import com.base.bo.controleacesso.UsuarioMenuBO;
 import com.base.bo.controleacesso.PermissaoBO;
 import com.base.dao.controleacesso.PermissaoDAO;
 import com.base.modelo.controleacesso.Permissao;
@@ -26,7 +27,7 @@ public class SessaoUsuarioMB extends AbstractUserSession implements Serializable
     @EJB
     private PermissaoDAO permissaoDAO;
     @EJB
-    private SessaoUsuarioMenu sessaoUsuarioMenu;
+    private UsuarioMenuBO usuarioMenuBO;
     @EJB
     private PermissaoBO permissaoBO;
     private Usuario user;
@@ -50,7 +51,7 @@ public class SessaoUsuarioMB extends AbstractUserSession implements Serializable
     }
 
     public void criarMenu() {
-        menuModel = sessaoUsuarioMenu.criarMenu(roles);
+        menuModel = usuarioMenuBO.criarMenu(roles);
     }
 
     public void criarCaminhoPermissao() {

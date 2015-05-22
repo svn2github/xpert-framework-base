@@ -77,7 +77,8 @@
                     <f:facet name="header">
                         <h:outputText value="#{xmsg['actions']}"/>
                     </f:facet>
-                    <p:commandButton oncomplete="PF('widgetUsuarioDetail').show();"  icon="ui-icon-zoomin" process="@form" update=":formDetailUsuario" >
+                    <p:commandButton oncomplete="PF('widgetUsuarioDetail').show();"  icon="ui-icon-zoomin"
+                                     action="#{usuarioMB.detail}" process="@form" update=":formDetailUsuario" >
                         <f:setPropertyActionListener value="#{usuario}" target="#{usuarioMB.entity}" />
                     </p:commandButton>
                     <x:securityArea rolesAllowed="usuario.create">

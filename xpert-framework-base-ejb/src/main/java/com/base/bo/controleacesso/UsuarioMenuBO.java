@@ -1,7 +1,8 @@
-package com.base.mb.controleacesso;
+package com.base.bo.controleacesso;
 
 import com.base.dao.controleacesso.PermissaoDAO;
 import com.base.modelo.controleacesso.Permissao;
+import com.base.modelo.controleacesso.Usuario;
 import com.xpert.i18n.I18N;
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +22,17 @@ import org.primefaces.model.menu.Submenu;
  * @author ayslan
  */
 @Stateless
-public class SessaoUsuarioMenu {
+public class UsuarioMenuBO {
 
     @EJB
     private PermissaoDAO permissaoDAO;
+    @EJB
+    private PermissaoBO permissaoBO;
+
+    public MenuModel criarMenu(Usuario usuario) {
+        List<Permissao> permissoes = permissaoBO.getPermissoes(usuario, true);
+        return criarMenu(permissoes);
+    }
 
     public MenuModel criarMenu(List<Permissao> permissoes) {
 
