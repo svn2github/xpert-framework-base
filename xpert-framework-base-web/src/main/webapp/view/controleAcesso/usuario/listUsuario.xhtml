@@ -104,5 +104,10 @@
         <p:dialog widgetVar="widgetUsuarioDetail" header="#{msg['usuario.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
             <ui:include src="detailUsuario.xhtml" />
         </p:dialog>
+
+        <p:dialog widgetVar="widgetPerfilDetail" header="#{msg['perfil.detail']}" appendTo="@(body)" modal="true" styleClass="uix-dialog-fluid">
+            <ui:include src="/view/controleAcesso/perfil/detailPerfil.xhtml" />
+        </p:dialog>
+
     </ui:define>
 </ui:composition>

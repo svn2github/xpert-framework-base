@@ -82,7 +82,7 @@ public class GeracaoPermissao {
         create(new Permissao("configuracaoEmail.audit", "Auditoria de Configuração de Email"), "configuracaoEmail");
         create(new Permissao("configuracaoEmail.delete", "Exclusão de Configuração de Email"), "configuracaoEmail");
 
-       //Pessoa Exemplo
+        //Pessoa Exemplo
         create(new Permissao("pessoaExemplo", "Pessoa Exemplo", true), null);
         create(new Permissao("pessoaExemplo.create", "Cadastro de Pessoa Exemplo", "/view/exemplo/pessoaExemplo/createPessoaExemplo.jsf", true), "pessoaExemplo");
         create(new Permissao("pessoaExemplo.list", "Consulta de Pessoa Exemplo", "/view/exemplo/pessoaExemplo/listPessoaExemplo.jsf", true), "pessoaExemplo");
@@ -122,6 +122,9 @@ public class GeracaoPermissao {
 
         if (pai != null && !pai.isEmpty()) {
             Permissao permissaoPai = permissaoDAO.unique("key", pai);
+            if (permissaoPai == null) {
+                logger.log(Level.WARNING, "Permissao ''{0}'' pai nao encontrada.", pai);
+            }
             permissao.setPermissaoPai(permissaoPai);
         }
 

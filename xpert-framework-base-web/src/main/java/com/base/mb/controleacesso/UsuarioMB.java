@@ -3,17 +3,22 @@ package com.base.mb.controleacesso;
 import com.base.bo.controleacesso.SolicitacaoRecuperacaoSenhaBO;
 import com.base.bo.controleacesso.UsuarioBO;
 import com.base.bo.controleacesso.UsuarioMenuBO;
+import com.base.dao.controleacesso.AcessoSistemaDAO;
+import com.base.modelo.controleacesso.AcessoSistema;
 import com.base.modelo.controleacesso.TipoRecuperacaoSenha;
 import com.base.modelo.controleacesso.Usuario;
 import java.io.Serializable;
 import com.xpert.core.crud.AbstractBaseBean;
 import com.xpert.core.crud.AbstractBusinessObject;
 import com.xpert.core.exception.BusinessException;
+import com.xpert.faces.primefaces.LazyDataModelImpl;
 import com.xpert.faces.utils.FacesMessageUtils;
 import com.xpert.i18n.I18N;
+import com.xpert.persistence.query.Restriction;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.menu.MenuModel;
 
 /**
@@ -30,7 +35,11 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
     @EJB
     private UsuarioBO usuarioBO;
     @EJB
+    private AcessoSistemaDAO acessoSistemaDAO;
+    @EJB
     private SolicitacaoRecuperacaoSenhaBO solicitacaoRecuperacaoSenhaBO;
+
+    private LazyDataModelImpl<AcessoSistema> ultimosAcessos;
 
     @Override
     public void init() {
@@ -44,9 +53,18 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
             FacesMessageUtils.error(ex);
         }
     }
-    
-    public void detail(){
+
+    public void detail() {
         carregarMenuUsuario();
+        carregarUltimosAcessos();
+    }
+
+    /**
+     * cria um lazy data model com os ultimos acessos do usuario
+     */
+    public void carregarUltimosAcessos() {
+        //aqui e adicionado o usuario selecionado
+        ultimosAcessos = new LazyDataModelImpl<AcessoSistema>("dataHora DESC", Restriction.equals("usuario", getEntity()), acessoSistemaDAO);
     }
 
     /**
@@ -98,6 +116,13 @@ public class UsuarioMB extends AbstractBaseBean<Usuario> implements Serializable
     public void setMenuModel(MenuModel menuModel) {
         this.menuModel = menuModel;
     }
-    
-    
+
+    public LazyDataModelImpl<AcessoSistema> getUltimosAcessos() {
+        return ultimosAcessos;
+    }
+
+    public void setUltimosAcessos(LazyDataModelImpl<AcessoSistema> ultimosAcessos) {
+        this.ultimosAcessos = ultimosAcessos;
+    }
+
 }
