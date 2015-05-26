@@ -4,6 +4,8 @@ import com.base.dao.controleacesso.PermissaoDAO;
 import com.base.modelo.controleacesso.Permissao;
 import com.base.modelo.controleacesso.Usuario;
 import com.xpert.i18n.I18N;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,8 @@ import javax.ejb.Stateless;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
+import org.primefaces.model.menu.MenuElement;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 import org.primefaces.model.menu.Submenu;
 
@@ -45,6 +49,7 @@ public class UsuarioMenuBO {
             //map para evitar a duplicidade e ter acesso mais rapido as menus
             Map<Permissao, DefaultSubMenu> subMenuMap = new HashMap<Permissao, DefaultSubMenu>();
             Map<Permissao, DefaultMenuItem> itemMenuMap = new HashMap<Permissao, DefaultMenuItem>();
+            
             //primeiro "for" para adicionar os submenus
             for (Permissao permissao : permissoes) {
                 putSubmenu(permissao, subMenuMap, menuModel);
@@ -60,7 +65,44 @@ public class UsuarioMenuBO {
 
         //sair
         menuModel.addElement(getMenuSair());
+
+        //ordernar
+        //order(menuModel);
+
         return menuModel;
+    }
+
+    public void order(MenuModel menuModel) {
+        if (menuModel.getElements() != null) {
+            order(menuModel.getElements());
+        }
+    }
+
+    public void order(List<MenuElement> itens) {
+        Comparator<MenuElement> comparator = new Comparator<MenuElement>() {
+            @Override
+            public int compare(MenuElement o1, MenuElement o2) {
+                return getOrderValue(o1).compareTo(getOrderValue(o2));
+            }
+        };
+        Collections.sort(itens, comparator);
+        for (MenuElement element : itens) {
+            if (element instanceof Submenu) {
+                order(((Submenu) element).getElements());
+            }
+        }
+    }
+
+    public String getOrderValue(MenuElement element) {
+        if (element instanceof MenuItem) {
+            MenuItem menuItem = (MenuItem) element;
+            if (menuItem.getValue() != null) {
+                return menuItem.getValue().toString();
+            }
+        } else if (element instanceof Submenu) {
+            return ((Submenu) element).getLabel();
+        }
+        return "";
     }
 
     public DefaultMenuItem getMenuHome() {

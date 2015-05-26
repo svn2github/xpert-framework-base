@@ -2,9 +2,6 @@ package com.base;
 
 import com.base.dao.DAO;
 import com.base.modelo.controleacesso.*;
-import com.xpert.core.exception.StackException;
-import com.xpert.core.exception.UniqueFieldException;
-import com.xpert.i18n.I18N;
 import com.xpert.persistence.dao.BaseDAO;
 import com.xpert.utils.Encryption;
 import java.security.NoSuchAlgorithmException;
