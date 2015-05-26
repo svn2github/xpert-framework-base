@@ -151,6 +151,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
                 }
                 List<Permissao> filhas = permissaoDAO.getInitialized(permissao.getPermissoesFilhas());
                 if (filhas != null) {
+                    //chamada recursiva para adicionar os filhos
                     criarTreeNode(node, filhas, permissoesParaSelecionar, permissoesSelecionaveis);
                     root.getChildren().add(node);
                 }
