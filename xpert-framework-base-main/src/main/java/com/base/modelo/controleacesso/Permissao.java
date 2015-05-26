@@ -59,6 +59,11 @@ public class Permissao implements Serializable, Role {
 
     @Transient
     private String caminhoPermissao;
+    
+    /**
+     * iniciar com valor padrao 0
+     */
+    private Integer ordenacao = 0;
 
     public Permissao() {
     }
@@ -124,9 +129,15 @@ public class Permissao implements Serializable, Role {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
-    
-    
 
+    public Integer getOrdenacao() {
+        return ordenacao;
+    }
+
+    public void setOrdenacao(Integer ordenacao) {
+        this.ordenacao = ordenacao;
+    }
+    
     public List<Perfil> getPerfis() {
         return perfis;
     }

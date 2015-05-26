@@ -20,7 +20,7 @@
                                  styleClass="table-responsive" 
                                  currentPageReportTemplate="#{permissaoMB.dataModel.currentPageReportTemplate}"
                                  paginatorTemplate="#{permissaoMB.dataModel.paginatorTemplate}"
-                                 rowIndexVar="index" widgetVar="widgetDataTablePerfil">
+                                 rowIndexVar="index" widgetVar="widgetDataTablePermissao">
 
                         <p:column styleClass="uix-datatable-index">
                             <h:outputText value="#{index+1}" />
@@ -81,7 +81,7 @@
                     </div>
                 </p:tab>
                 <p:tab title="#{msg['permissao.verNaArvore']}">
-                    <p:treeTable value="#{perfilMB.permissoes}" var="permissao">  
+                    <p:treeTable value="#{permissaoMB.permissoes}" var="permissao">  
                         <p:column headerText="#{msg['permissao']}">  
                             <h:outputText value="#{permissao.descricao}"  style="font-size: 12px;" />  
                             <h:panelGroup rendered="#{not permissao.ativo}" style="color: red;">
@@ -120,12 +120,20 @@
                         </p:column>  
                     </p:treeTable>  
                 </p:tab>
-                <p:tab title="#{msg['permissao.verNaArvore']}">
-                    <p:tree value="#{perfilMB.permissoes}" var="permissao" draggable="true" droppable="true" >  
+                <p:tab title="#{msg['permissao.ordenacao']}">
+                    <p:tree value="#{permissaoMB.permissoes}" var="permissao" draggable="true" droppable="true" >  
                         <p:treeNode>
                             <h:outputText value="#{permissao.descricao}"  style="font-size: 12px;" />  
                         </p:treeNode>
                     </p:tree>  
+
+                    <div class="uix-center">
+
+                        <x:securityArea rolesAllowed="permissao.create">
+                            <p:commandButton process="@form" update="@form" action="#{permissaoMB.salvarOrdenacao}" value="#{xmsg['save']}" />
+                        </x:securityArea>
+                    </div>
+
                 </p:tab>
 
 

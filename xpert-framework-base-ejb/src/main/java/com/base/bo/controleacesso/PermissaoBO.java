@@ -16,8 +16,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Comparator;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -27,86 +26,154 @@ import org.primefaces.model.TreeNode;
  */
 @Stateless
 public class PermissaoBO extends AbstractBusinessObject<Permissao> {
-
+    
     @EJB
     private PermissaoDAO permissaoDAO;
-
+    
     @Override
     public BaseDAO getDAO() {
         return permissaoDAO;
     }
+    
+    public void salvarOrdenacao(TreeNode permissoes) {
+        atualizarOrdenacao(permissoes.getChildren());
+    }
 
+    /**
+     * metodo que seta a permissao pai e a ordenacao no menu, baseado na arvore
+     * que foi montada na view
+     *
+     * @param nodes
+     */
+    public void atualizarOrdenacao(List<TreeNode> nodes) {
+        if (nodes != null) {
+            int count = 0;
+            for (TreeNode node : nodes) {
+                Permissao permissao = (Permissao) node.getData();
+                if (node.getParent() != null) {
+                    permissao.setPermissaoPai((Permissao) node.getParent().getData());
+                } else {
+                    permissao.setPermissaoPai(null);
+                }
+                permissao.setOrdenacao(count);
+                atualizarOrdenacao(node.getChildren());
+                count++;
+                //atualizar no banco
+                permissaoDAO.merge(permissao);
+            }
+        }
+    }
+    
     public TreeNode getTreeNodeMenu(Perfil perfil) {
-        List<Permissao> permissoesPerfil = permissaoDAO.getPermissoes(perfil);
+        //pegar todas as permissoes
+        List<Permissao> permissoes = getPermissoesRaiz();
+        //permissoes marcadas no menu
         List<Permissao> permissoesMenu = null;
         if (perfil != null && perfil.getId() != null) {
             permissoesMenu = permissaoDAO.getPermissoesMenu(perfil);
         }
-        return getTreeNode(permissoesPerfil, permissoesMenu);
-    }
-
-    public TreeNode getTreeNode(Perfil perfil) {
-        List<Permissao> todasPermissoes = permissaoDAO.listAll("descricao");
+        //permissoes do perfil
         List<Permissao> permissoesPerfil = null;
         if (perfil != null && perfil.getId() != null) {
             permissoesPerfil = permissaoDAO.getPermissoes(perfil);
         }
-        return getTreeNode(todasPermissoes, permissoesPerfil);
-    }
-
-    public void adicionarPermissaoAoMap(TreeNode root, Permissao permissao, Map<Permissao, TreeNode> nodeMap,
-            List<Permissao> permissoes, List<Permissao> permissoesParaSelecionar, boolean selectable) {
-        TreeNode node = new DefaultTreeNode(permissao, root);
-        node.setExpanded(true);
-        node.setSelectable(selectable);
-        if (permissoesParaSelecionar != null && permissoesParaSelecionar.contains(permissao)) {
-            node.setSelected(true);
-        }
-        nodeMap.put(permissao, node);
-        if (permissao.getPermissaoPai() != null) {
-            Permissao permissaoPai = permissaoDAO.getInitialized(permissao.getPermissaoPai());
-            if (!permissoes.contains(permissaoPai) && nodeMap.get(permissaoPai) == null) {
-                adicionarPermissaoAoMap(root, permissaoPai, nodeMap, permissoes, permissoesParaSelecionar, false);
-            }
-        }
+        return criarTreeNode(null, permissoes, permissoesMenu, permissoesPerfil);
     }
 
     /**
-     * Método que carrega a arvore para uma lista de permissoes
+     * Retorna uma arvore de permissoes de um determinado perfil. A arvore
+     * possui todas as permissoes, porem so estarao selecionados as permissoes
+     * que o perfil possui. O perfil pode ser passado como nulo tambem
      *
-     * @param permissoes - as permissoes a serem exibidas
-     * @param permissoesParaSelecionar - as permissoes que ficarao selecionadas
+     * @param perfil
      * @return
      */
-    public TreeNode getTreeNode(List<Permissao> permissoes, List<Permissao> permissoesParaSelecionar) {
-        TreeNode root = new DefaultTreeNode();
-        root.setExpanded(true);
+    public TreeNode getTreeNode(Perfil perfil) {
 
-        Map<Permissao, TreeNode> nodeMap = new LinkedHashMap<Permissao, TreeNode>();
+        //pegar todas as permissoes
+        List<Permissao> permissoes = getPermissoesRaiz();
 
-        //criar nó para cada permissao
-        for (Permissao permissao : permissoes) {
-            adicionarPermissaoAoMap(root, permissao, nodeMap, permissoes, permissoesParaSelecionar, true);
+        //pegar as permissoes apenas do perfil
+        List<Permissao> permissoesPerfil = null;
+        if (perfil != null && perfil.getId() != null) {
+            permissoesPerfil = permissaoDAO.getPermissoes(perfil);
         }
-        for (Map.Entry<Permissao, TreeNode> entry : nodeMap.entrySet()) {
+        //o null eh o root, que nao precisa ser passado
+        return criarTreeNode(null, permissoes, permissoesPerfil, null);
+    }
 
-            Permissao permissao = entry.getKey();
-            TreeNode node = entry.getValue();
-            if (permissao.getPermissaoPai() != null) {
-                TreeNode parent = nodeMap.get(permissao.getPermissaoPai());
-                //selecionar apenas ate o segundo nivel
-                if (parent != null && parent.isSelected()) {
+    /**
+     * Retorna as permissoes que ficam na raiz, ou seja, as permissoes "sem pai"
+     *
+     * @return
+     */
+    public List<Permissao> getPermissoesRaiz() {
+        return permissaoDAO.getQueryBuilder()
+                .from(Permissao.class)
+                .isNull("permissaoPai")
+                .orderBy("descricao").getResultList();
+    }
+
+    /**
+     * Metodo que carrega a arvore para uma lista de permissoes
+     *
+     * @param root
+     * @param permissoes - as permissoes a serem exibidas
+     * @param permissoesParaSelecionar - as permissoes que ficarao selecionadas
+     * @param permissoesSelecionaveis - as permissoes que se pode selecionar,
+     * quando passado null, qualquer um sera selecionavel
+     * @return
+     */
+    public TreeNode criarTreeNode(TreeNode root, List<Permissao> permissoes, List<Permissao> permissoesParaSelecionar, List<Permissao> permissoesSelecionaveis) {
+        
+        boolean nullRoot = false;
+        if (root == null) {
+            root = new DefaultTreeNode();
+            root.setExpanded(true);
+            nullRoot = true;
+        }
+        
+        if (permissoes != null) {
+            //ordernar permissoes
+            ordernar(permissoes);
+            for (Permissao permissao : permissoes) {
+                TreeNode node = new DefaultTreeNode(permissao, root);
+                //expandir apenas os primeiros filhos
+                node.setExpanded(nullRoot);
+                //se as selecionaveis forem nulas ou 
+                if (permissoesSelecionaveis == null || permissoesSelecionaveis.contains(permissao)) {
+                    node.setSelectable(true);
+                }else{
+                    node.setSelectable(false);
+                }
+                if (permissoesParaSelecionar != null && permissoesParaSelecionar.contains(permissao)) {
                     node.setSelected(true);
                 }
-                node.setExpanded(false);
-                if (parent != null) {
-                    parent.getChildren().add(node);
-                } else {
+                List<Permissao> filhas = permissaoDAO.getInitialized(permissao.getPermissoesFilhas());
+                if (filhas != null) {
+                    criarTreeNode(node, filhas, permissoesParaSelecionar, permissoesSelecionaveis);
                     root.getChildren().add(node);
                 }
             }
         }
+
+        //ordernar
+        // order(root);
         return root;
+    }
+    
+    public static void ordernar(List<Permissao> permissoes) {
+        if (permissoes != null) {
+            Comparator<Permissao> comparator = new Comparator<Permissao>() {
+                @Override
+                public int compare(Permissao o1, Permissao o2) {
+                    Integer v1 = o1.getOrdenacao() != null ? o1.getOrdenacao() : 0;
+                    Integer v2 = o2.getOrdenacao() != null ? o2.getOrdenacao() : 0;
+                    return v1.compareTo(v2);
+                }
+            };
+            Collections.sort(permissoes, comparator);
+        }
     }
 
     /**
@@ -180,7 +247,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         }
         return permissoesAdd;
     }
-
+    
     public void alterarStatus(Permissao permissao, boolean ativo, boolean emCascata) {
         permissao.setAtivo(ativo);
         permissaoDAO.merge(permissao);
@@ -193,27 +260,27 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-
+    
     public void inativar(Permissao permissao, boolean emCascata) {
         //passar ativo = false
         alterarStatus(permissao, false, emCascata);
     }
-
+    
     public void ativar(Permissao permissao, boolean emCascata) {
         //passar ativo = true
         alterarStatus(permissao, true, emCascata);
     }
-
+    
     @Override
     public void save(Permissao permissao) throws BusinessException {
         super.save(permissao);
     }
-
+    
     @Override
     public List<UniqueField> getUniqueFields() {
         return new UniqueFields().add("key");
     }
-
+    
     @Override
     public void validate(Permissao permissao) throws BusinessException {
         if (permissao.getId() != null && permissao.getPermissaoPai() != null) {
@@ -222,7 +289,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-
+    
     @Override
     public boolean isAudit() {
         return true;
@@ -240,14 +307,14 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         if (listaPermissoes != null) {
             for (Permissao permissao : listaPermissoes) {
                 StringBuilder builder = new StringBuilder();
-
+                
                 List<Permissao> permissoes = new ArrayList<Permissao>();
                 Permissao permissaoAtual = permissao;
                 while (permissaoAtual != null) {
                     permissoes.add(permissaoAtual);
                     permissaoAtual = permissaoDAO.getInitialized(permissaoAtual.getPermissaoPai());
                 }
-
+                
                 Collections.reverse(permissoes);
                 for (int i = 0; i < permissoes.size(); i++) {
                     if (adicionarPropriaPermissao == true || !permissoes.get(i).equals(permissao)) {
@@ -265,10 +332,10 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-
+    
     public List<Permissao> pesquisarPermissao(String query, List<Permissao> listaPermissoes) {
         List<Permissao> permissoes = new ArrayList<Permissao>();
-
+        
         if (listaPermissoes != null) {
             for (Permissao permissao : listaPermissoes) {
                 if (permissao.isPossuiMenu() && permissao.getUrl() != null && !permissao.getUrl().isEmpty()) {
@@ -279,9 +346,9 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
                 }
             }
         }
-
+        
         CollectionsUtils.orderAsc(permissoes, "caminhoPermissao");
-
+        
         return permissoes;
     }
 }

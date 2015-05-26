@@ -4,6 +4,7 @@ import com.base.dao.controleacesso.PermissaoDAO;
 import com.base.modelo.controleacesso.Permissao;
 import com.base.modelo.controleacesso.Usuario;
 import com.xpert.i18n.I18N;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -44,65 +45,84 @@ public class UsuarioMenuBO {
         //home
         menuModel.addElement(getMenuHome());
 
-        //urls dinamicas
-        if (permissoes != null && !permissoes.isEmpty()) {
-            //map para evitar a duplicidade e ter acesso mais rapido as menus
-            Map<Permissao, DefaultSubMenu> subMenuMap = new HashMap<Permissao, DefaultSubMenu>();
-            Map<Permissao, DefaultMenuItem> itemMenuMap = new HashMap<Permissao, DefaultMenuItem>();
-            
-            //primeiro "for" para adicionar os submenus
-            for (Permissao permissao : permissoes) {
-                putSubmenu(permissao, subMenuMap, menuModel);
-            }
-
-            //montar itens
-            for (Permissao permissao : permissoes) {
-                if (permissao.isPossuiMenu() && permissao.isAtivo()) {
-                    putItemMenu(permissao, subMenuMap, itemMenuMap, menuModel);
-                }
+        //elementos dinamicos
+        List<MenuElement> elements = getMenuElements(permissoes);
+        if (elements != null) {
+            for (MenuElement element : elements) {
+                menuModel.addElement(element);
             }
         }
 
         //sair
         menuModel.addElement(getMenuSair());
 
-        //ordernar
-        //order(menuModel);
-
         return menuModel;
     }
 
-    public void order(MenuModel menuModel) {
+    public List<MenuElement> getMenuElements(List<Permissao> permissoes) {
+
+        List<MenuElement> elements = new ArrayList<MenuElement>();
+
+        //urls dinamicas
+        if (permissoes != null && !permissoes.isEmpty()) {
+
+            //map para evitar a duplicidade e ter acesso mais rapido as menus
+            Map<Permissao, DefaultSubMenu> subMenuMap = new HashMap<Permissao, DefaultSubMenu>();
+            Map<Permissao, DefaultMenuItem> itemMenuMap = new HashMap<Permissao, DefaultMenuItem>();
+
+            //map para vincular o item do menu a permissao
+            Map<MenuElement, Permissao> permissaoMap = new HashMap<MenuElement, Permissao>();
+
+            //primeiro "for" para adicionar os submenus
+            for (Permissao permissao : permissoes) {
+                putSubmenu(permissao, subMenuMap, elements, permissaoMap);
+            }
+
+            //montar itens
+            for (Permissao permissao : permissoes) {
+                if (permissao.isPossuiMenu() && permissao.isAtivo()) {
+                    putItemMenu(permissao, subMenuMap, itemMenuMap, elements, permissaoMap);
+                }
+            }
+            //ordenar elementos
+            order(elements, permissaoMap);
+        }
+
+        //ordernar
+        return elements;
+    }
+
+    public void order(MenuModel menuModel, Map<MenuElement, Permissao> permissaoMap) {
         if (menuModel.getElements() != null) {
-            order(menuModel.getElements());
+            order(menuModel.getElements(), permissaoMap);
         }
     }
 
-    public void order(List<MenuElement> itens) {
-        Comparator<MenuElement> comparator = new Comparator<MenuElement>() {
-            @Override
-            public int compare(MenuElement o1, MenuElement o2) {
-                return getOrderValue(o1).compareTo(getOrderValue(o2));
-            }
-        };
-        Collections.sort(itens, comparator);
-        for (MenuElement element : itens) {
-            if (element instanceof Submenu) {
-                order(((Submenu) element).getElements());
+    public void order(List<MenuElement> itens, final Map<MenuElement, Permissao> permissaoMap) {
+        if (itens != null) {
+            Comparator<MenuElement> comparator = new Comparator<MenuElement>() {
+                @Override
+                public int compare(MenuElement o1, MenuElement o2) {
+                    Integer v1 = getOrder(o1, permissaoMap);
+                    Integer v2 = getOrder(o2, permissaoMap);
+                    return v1.compareTo(v2);
+                }
+            };
+            Collections.sort(itens, comparator);
+            for (MenuElement element : itens) {
+                if (element instanceof Submenu) {
+                    order(((Submenu) element).getElements(), permissaoMap);
+                }
             }
         }
     }
 
-    public String getOrderValue(MenuElement element) {
-        if (element instanceof MenuItem) {
-            MenuItem menuItem = (MenuItem) element;
-            if (menuItem.getValue() != null) {
-                return menuItem.getValue().toString();
-            }
-        } else if (element instanceof Submenu) {
-            return ((Submenu) element).getLabel();
+    public Integer getOrder(MenuElement element, Map<MenuElement, Permissao> permissaoMap) {
+        Permissao permissao = permissaoMap.get(element);
+        if (permissao == null || permissao.getOrdenacao() == null) {
+            return 0;
         }
-        return "";
+        return permissao.getOrdenacao();
     }
 
     public DefaultMenuItem getMenuHome() {
@@ -121,7 +141,8 @@ public class UsuarioMenuBO {
         return item;
     }
 
-    public void putItemMenu(Permissao permissao, Map<Permissao, DefaultSubMenu> subMenuMap, Map<Permissao, DefaultMenuItem> itemMenuMap, MenuModel menuModel) {
+    public void putItemMenu(Permissao permissao, Map<Permissao, DefaultSubMenu> subMenuMap,
+            Map<Permissao, DefaultMenuItem> itemMenuMap, List<MenuElement> elements, Map<MenuElement, Permissao> permissaoMap) {
         //se ja estiver adicionado nao adcionar novamente
         if (itemMenuMap.containsKey(permissao)) {
             return;
@@ -132,9 +153,9 @@ public class UsuarioMenuBO {
             Permissao permissaoPai = permissaoDAO.getInitialized(permissao.getPermissaoPai());
             if (permissaoPai != null) {
                 submenu = subMenuMap.get(permissaoPai);
-                //cadicionar o menu pai quando não encontrado
+                //adicionar o menu pai quando não encontrado
                 if (submenu == null) {
-                    putSubmenu(permissaoPai, subMenuMap, menuModel);
+                    putSubmenu(permissaoPai, subMenuMap, elements, permissaoMap);
                     submenu = subMenuMap.get(permissaoPai);
                 }
             }
@@ -144,17 +165,18 @@ public class UsuarioMenuBO {
                 item.setValue(permissao.getNomeMenuVerificado());
                 item.setUrl(permissao.getUrlMenuVerificado());
                 itemMenuMap.put(permissao, item);
+                permissaoMap.put(item, permissao);
                 //adicionar ao submenu quando encontrado, senao adicionar ao root
                 if (submenu != null) {
                     submenu.getElements().add(item);
                 } else {
-                    menuModel.addElement(item);
+                    elements.add(item);
                 }
             }
         }
     }
 
-    public void putSubmenu(Permissao permissao, Map<Permissao, DefaultSubMenu> subMenuMap, MenuModel menuModel) {
+    public void putSubmenu(Permissao permissao, Map<Permissao, DefaultSubMenu> subMenuMap, List<MenuElement> elements, Map<MenuElement, Permissao> permissaoMap) {
         if (permissao != null) {
             if (permissao.isPossuiMenu() && permissao.isAtivo()) {
                 String url = permissao.getUrlMenuVerificado();
@@ -165,10 +187,11 @@ public class UsuarioMenuBO {
                         submenu = new DefaultSubMenu();
                         submenu.setLabel(permissao.getNomeMenuVerificado());
                         subMenuMap.put(permissao, submenu);
+                        permissaoMap.put(submenu, permissao);
                         Submenu pai = null;
                         Permissao permissaoPai = permissaoDAO.getInitialized(permissao.getPermissaoPai());
                         if (permissaoPai != null && permissaoPai.isAtivo()) {
-                            putSubmenu(permissaoPai, subMenuMap, menuModel);
+                            putSubmenu(permissaoPai, subMenuMap, elements, permissaoMap);
                             pai = subMenuMap.get(permissaoPai);
                         }
                         //setar submenupai
@@ -177,7 +200,7 @@ public class UsuarioMenuBO {
                         } else {
                             //adicionar ao root apenas quando nao possuir pai
                             if (permissaoPai == null) {
-                                menuModel.addElement(submenu);
+                                elements.add(submenu);
                             }
                         }
                     }
