@@ -26,15 +26,15 @@ import org.primefaces.model.TreeNode;
  */
 @Stateless
 public class PermissaoBO extends AbstractBusinessObject<Permissao> {
-    
+
     @EJB
     private PermissaoDAO permissaoDAO;
-    
+
     @Override
     public BaseDAO getDAO() {
         return permissaoDAO;
     }
-    
+
     public void salvarOrdenacao(TreeNode permissoes) {
         atualizarOrdenacao(permissoes.getChildren());
     }
@@ -63,7 +63,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-    
+
     public TreeNode getTreeNodeMenu(Perfil perfil) {
         //pegar todas as permissoes
         List<Permissao> permissoes = getPermissoesRaiz();
@@ -125,14 +125,14 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
      * @return
      */
     public TreeNode criarTreeNode(TreeNode root, List<Permissao> permissoes, List<Permissao> permissoesParaSelecionar, List<Permissao> permissoesSelecionaveis) {
-        
+
         boolean nullRoot = false;
         if (root == null) {
             root = new DefaultTreeNode();
             root.setExpanded(true);
             nullRoot = true;
         }
-        
+
         if (permissoes != null) {
             //ordernar permissoes
             ordernar(permissoes);
@@ -143,7 +143,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
                 //se as selecionaveis forem nulas ou 
                 if (permissoesSelecionaveis == null || permissoesSelecionaveis.contains(permissao)) {
                     node.setSelectable(true);
-                }else{
+                } else {
                     node.setSelectable(false);
                 }
                 if (permissoesParaSelecionar != null && permissoesParaSelecionar.contains(permissao)) {
@@ -158,11 +158,14 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
 
-        //ordernar
-        // order(root);
         return root;
     }
-    
+
+    /**
+     * Ordena a lista de permissoes baseada no campo ordenacao (do menor para o maior)
+     *
+     * @param permissoes
+     */
     public static void ordernar(List<Permissao> permissoes) {
         if (permissoes != null) {
             Comparator<Permissao> comparator = new Comparator<Permissao>() {
@@ -248,7 +251,15 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         }
         return permissoesAdd;
     }
+
     
+    /**
+     * Muda o status de uma permissao
+     * 
+     * @param permissao
+     * @param ativo Indica se o status desejado eh o ativo ou nao
+     * @param emCascata Indica se as permissoes filhas sera afetadas tambem (e as filhas das filhas)
+     */
     public void alterarStatus(Permissao permissao, boolean ativo, boolean emCascata) {
         permissao.setAtivo(ativo);
         permissaoDAO.merge(permissao);
@@ -261,36 +272,50 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-    
+
+    /**
+     * Inativa uma permissao
+     * 
+     * @param permissao
+     * @param emCascata Indica se as permissoes filhas sera inativadas tambem (e as filhas das filhas)
+     */
     public void inativar(Permissao permissao, boolean emCascata) {
         //passar ativo = false
         alterarStatus(permissao, false, emCascata);
     }
-    
+
+     /**
+     * Ativa uma permissao
+     * 
+     * @param permissao
+     * @param emCascata Indica se as permissoes filhas sera ativadas tambem (e as filhas das filhas)
+     */
     public void ativar(Permissao permissao, boolean emCascata) {
         //passar ativo = true
         alterarStatus(permissao, true, emCascata);
     }
-    
+
     @Override
     public void save(Permissao permissao) throws BusinessException {
         super.save(permissao);
     }
-    
+
     @Override
     public List<UniqueField> getUniqueFields() {
         return new UniqueFields().add("key");
     }
-    
+
     @Override
     public void validate(Permissao permissao) throws BusinessException {
+        
+        //permissao nao pode ser pai dela mesma
         if (permissao.getId() != null && permissao.getPermissaoPai() != null) {
             if (permissao.getId().equals(permissao.getPermissaoPai().getId())) {
                 throw new BusinessException("business.permissaoNaoPodePaiDelaMesma");
             }
         }
     }
-    
+
     @Override
     public boolean isAudit() {
         return true;
@@ -308,14 +333,14 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         if (listaPermissoes != null) {
             for (Permissao permissao : listaPermissoes) {
                 StringBuilder builder = new StringBuilder();
-                
+
                 List<Permissao> permissoes = new ArrayList<Permissao>();
                 Permissao permissaoAtual = permissao;
                 while (permissaoAtual != null) {
                     permissoes.add(permissaoAtual);
                     permissaoAtual = permissaoDAO.getInitialized(permissaoAtual.getPermissaoPai());
                 }
-                
+
                 Collections.reverse(permissoes);
                 for (int i = 0; i < permissoes.size(); i++) {
                     if (adicionarPropriaPermissao == true || !permissoes.get(i).equals(permissao)) {
@@ -333,10 +358,16 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             }
         }
     }
-    
+
+    /**
+     * retorna uma lista de permissoes baseada na
+     * @param query
+     * @param listaPermissoes
+     * @return 
+     */
     public List<Permissao> pesquisarPermissao(String query, List<Permissao> listaPermissoes) {
         List<Permissao> permissoes = new ArrayList<Permissao>();
-        
+
         if (listaPermissoes != null) {
             for (Permissao permissao : listaPermissoes) {
                 if (permissao.isPossuiMenu() && permissao.getUrl() != null && !permissao.getUrl().isEmpty()) {
@@ -347,9 +378,9 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
                 }
             }
         }
-        
+
         CollectionsUtils.orderAsc(permissoes, "caminhoPermissao");
-        
+
         return permissoes;
     }
 }
