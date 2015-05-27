@@ -35,6 +35,11 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         return permissaoDAO;
     }
 
+    /**
+     * salva a ordenacao das permissoes baseado na posicao na arvore
+     *
+     * @param permissoes
+     */
     public void salvarOrdenacao(TreeNode permissoes) {
         atualizarOrdenacao(permissoes.getChildren());
     }
@@ -64,6 +69,13 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         }
     }
 
+    /**
+     * Retorna uma arvore de permissoes de um determinado perfil. Baseada nos
+     * menus de atalho de cada perfil
+     *
+     * @param perfil
+     * @return
+     */
     public TreeNode getTreeNodeMenu(Perfil perfil) {
         //pegar todas as permissoes
         List<Permissao> permissoes = getPermissoesRaiz();
@@ -162,7 +174,8 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
     }
 
     /**
-     * Ordena a lista de permissoes baseada no campo ordenacao (do menor para o maior)
+     * Ordena a lista de permissoes baseada no campo ordenacao (do menor para o
+     * maior)
      *
      * @param permissoes
      */
@@ -252,13 +265,13 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
         return permissoesAdd;
     }
 
-    
     /**
      * Muda o status de uma permissao
-     * 
+     *
      * @param permissao
      * @param ativo Indica se o status desejado eh o ativo ou nao
-     * @param emCascata Indica se as permissoes filhas sera afetadas tambem (e as filhas das filhas)
+     * @param emCascata Indica se as permissoes filhas sera afetadas tambem (e
+     * as filhas das filhas)
      */
     public void alterarStatus(Permissao permissao, boolean ativo, boolean emCascata) {
         permissao.setAtivo(ativo);
@@ -275,20 +288,22 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
 
     /**
      * Inativa uma permissao
-     * 
+     *
      * @param permissao
-     * @param emCascata Indica se as permissoes filhas sera inativadas tambem (e as filhas das filhas)
+     * @param emCascata Indica se as permissoes filhas sera inativadas tambem (e
+     * as filhas das filhas)
      */
     public void inativar(Permissao permissao, boolean emCascata) {
         //passar ativo = false
         alterarStatus(permissao, false, emCascata);
     }
 
-     /**
+    /**
      * Ativa uma permissao
-     * 
+     *
      * @param permissao
-     * @param emCascata Indica se as permissoes filhas sera ativadas tambem (e as filhas das filhas)
+     * @param emCascata Indica se as permissoes filhas sera ativadas tambem (e
+     * as filhas das filhas)
      */
     public void ativar(Permissao permissao, boolean emCascata) {
         //passar ativo = true
@@ -307,7 +322,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
 
     @Override
     public void validate(Permissao permissao) throws BusinessException {
-        
+
         //permissao nao pode ser pai dela mesma
         if (permissao.getId() != null && permissao.getPermissaoPai() != null) {
             if (permissao.getId().equals(permissao.getPermissaoPai().getId())) {
@@ -361,9 +376,10 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
 
     /**
      * retorna uma lista de permissoes baseada na
+     *
      * @param query
      * @param listaPermissoes
-     * @return 
+     * @return
      */
     public List<Permissao> pesquisarPermissao(String query, List<Permissao> listaPermissoes) {
         List<Permissao> permissoes = new ArrayList<Permissao>();

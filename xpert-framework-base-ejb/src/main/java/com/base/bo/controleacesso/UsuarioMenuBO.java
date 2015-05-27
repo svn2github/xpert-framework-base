@@ -33,11 +33,23 @@ public class UsuarioMenuBO {
     @EJB
     private PermissaoBO permissaoBO;
 
+    /**
+     * cria o menu do usuario
+     *
+     * @param usuario
+     * @return
+     */
     public MenuModel criarMenu(Usuario usuario) {
         List<Permissao> permissoes = permissaoBO.getPermissoes(usuario, true);
         return criarMenu(permissoes);
     }
 
+    /**
+     * cria o menu a partir de uma lista de permissoes
+     *
+     * @param permissoes
+     * @return
+     */
     public MenuModel criarMenu(List<Permissao> permissoes) {
 
         DefaultMenuModel menuModel = new DefaultMenuModel();

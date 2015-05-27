@@ -35,9 +35,15 @@ public class ErroSistemaBO extends AbstractBusinessObject<ErroSistema> {
     @EJB
     private PermissaoDAO permissaoDAO;
 
+    /**
+     * registro o erro baseado na excecao passada por parametro
+     *
+     * @param throwable
+     * @return
+     */
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public ErroSistema save(Throwable throwable) {
-        return save(null, ErroSistemaBO.montarPilha(throwable), null);
+        return save(null, ErroSistemaBO.getStackTrace(throwable), null);
     }
 
     /**
@@ -95,7 +101,7 @@ public class ErroSistemaBO extends AbstractBusinessObject<ErroSistema> {
         }
     }
 
-    public static String montarPilha(Throwable throwable) {
+    public static String getStackTrace(Throwable throwable) {
 
         StringWriter stringWriter = new StringWriter();
         printStackTrace(throwable, stringWriter);
