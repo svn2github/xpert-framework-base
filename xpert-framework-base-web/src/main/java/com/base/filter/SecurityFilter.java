@@ -16,6 +16,9 @@ import javax.servlet.annotation.WebFilter;
 public class SecurityFilter extends AbstractSecurityFilter {
 
     private static final Logger logger = Logger.getLogger(SecurityFilter.class.getName());
+    /**
+     * tudo que estiver dentro desta pasta necessita de controle de acesso
+     */
     public static final String PATTERN = "/view/*";
     private static final String HOME = "/index.jsf";
     /**
