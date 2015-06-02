@@ -32,7 +32,7 @@ public class AlterPasswordBO {
      * a senha. 3 - senha atual deve esta correta
      *
      * Caso o objeto solicitacaoRecuperacaoSenha esteja presente nao precisa
-     * validar o passo 3, pois nesse caso o usuario esta redfinindo sua senha
+     * validar o passo 3, pois nesse caso o usuario esta redefinindo sua senha
      * sem saber a atual
      *
      * @param usuario

@@ -109,6 +109,12 @@ public class UsuarioMenuBO {
         }
     }
 
+    /**
+     * Metodo para ordenar os itens do menu baseado na posicao da permissao
+     *
+     * @param itens
+     * @param permissaoMap
+     */
     public void order(List<MenuElement> itens, final Map<MenuElement, Permissao> permissaoMap) {
         if (itens != null) {
             Comparator<MenuElement> comparator = new Comparator<MenuElement>() {
@@ -154,7 +160,7 @@ public class UsuarioMenuBO {
 
     public void putItemMenu(Permissao permissao, Map<Permissao, DefaultSubMenu> subMenuMap,
             Map<Permissao, DefaultMenuItem> itemMenuMap, List<MenuElement> elements, Map<MenuElement, Permissao> permissaoMap) {
-        //se ja estiver adicionado nao adcionar novamente
+        //se ja estiver adicionado nao adiscionar novamente
         if (itemMenuMap.containsKey(permissao)) {
             return;
         }

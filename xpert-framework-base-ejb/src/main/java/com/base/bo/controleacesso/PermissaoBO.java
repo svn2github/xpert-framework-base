@@ -55,6 +55,7 @@ public class PermissaoBO extends AbstractBusinessObject<Permissao> {
             int count = 0;
             for (TreeNode node : nodes) {
                 Permissao permissao = (Permissao) node.getData();
+                //se o no possuir pai, entao salvar a permissao pai, senao setar nulo
                 if (node.getParent() != null) {
                     permissao.setPermissaoPai((Permissao) node.getParent().getData());
                 } else {
