@@ -28,7 +28,7 @@ import org.apache.commons.mail.HtmlEmail;
 @Stateless
 public class EmailBO {
 
-     private static final Configuration cfg = new Configuration();
+    private static final Configuration cfg = new Configuration();
     private static final Logger logger = Logger.getLogger(EmailBO.class.getName());
     @EJB
     private ModeloEmailBO modeloEmailBO;
@@ -201,16 +201,14 @@ public class EmailBO {
      */
     public void enviar(String assunto, String mensagem, ConfiguracaoEmail configuracaoEmail, String destinatario, List<Attachment> anexos) throws BusinessException {
 
-        if (assunto == null || assunto.isEmpty()) {
-            throw new IllegalArgumentException("Email must not be null");
-        }
-
         HtmlEmail email = new HtmlEmail();
         email.setHostName(configuracaoEmail.getHostName());
         try {
 
             for (String string : destinatario.split(",")) {
-                email.addTo(string);
+                if (string != null && !string.isEmpty()) {
+                    email.addTo(string.trim());
+                }
             }
             //anexo
             if (anexos != null) {
@@ -224,8 +222,8 @@ public class EmailBO {
             email.setHtmlMsg(mensagem);
             email.setAuthentication(configuracaoEmail.getUsuario(), configuracaoEmail.getSenha());
             email.setSmtpPort(configuracaoEmail.getSmtpPort());
-            email.setSSL(configuracaoEmail.isSsl());
-            email.setTLS(configuracaoEmail.isTls());
+            email.setSSLOnConnect(configuracaoEmail.isSsl());
+            email.setStartTLSEnabled(configuracaoEmail.isTls());
 
             email.send();
 
