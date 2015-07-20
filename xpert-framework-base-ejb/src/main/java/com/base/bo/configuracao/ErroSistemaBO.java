@@ -10,8 +10,6 @@ import com.xpert.core.exception.BusinessException;
 import com.xpert.core.validation.UniqueField;
 import com.xpert.faces.utils.FacesUtils;
 import com.xpert.persistence.dao.BaseDAO;
-import com.xpert.persistence.query.Restriction;
-import com.xpert.persistence.query.RestrictionType;
 import com.xpert.persistence.query.Restrictions;
 import java.io.PrintWriter;
 import java.io.StringWriter;
