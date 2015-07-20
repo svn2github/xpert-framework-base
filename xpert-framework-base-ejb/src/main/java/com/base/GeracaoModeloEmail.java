@@ -30,12 +30,14 @@ public class GeracaoModeloEmail {
 
     public void generate() {
 
-        ConfiguracaoEmail configuracaoEmail = getDAO(ConfiguracaoEmail.class).unique("email", "xpert.testes@gmail.com");
+        String email = "xpert.testes@gmail.com";
+        
+        ConfiguracaoEmail configuracaoEmail = getDAO(ConfiguracaoEmail.class).unique("email", email);
         if (configuracaoEmail == null) {
             configuracaoEmail = new ConfiguracaoEmail();
-            configuracaoEmail.setNome("Sistema Base");
-            configuracaoEmail.setEmail("xpert.testes@gmail.com");
-            configuracaoEmail.setUsuario("xpert.testes@gmail.com");
+            configuracaoEmail.setNome("[xpert-framework-base]");
+            configuracaoEmail.setEmail(email);
+            configuracaoEmail.setUsuario(email);
             configuracaoEmail.setSenha("xpert12345");
             configuracaoEmail.setHostName("smtp.gmail.com");
             configuracaoEmail.setSsl(true);

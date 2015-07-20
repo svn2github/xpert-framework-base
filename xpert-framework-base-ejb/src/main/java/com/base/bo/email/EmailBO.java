@@ -219,7 +219,7 @@ public class EmailBO {
                 }
             }
             email.setCharset("UTF-8");
-            email.setFrom(configuracaoEmail.getEmail(), configuracaoEmail.getEmail());
+            email.setFrom(configuracaoEmail.getEmail(), configuracaoEmail.getNome());
             email.setSubject(assunto);
             email.setHtmlMsg(mensagem);
             email.setAuthentication(configuracaoEmail.getUsuario(), configuracaoEmail.getSenha());
