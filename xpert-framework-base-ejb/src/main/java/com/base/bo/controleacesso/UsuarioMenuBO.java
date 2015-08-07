@@ -94,20 +94,19 @@ public class UsuarioMenuBO {
     public MenuModel criarMenu(List<Permissao> permissoes, String root) {
         //pegar o menu model completo
         MenuModel menuModelCompleto = criarMenu(permissoes);
-        return criarMenu(permissoes, menuModelCompleto, root);
+        return criarMenu(menuModelCompleto, root);
     }
 
     /**
      * cria o menu do usuario, pode-se passar o root que seria a partir de onde
      * sera pego a permissao
      *
-     * @param permissoes
      * @param menuModelCompleto Menu completo do usuario, a partir dele sera
      * pego os filhos
      * @param root a chave da permissao
      * @return
      */
-    public MenuModel criarMenu(List<Permissao> permissoes, MenuModel menuModelCompleto, String root) {
+    public MenuModel criarMenu(MenuModel menuModelCompleto, String root) {
         MenuModel menuModel = new DefaultMenuModel();
 
         //pegar a permissao pela chave
