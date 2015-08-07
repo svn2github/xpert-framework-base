@@ -49,9 +49,11 @@ public class PermissaoDAOImpl extends BaseDAOImpl<Permissao> implements Permissa
     public List<Permissao> getPermissoes(Usuario usuario, boolean apenasAtivas) {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("SELECT DISTINCT p FROM ").append(Usuario.class.getName()).append(" u ");
-        builder.append("LEFT JOIN u.perfis pe INNER JOIN pe.permissoes p ");
+        builder.append("SELECT DISTINCT p FROM ").append(Permissao.class.getName()).append(" p ");
+        builder.append("LEFT JOIN p.perfis pe ");
+        builder.append("LEFT JOIN pe.usuarios u ");
         builder.append("WHERE (u = :usuario or p.global = true) ");
+        
         if (apenasAtivas == true) {
             builder.append(" AND (p.ativo = true) ");
         }
