@@ -16,6 +16,7 @@ import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
 import org.primefaces.model.menu.MenuElement;
+import org.primefaces.model.menu.MenuItem;
 import org.primefaces.model.menu.MenuModel;
 import org.primefaces.model.menu.Submenu;
 
@@ -45,6 +46,18 @@ public class UsuarioMenuBO {
     }
 
     /**
+     * cria o menu do usuario
+     *
+     * @param usuario
+     * @param root a chave da permissao
+     * @return
+     */
+    public MenuModel criarMenu(Usuario usuario, String root) {
+        List<Permissao> permissoes = permissaoBO.getPermissoes(usuario, true);
+        return criarMenu(permissoes, root);
+    }
+
+    /**
      * cria o menu a partir de uma lista de permissoes
      *
      * @param permissoes
@@ -68,6 +81,84 @@ public class UsuarioMenuBO {
         menuModel.addElement(getMenuSair());
 
         return menuModel;
+    }
+
+    /**
+     * cria o menu do usuario, pode-se passar o root que seria a partir de onde
+     * sera pego a permissao
+     *
+     * @param permissoes
+     * @param root
+     * @return
+     */
+    public MenuModel criarMenu(List<Permissao> permissoes, String root) {
+        //pegar o menu model completo
+        MenuModel menuModelCompleto = criarMenu(permissoes);
+        return criarMenu(permissoes, menuModelCompleto, root);
+    }
+
+    /**
+     * cria o menu do usuario, pode-se passar o root que seria a partir de onde
+     * sera pego a permissao
+     *
+     * @param permissoes
+     * @param menuModelCompleto Menu completo do usuario, a partir dele sera
+     * pego os filhos
+     * @param root a chave da permissao
+     * @return
+     */
+    public MenuModel criarMenu(List<Permissao> permissoes, MenuModel menuModelCompleto, String root) {
+        MenuModel menuModel = new DefaultMenuModel();
+
+        //pegar a permissao pela chave
+        Permissao permissao = permissaoDAO.unique("key", root);
+        if (permissao != null) {
+            //aqui eh passado o id como string pois o "setId" do menu do primefaces tbm eh string
+            MenuElement element = encontrarMenu(menuModelCompleto.getElements(), permissao.getId().toString());
+            if (element != null) {
+                //se for item apenas adicionar o item, senao adicionar os filhos do submenu
+                if (element instanceof MenuItem) {
+                    menuModel.addElement(element);
+                } else if (element instanceof Submenu) {
+                    Submenu submenu = (Submenu) element;
+                    for (Object menuElement : submenu.getElements()) {
+                        if (menuElement instanceof MenuElement) {
+                            menuModel.addElement((MenuElement) menuElement);
+                        }
+                    }
+                }
+            }
+        }
+        return menuModel;
+    }
+
+    /**
+     * metodo que pesquisa dentro dos elmentos o menu que possui o id passado
+     * por parametro
+     *
+     * @param elements
+     * @param id
+     * @return
+     */
+    public MenuElement encontrarMenu(List<MenuElement> elements, String id) {
+
+        if (elements != null) {
+            for (MenuElement el : elements) {
+                if (el.getId() != null && el.getId().equals(id)) {
+                    return el;
+                }
+                if (el instanceof Submenu) {
+                    Submenu submenu = (Submenu) el;
+                    if (submenu.getElements() != null) {
+                        MenuElement element = encontrarMenu(submenu.getElements(), id);
+                        if (element != null) {
+                            return element;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public List<MenuElement> getMenuElements(List<Permissao> permissoes) {
@@ -179,6 +270,7 @@ public class UsuarioMenuBO {
             //se o menu pai for nulo ou se encontrou o menu pai e ele possui menu pai
             if (permissaoPai == null || submenu != null) {
                 DefaultMenuItem item = new DefaultMenuItem();
+                item.setId(permissao.getId().toString());
                 item.setValue(permissao.getNomeMenuVerificado());
                 item.setUrl(permissao.getUrlMenuVerificado());
                 itemMenuMap.put(permissao, item);
@@ -202,6 +294,7 @@ public class UsuarioMenuBO {
                     //caso a permissao tenha pai deve ser adicionado um submenu desse pai quando nao encontrado
                     if (submenu == null) {
                         submenu = new DefaultSubMenu();
+                        submenu.setId(permissao.getId().toString());
                         submenu.setLabel(permissao.getNomeMenuVerificado());
                         subMenuMap.put(permissao, submenu);
                         permissaoMap.put(submenu, permissao);
